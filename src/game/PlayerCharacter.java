@@ -3,16 +3,13 @@ package game;
 import gameMode.Campaign;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
-import java.util.Timer;
-import java.util.TimerTask;
 // Temporizador del rango.
 
 
 public class PlayerCharacter {
     private int x;
     private int y;
-    private int attack = 1;
+    private int attack = 3;
     private int life =  5;
 
     private String imageName;

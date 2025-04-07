@@ -7,11 +7,15 @@ import game.PlayerCharacter;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 // Java FX.
 
 
@@ -36,20 +40,32 @@ public class Campaign {
     // Variables privadas estaticas.
 
     private static GraphicsContext graphics;
-    private Scene gameScene;
+
+
+
+    public static Scene campaignGameScene;
+    private Group root;
+    private Canvas canvas;
     // Variables privadas.
 
 
     public Campaign(GraphicsContext graphics, Scene gameScene) {
         Campaign.graphics = graphics;
-        this.gameScene = gameScene;
+        this.campaignGameScene = gameScene;
     }
 
 
 
     public void initialize() {
-        window.setScene(gameScene);
-        player = new PlayerCharacter(64, 128, "monigote.png", "decerca.png");
+
+        root = new Group();
+        campaignGameScene = new Scene(root, 1000, 850);
+        canvas = new Canvas(1000, 850);
+
+        root.getChildren().add(canvas);
+        graphics = canvas.getGraphicsContext2D();
+        window.setScene(campaignGameScene);
+        player = new PlayerCharacter(64, 64, "monigote.png", "decerca.png");
         enemy = new EnemyCharacter(304, 288, "enemigomortal1.jpg", "decercaenemigo.png");
         // Se pone la pantalla y se instancian los jugadores y enemigos.
 
@@ -61,8 +77,26 @@ public class Campaign {
         }
         }
 
-        playerMovement(gameScene);
-        gameLoop(graphics);
+        playerMovement(campaignGameScene);
+
+
+        graphics.fillRect(680, 32, 310, 500);
+        // Cuadro de las estadisticas.
+
+        graphics.fillRect(32, 710, 612, 135);
+        // Cuadro de los dialogos.
+
+        graphics.fillRect(680, 542, 310, 303);
+        // Cuadro de las acciones.
+
+        Font font = new Font("Arial", 20);
+        Label actionPoint = new Label("Action Points: "+Campaign.actionPoints);
+        actionPoint.setTranslateX(685);
+        actionPoint.setTranslateY(48);
+        actionPoint.setTextFill(Color.WHITE);
+        actionPoint.setFont(font);
+        root.getChildren().add(actionPoint);
+        gameLoop(graphics, actionPoint);
         if (enemy.isAlive()){
 
 
@@ -75,6 +109,15 @@ public class Campaign {
 
 
     }
+
+    private void stats(){
+
+    }
+
+    private void dialogueAndStoryteller(){
+
+    }
+
     private void randomPosition() {
         int xPos = random.nextInt(7, 11);
         int yPos = random.nextInt(1, 10);
@@ -124,7 +167,13 @@ public class Campaign {
                 int move = 0;
                 switch (event.getCode().toString()) {
                     case "A":
-                        actionPoints--;
+                        if (actionPoints != 0){
+
+                            actionPoints--;
+
+                        }else{
+                            break;
+                        }
                         if (actionPoints >= 0) {
                             if (player.getY() == 640) {
                                 actionPoints++;
@@ -142,7 +191,14 @@ public class Campaign {
                             break;
                         }
                     case "D":
+                        if (actionPoints != 0){
+
                         actionPoints--;
+
+                        }else{
+                            break;
+                        }
+
                         if (actionPoints >= 0) {
                             if (player.getY() == 640) {
                                 actionPoints++;
@@ -158,7 +214,13 @@ public class Campaign {
                         break;
 
                     case "W":
-                        actionPoints--;
+                        if (actionPoints != 0){
+
+                            actionPoints--;
+
+                        }else{
+                            break;
+                        }
                         if (actionPoints >= 0) {
                             if (player.getY() == 32) {
                                 actionPoints++;
@@ -173,7 +235,13 @@ public class Campaign {
                         break;
 
                     case "S":
-                        actionPoints--;
+                        if (actionPoints != 0){
+
+                            actionPoints--;
+
+                        }else{
+                            break;
+                        }
                         if (actionPoints >= 0) {
                             if (player.getY() == 640) {
                                 actionPoints++;
@@ -188,7 +256,13 @@ public class Campaign {
                         break;
 
                     case "Q":
+                        if (actionPoints != 0){
+
                         actionPoints--;
+
+                    }else{
+                        break;
+                    }
                         if (actionPoints >= 0) {
                             if (player.getY() == 32) {
                                 actionPoints++;
@@ -204,7 +278,13 @@ public class Campaign {
                         }
                         break;
                     case "E":
+                        if (actionPoints != 0){
+
                         actionPoints--;
+
+                    }else{
+                        break;
+                    }
                         if (actionPoints >= 0) {
                             if (player.getY() == 32) {
                                 actionPoints++;
@@ -245,7 +325,7 @@ public class Campaign {
 
 
 
-    private void gameLoop(GraphicsContext graphics) {
+    private void gameLoop(GraphicsContext graphics, Label actionPoint) {
         long initialTime = System.nanoTime();
         Combat combat = new Combat();
         AnimationTimer animationTimer = new AnimationTimer() {
@@ -257,12 +337,13 @@ public class Campaign {
                 if (time == 60){
                     time = 0;
                 }
+                actionPoint.setText("Action Points: "+actionPoints);
                 /* Aqui se calcula el tiempo, que luego se usara
                 para que parpadee el rango.
                 */
 
                 draw(time, graphics);
-                actualizeState(combat);
+                actualizeState(combat, campaignGameScene);
 
             }
         };
@@ -272,7 +353,8 @@ public class Campaign {
     }
 
 
-    private void actualizeState(Combat combat) {
+    private void actualizeState(Combat combat, Scene gameScene) {
+        this.campaignGameScene = gameScene;
         if (enemy.isAlive()){
             enemy.collideRange();
         }
@@ -285,19 +367,22 @@ public class Campaign {
         */
 
         if (collidePlayer && collideEnemy) {
+            combat.setGameScene(gameScene);
             combat.initializeWindow();
-            player.setY(32);
-            player.setX(112);
+            player.setX(64);
+            player.setY(64);
         }
         if (collidePlayer) {
+            combat.setGameScene(gameScene);
             combat.initializeWindow();
-            player.setY(32);
-            player.setX(112);
+            player.setX(64);
+            player.setY(64);
         }
         if (collideEnemy) {
+            combat.setGameScene(gameScene);
             combat.initializeWindow();
-            player.setY(32);
-            player.setX(112);
+            player.setX(64);
+            player.setY(64);
         }
 
 
@@ -310,37 +395,19 @@ public class Campaign {
 
         for (int i = 1; i <= 11; i++) {
             Image hex = new Image("normalTerrain.png");
-            double pos = 0;
             if (i % 2 == 0) {
-                pos = switch (i) {
-                    case 2 -> 112;
-                    case 4 -> 208;
-                    case 6 -> 304;
-                    case 8 -> 400;
-                    case 10 -> 496;
-                    default -> pos;
-                };
-
-
-                for (int j = 32; j < 640; j += 64) {
-                    graphics.drawImage(hex, pos, j);
-
+                for (int pos = 112; pos <= 496; pos+= 96) {
+                    for (int j = 32; j < 640; j += 64) {
+                        graphics.drawImage(hex, pos, j);
+                    }
                 }
 
-
             } else {
-                pos = switch (i) {
-                    case 1 -> 64;
-                    case 3 -> 160;
-                    case 5 -> 256;
-                    case 7 -> 352;
-                    case 9 -> 448;
-                    case 11 -> 544;
-                    default -> pos;
-                };
-                for (int j = 64; j < 704; j += 64) {
-                    graphics.drawImage(hex, pos, j);
 
+                for (int pos = 64; pos <= 544; pos+=96) {
+                    for (int j = 64; j < 704; j += 64) {
+                        graphics.drawImage(hex, pos, j);
+                    }
                 }
 
             }

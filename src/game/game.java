@@ -24,7 +24,6 @@ public class game extends Application {
     public static Scene gameScene;
     public static boolean gameOver;
     private static GraphicsContext graphics;
-    private Group root;
     private Scene mainScene;
     private Scene gameModeScene;
     private Canvas canvas;
@@ -44,29 +43,18 @@ public class game extends Application {
 
     @Override
     public void start(Stage window) throws Exception {
-        initializeComponents();
         game.window = window;
         /* Game.window es la variable publica estatica que usaran
         todas las clases para instanciar la ventana que necesiten.
          */
 
-        windowDesign(window);
+        windowDesign();
         window.setScene(mainScene);
         window.setTitle("Cronicas de Valthar: El torneo de las eras");
         window.show();
         // Ventana principal.
     }
-
-    public void initializeComponents() {
-        root = new Group();
-        gameScene = new Scene(root, 1000, 850);
-        canvas = new Canvas(832, 850);
-        root.getChildren().add(canvas);
-        graphics = canvas.getGraphicsContext2D();
-
-    }
-
-    private void windowDesign(Stage window) {
+    private void windowDesign() {
         Button play = new Button("Jugar.");
         Button options = new Button("Opciones. ");
         Button quit = new Button("Salir. ");

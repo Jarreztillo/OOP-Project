@@ -11,7 +11,7 @@ public class EnemyCharacter {
     private String closestImageName;
     private int x;
     private int y;
-    private int attack = 1;
+    private int attack = 2;
     private int life = 5;
     private boolean alive = true;
 

@@ -34,6 +34,11 @@ public class Combat {
     private AnimationTimer animationforotherthings;
     private boolean enemyAttack;
     private Random probabilities;
+    private Scene gameScene;
+
+    public void setGameScene(Scene gameScene) {
+        this.gameScene = gameScene;
+    }
 
     public void setAnimationTimer(AnimationTimer animationTimer) {
         this.animationTimer = animationTimer;
@@ -63,7 +68,6 @@ public class Combat {
 
 
         // Configuraciones de ataques.
-
         root.getChildren().addAll(canvas,playerLife, playerAttack, enemyLife, enemyAttack, attack, message, runAway, passTurn);
         graphics = canvas.getGraphicsContext2D();
         graphics.fillRect(0, 440, 832, 410);
@@ -81,6 +85,7 @@ public class Combat {
     }
 
     private void comeBack(Scene gameOverScene) {
+
         gameOverScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -93,6 +98,7 @@ public class Combat {
                         animationforotherthings.stop();
                         animationTimer.start();
                         player.setLife(5);
+                        System.out.println(gameScene);
                         break;
                 }
             }
@@ -122,7 +128,7 @@ public class Combat {
             noRandomPosition = true;
             collideEnemy = false;
             collidePlayer = false;
-            window.setScene(gameScene);
+            window.setScene(campaignGameScene);
             animationTimer.start();
         }else {
             enemyAttack = probabilities.nextBoolean();
@@ -193,7 +199,7 @@ public class Combat {
 
     private void lifeChecker(){
 
-        if (player.getLife() == 0){
+        if (player.getLife() <= 0){
             animationforotherthings.stop();
             gameOverRoot = new Group();
             gameOverScene = new Scene(gameOverRoot, 832, 850);
@@ -215,12 +221,12 @@ public class Combat {
             comeBack(gameOverScene);
         }
 
-        if (enemy.getLife() == 0){
+        if (enemy.getLife() <= 0){
             enemy.setAlive(false);
             noRandomPosition = true;
             collideEnemy = false;
             collidePlayer = false;
-            window.setScene(gameScene);
+            window.setScene(campaignGameScene);
             animationforotherthings.stop();
             animationTimer.start();
         }
@@ -252,7 +258,7 @@ public class Combat {
         }
     }
     private void enemyAttack(Label playerLife){
-            player.setLife(player.getLife() - player.getAttack());
+            player.setLife(player.getLife() - enemy.getAttack());
             playerLife.setText("HP: "+player.getLife());
 
     }
