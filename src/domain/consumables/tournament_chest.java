@@ -1,7 +1,6 @@
 package domain.consumables;
 
 import domain.entities.PlayerCharacter;
-import app.Consumables;
 
 import java.util.Random;
 

@@ -1,6 +1,5 @@
 package domain.consumables;
 
-import app.Consumables;
 import domain.entities.PlayerCharacter;
 
 public class vitality_potion extends Consumables {

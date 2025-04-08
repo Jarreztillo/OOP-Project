@@ -1,7 +1,6 @@
 package domain.consumables;
 
 import domain.entities.PlayerCharacter;
-import app.Consumables;
 
 public class shard_of_Aether extends Consumables {
    private static int attack_added=2;

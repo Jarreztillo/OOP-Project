@@ -1,4 +1,4 @@
-package app;
+package domain.consumables;
 
 import domain.entities.PlayerCharacter;
 
