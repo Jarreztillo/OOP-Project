@@ -1,6 +1,7 @@
 module Game {
     requires javafx.controls;
     requires javafx.graphics;
+    requires java.desktop;
 
-    opens game;
+    opens app;
 }
