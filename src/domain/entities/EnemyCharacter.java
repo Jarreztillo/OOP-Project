@@ -2,22 +2,19 @@ package domain.entities;
 
 import java.util.Random;
 
-import app.Campaign;
+import app.gameModes.Campaign;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 
 public class EnemyCharacter {
-    private String closestImageName;
     private int x;
     private int y;
-    private int attack = 2;
+    private int attack = 1;
     private int Health = 5;
     private boolean alive = true;
-
-
-
-    private String imageName;
+    private String imageName = "enemigomortal1.jpg";
+    private String closestImageName = "decercaenemigo.png";
     private PlayerCharacter character;
     public static boolean collidePlayer;
     Random random = new Random();
@@ -27,14 +24,59 @@ public class EnemyCharacter {
         graphics.drawImage(new Image(imageName), x, y);
     }
 
-    public void move(boolean enemyMove, int playerx, int playery, int enemyx, int enemyy) {
-        if (enemyMove) {
 
 
-            enemyMove = false;
-        }
+    public void move(int playerx, int playery, int enemyx, int enemyy) {
+        int distanceX = playerx - enemyx;
+        int distanceY = playery - enemyy;
+
+
+
+            if (distanceX < 0 && distanceY < 0) {
+                if (distanceY < (enemyy+32) + distanceY) {
+                    x = enemyx - 48;
+                    y = enemyy - 32;
+
+                } else {
+                    x = enemyx - 48;
+                    y = enemyy + 32;
+
+                }
+
+
+            } if (distanceX < 0 && distanceY == 0) {
+                x = enemyx - 48;
+                y = enemyy + 32;
+            }if (distanceX == 0 && distanceY < 0){
+                y = enemyy - 64;
+            } if (distanceX < 0 && distanceY >0){
+                x = enemyx - 48;
+                y = enemyy + 32;
+            }
+            if (distanceX > 0 && distanceY > 0){
+                if (distanceY > (enemyy+32) + distanceY) {
+                    x = enemyx + 48;
+                    y = enemyy - 32;
+
+                } else {
+                    x = enemyx + 48;
+                    y = enemyy + 32;
+                }
+            } if (distanceX > 0 && distanceY == 0) {
+                x = enemyx + 48;
+                y = enemyy + 32;
+            }if (distanceX == 0 && distanceY > 0){
+                y = enemyy + 64;
+            } if (distanceX > 0 && distanceY < 0){
+                x = enemyx + 48;
+                y = enemyy - 32;
+            }
+
+
+
 
     }
+
 
     public void range(GraphicsContext graphics, long time) {
         Image rango = new Image("rangeTerrain.png");
@@ -198,11 +240,9 @@ public class EnemyCharacter {
         this.random = random;
     }
 
-    public EnemyCharacter(int x, int y, String imageName, String closestImageName) {
+    public EnemyCharacter(int x, int y) {
         this.y = y;
         this.x = x;
-        this.imageName = imageName;
-        this.closestImageName = closestImageName;
     }
     public EnemyCharacter(){
 
@@ -228,9 +268,6 @@ public class EnemyCharacter {
         return closestImageName;
     }
 
-    public void setClosestImageName(String closestImageName) {
-        this.closestImageName = closestImageName;
-    }
     public boolean isAlive() {
         return alive;
     }

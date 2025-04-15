@@ -15,6 +15,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/inGameplayEnemies" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/terrains" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/DAO/sound_effects" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/characterDialogues" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/consumables" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/roasterImages/characterFrontImages" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/roasterImages/selectableCharacters" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/roasterImages/selectionHexagons" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DAO/audios/sound_effects" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

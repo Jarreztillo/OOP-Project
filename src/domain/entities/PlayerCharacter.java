@@ -1,6 +1,6 @@
 package domain.entities;
 
-import app.Campaign;
+import app.gameModes.Campaign;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 // Temporizador del rango.
@@ -9,14 +9,10 @@ import javafx.scene.image.Image;
 public class PlayerCharacter {
     private int x;
     private int y;
-    private int attack = 3;
+    private int attack = 1;
     private int Health =  5;
-
     private String imageName;
-
-
     private String closestImageName;
-    private boolean activatedRange;
     private EnemyCharacter enemy;
 
     public static boolean collideEnemy;
@@ -161,11 +157,12 @@ public class PlayerCharacter {
 
     public void setEnemy(EnemyCharacter enemy) {this.enemy = enemy;}
 
-    public PlayerCharacter(int x, int y, String imageName, String closestImageName) {
+    public PlayerCharacter(int x, int y) {
         this.x = x;
         this.y = y;
-        this.imageName = imageName;
-        this.closestImageName = closestImageName;
+    }
+    public PlayerCharacter(){
+
     }
 
     public int getX() {return x;}

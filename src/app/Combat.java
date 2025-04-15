@@ -1,5 +1,7 @@
 package app;
 
+import domain.entities.EnemyCharacter;
+import domain.entities.PlayerCharacter;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -16,40 +18,29 @@ import javafx.scene.text.Font;
 
 import java.util.Random;
 
-import static app.game.*;
+import static app.main.game.*;
 import static domain.entities.EnemyCharacter.collidePlayer;
 import static domain.entities.PlayerCharacter.collideEnemy;
-import static app.Campaign.*;
+import static app.gameModes.Campaign.*;
 
 
 public class Combat {
 
-    private Group root;
-    private Group gameOverRoot;
-    private Scene combatScene;
-    private Scene gameOverScene;
+    private PlayerCharacter player;
+    private EnemyCharacter enemy;
     private static GraphicsContext graphics;
-    private GraphicsContext looserGraphics;
     private AnimationTimer animationTimer;
-    private AnimationTimer animationforotherthings;
+    private AnimationTimer animationForOtherThings;
     private boolean enemyAttack;
     private Random probabilities;
     private Scene gameScene;
-
-    public void setGameScene(Scene gameScene) {
-        this.gameScene = gameScene;
-    }
-
-    public void setAnimationTimer(AnimationTimer animationTimer) {
-        this.animationTimer = animationTimer;
-    }
 
     public static boolean noRandomPosition;
 
     public void initializeWindow() {
         animationTimer.stop();
-        root = new Group();
-        combatScene = new Scene(root, 832, 850);
+        Group root = new Group();
+        Scene combatScene = new Scene(root, 832, 850);
         Canvas canvas = new Canvas(832, 850);
         //Configuraciones minimas.
 
@@ -73,37 +64,68 @@ public class Combat {
         graphics.fillRect(0, 440, 832, 410);
         window.setScene(combatScene);
         drawing();
-        animationforotherthings = new AnimationTimer() {
+        animationForOtherThings = new AnimationTimer() {
             @Override
             public void handle(long l) {
 
                 lifeChecker();
             }
         };
-        animationforotherthings.start();
+        animationForOtherThings.start();
 
     }
 
-    private void comeBack(Scene gameOverScene) {
 
-        gameOverScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                switch (event.getCode().toString()){
-                    case "R":
-                        noRandomPosition = true;
-                        collideEnemy = false;
-                        collidePlayer = false;
-                        window.setScene(gameScene);
-                        animationforotherthings.stop();
-                        animationTimer.start();
-                        player.setHealth(5);
-                        System.out.println(gameScene);
-                        break;
-                }
-            }
-        });
+    private void drawing() {
+        graphics.drawImage(new Image(player.getImageName()), 104, 325);
+        graphics.drawImage(new Image(player.getClosestImageName()), 0, 440);
+        graphics.drawImage(new Image(enemy.getImageName()), 684, 325);
+        graphics.drawImage(new Image(enemy.getClosestImageName()), 712, 440);
 
+        //Dibujando pantalla de pelea.
+    }
+
+
+
+    private void labelConfigurations(Label playerLife, Label playerAttack, Label enemyLife, Label enemyAttack, Label message) {
+        Font stadisticsFont = new Font("ARIAL",20);
+
+        playerLife.setTranslateX(150);
+        playerLife.setTranslateY(450);
+        playerLife.setText("HP: "+player.getHealth());
+        playerLife.setTextFill(Color.WHITE);
+
+
+        playerAttack.setTranslateX(150);
+        playerAttack.setTranslateY(480);
+        playerAttack.setText("Attack points: "+player.getAttack());
+        playerAttack.setTextFill(Color.WHITE);
+
+        playerLife.setFont(stadisticsFont);
+        playerAttack.setFont(stadisticsFont);
+        //Label del jugador.
+
+
+        enemyLife.setTranslateX(635);
+        enemyLife.setTranslateY(450);
+        enemyLife.setText("HP: "+enemy.getHealth());
+        enemyLife.setTextFill(Color.WHITE);
+
+        enemyAttack.setTranslateX(542);
+        enemyAttack.setTranslateY(480);
+        enemyAttack.setText("Attack points: "+enemy.getAttack());
+        enemyAttack.setTextFill(Color.WHITE);
+
+        message.setTranslateX(20);
+        message.setTranslateY(700);
+        message.setText("¡Te has encontrado a tu mayor enemigo!");
+        message.setTextFill(Color.WHITE);
+
+        enemyLife.setFont(stadisticsFont);
+        enemyAttack.setFont(stadisticsFont);
+        message.setFont(stadisticsFont);
+
+        //Label del enemigo
     }
 
     private void buttonConfigurations(Button attack, Button passTurn, Button runAway, Label playerLife, Label playerAttack, Label enemyLife, Label enemyAttack, Label message) {
@@ -153,61 +175,17 @@ public class Combat {
 
     }
 
-    private void labelConfigurations(Label playerLife, Label playerAttack, Label enemyLife, Label enemyAttack, Label message) {
-        Font stadisticsFont = new Font("ARIAL",20);
-
-        playerLife.setTranslateX(150);
-        playerLife.setTranslateY(450);
-        playerLife.setText("HP: "+player.getHealth());
-        playerLife.setTextFill(Color.WHITE);
-
-
-        playerAttack.setTranslateX(150);
-        playerAttack.setTranslateY(480);
-        playerAttack.setText("Attack points: "+player.getAttack());
-        playerAttack.setTextFill(Color.WHITE);
-
-        playerLife.setFont(stadisticsFont);
-        playerAttack.setFont(stadisticsFont);
-        //Label del jugador.
-
-
-        enemyLife.setTranslateX(635);
-        enemyLife.setTranslateY(450);
-        enemyLife.setText("HP: "+enemy.getHealth());
-        enemyLife.setTextFill(Color.WHITE);
-
-        enemyAttack.setTranslateX(542);
-        enemyAttack.setTranslateY(480);
-        enemyAttack.setText("Attack points: "+enemy.getAttack());
-        enemyAttack.setTextFill(Color.WHITE);
-
-        message.setTranslateX(20);
-        message.setTranslateY(700);
-        message.setText("¡Te has encontrado a tu mayor enemigo!");
-        message.setTextFill(Color.WHITE);
-
-        enemyLife.setFont(stadisticsFont);
-        enemyAttack.setFont(stadisticsFont);
-        message.setFont(stadisticsFont);
-
-        //Label del enemigo
-
-
-
-    }
-
     private void lifeChecker(){
 
         if (player.getHealth() <= 0){
-            animationforotherthings.stop();
-            gameOverRoot = new Group();
-            gameOverScene = new Scene(gameOverRoot, 832, 850);
+            animationForOtherThings.stop();
+            Group gameOverRoot = new Group();
+            Scene gameOverScene = new Scene(gameOverRoot, 832, 850);
             Font gameover = new Font(40);
             Canvas looserCanvas = new Canvas(832, 850);
             Label perdiste = new Label("Game over.");
             Label perdiste2 = new Label("Reinicie la partida con R. ");
-            looserGraphics = looserCanvas.getGraphicsContext2D();
+            GraphicsContext looserGraphics = looserCanvas.getGraphicsContext2D();
             gameOverRoot.getChildren().addAll(looserCanvas, perdiste, perdiste2);
             perdiste.setFont(gameover);
             perdiste.setTranslateX(250);
@@ -227,20 +205,34 @@ public class Combat {
             collideEnemy = false;
             collidePlayer = false;
             window.setScene(campaignGameScene);
-            animationforotherthings.stop();
+            animationForOtherThings.stop();
             animationTimer.start();
         }
 
     }
 
-    private void drawing() {
-        graphics.drawImage(new Image(player.getImageName()), 104, 325);
-        graphics.drawImage(new Image(player.getClosestImageName()), 0, 440);
-        graphics.drawImage(new Image(enemy.getImageName()), 684, 325);
-        graphics.drawImage(new Image(enemy.getClosestImageName()), 712, 440);
+    private void comeBack(Scene gameOverScene) {
 
-        //Dibujando pantalla de pelea.
+        gameOverScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                switch (event.getCode().toString()){
+                    case "R":
+                        noRandomPosition = true;
+                        collideEnemy = false;
+                        collidePlayer = false;
+                        window.setScene(gameScene);
+                        animationForOtherThings.stop();
+                        animationTimer.start();
+                        player.setHealth(5);
+                        System.out.println(gameScene);
+                        break;
+                }
+            }
+        });
+
     }
+
 
 
 
@@ -260,6 +252,21 @@ public class Combat {
     private void enemyAttack(Label playerLife){
             player.setHealth(player.getHealth() - enemy.getAttack());
             playerLife.setText("HP: "+player.getHealth());
+
+    }
+
+
+    public void setGameScene(Scene gameScene) {
+        this.gameScene = gameScene;
+    }
+
+    public void setAnimationTimer(AnimationTimer animationTimer) {
+        this.animationTimer = animationTimer;
+    }
+
+    public Combat(PlayerCharacter player, EnemyCharacter enemy){
+        this.player = player;
+        this.enemy = enemy;
 
     }
 
