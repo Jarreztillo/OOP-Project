@@ -1,6 +1,5 @@
 package app.main;
 
-import app.Roaster;
 import app.cutscenes.yosbelFirstApparition;
 
 import javafx.application.Application;
@@ -64,6 +63,11 @@ public class game extends Application {
 
     public void gameModes() {
         Button campaig = new Button("Campaña.");
+        campaig.setStyle(
+                "-fx-background-color: blue; "+
+                "-fx-text-fill: white;"
+        );
+        //Ceseando.
         Button pvp = new Button("PvP.");
         Button tournament = new Button("Torneo.");
         // Botones para inicializar modos de juego.
@@ -79,10 +83,9 @@ public class game extends Application {
         window.setScene(gameModeScene);
         // Se activa la escena donde se muestran todos los objetos.
 
-        Roaster roaster = new Roaster();
-        yosbelFirstApparition yosbel = new yosbelFirstApparition();
 
-        campaig.setOnAction(e -> roaster.initialize());
+
+        campaig.setOnAction(e -> Roaster.initialize());
         // Cada boton lleva al modo de juego correspondiente.
     }
 

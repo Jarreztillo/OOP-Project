@@ -1,6 +1,9 @@
 package app.gameModes;
 
-import app.Combat;
+import app.gameplayFeatures.Combat;
+import app.gameplayFeatures.Consumables;
+import app.gameplayFeatures.Map;
+import domain.consumables.vitality_potion;
 import domain.entities.EnemyCharacter;
 import domain.entities.PlayerCharacter;
 // Clases locales que usa Campaign.
@@ -19,36 +22,44 @@ import javafx.scene.text.Font;
 // Java FX.
 
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 // Utilidades de Java.
 
+import static app.gameplayFeatures.Combat.dropConsumable;
 import static domain.entities.EnemyCharacter.collidePlayer;
 import static app.main.game.window;
 import static domain.entities.PlayerCharacter.collideEnemy;
-import static app.Combat.noRandomPosition;
+import static app.gameplayFeatures.Combat.noRandomPosition;
 
 // Variables estaticas importadas.
 
 public class Campaign {
 
+    public static boolean grabConsumable;
+    public static boolean drawConsumable;
+    public static boolean addConsumable;
     public static boolean activateRange;
     public static Scene campaignGameScene;
+    public static ArrayList<Consumables> mapConsumables = new ArrayList<>();
+
     // Variables públicas estaticas.
 
-    private Group root;
-    private Canvas canvas;
-    private GraphicsContext graphics;
-    private PlayerCharacter player;
-    private EnemyCharacter enemy;
-    private int actionPoints = 2;
-    private Random random = new Random();
+    private static Group root;
+    private static Canvas canvas;
+    private static GraphicsContext graphics;
+    private static PlayerCharacter player;
+    private static EnemyCharacter enemy;
+    private static int actionPoints = 2;
+    private static Random random = new Random();
 
     // Variables privadas.
 
 
 
-    public void initialize(PlayerCharacter roasterPlayer) {
+    public static void initialize(PlayerCharacter roasterPlayer) {
 
         root = new Group();
         campaignGameScene = new Scene(root, 1000, 850);
@@ -61,13 +72,16 @@ public class Campaign {
         player.setImageName(roasterPlayer.getImageName());
         player.setClosestImageName(roasterPlayer.getClosestImageName());
         // Se pone la pantalla y se instancian los jugadores y enemigos.
-
+        vitality_potion potion = new vitality_potion();
+        potion.setQuantity(3);
+        player.setConsumables(potion);
 
         if (enemy.isAlive()){
         if (!noRandomPosition){
             randomPosition();
         }
         }else{
+
         }
 
         playerMovement(campaignGameScene);
@@ -106,7 +120,7 @@ public class Campaign {
 
 
 
-    private void randomPosition() {
+    private static void randomPosition() {
         int xPos = random.nextInt(7, 11);
         int yPos = random.nextInt(1, 10);
         /* xPos es de 7 a 11 para que el enemigo solo aparezca
@@ -141,7 +155,7 @@ public class Campaign {
         // Se le pone al enemigo la posicion aleatoria generada.
     }
 
-    private void playerMovement(Scene scene) {
+    private static void playerMovement(Scene scene) {
 
         /* Por cada tecla presionada, el codigo evaluara
         los puntos de accion y la posicion del jugador
@@ -152,6 +166,8 @@ public class Campaign {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
+                System.out.println("X: "+ player.getX());
+                System.out.println("Y: "+ player.getY());
                 switch (event.getCode().toString()) {
                     case "A":
                         if (actionPoints != 0){
@@ -292,10 +308,8 @@ public class Campaign {
                         actionPoints = 2;
                         System.out.println("xDistanceEvP: "+(player.getX()-enemy.getX()));
                         System.out.println("yDistanceEvP: "+(player.getY()-enemy.getY()));
-                        for (int i = 1; i<= 2; i++){
-
-                        enemy.move(player.getX(), player.getY(), enemy.getX(), enemy.getY());
-
+                        for (int i = 1; i<=2; i++){
+                            enemy.move(player.getX(), player.getY(), enemy.getX(), enemy.getY());
                         }
 
                         break;
@@ -303,15 +317,23 @@ public class Campaign {
                         activateRange = !activateRange;
 
                         break;
+                    case "K":
+                        enemy.setAlive(true);
+                        drawConsumable = true;
+                        enemy.setX(544);
+                        enemy.setY(64);
+                        break;
 
                 }
             }
         });
+
+
     }
 
 
 
-    private void gameLoop(GraphicsContext graphics, Label actionPoint) {
+    private static void gameLoop(GraphicsContext graphics, Label actionPoint) {
         long initialTime = System.nanoTime();
         Combat combat = new Combat(player, enemy);
         AnimationTimer animationTimer = new AnimationTimer() {
@@ -328,7 +350,8 @@ public class Campaign {
                 para que parpadee el rango.
                 */
 
-                draw(time, graphics);
+                    draw(time, graphics);
+
                 actualizeState(combat);
 
             }
@@ -339,12 +362,16 @@ public class Campaign {
     }
 
 
-    private void actualizeState(Combat combat) {
+    private static void actualizeState(Combat combat) {
         if (enemy.isAlive()){
             enemy.collideRange();
+
         }
 
 
+        if (!mapConsumables.isEmpty()){
+            player.collideWithConsumable(mapConsumables);
+        }
         player.collideRange();
 
         /* Llama a los metodos que comprueban las
@@ -375,30 +402,10 @@ public class Campaign {
     }
 
 
-    private void draw(long time, GraphicsContext graphics) {
+    private static void draw(long time, GraphicsContext graphics) {
         //Salvenos Dios por toda esta cantidad de codigo.
 
-        for (int i = 1; i <= 11; i++) {
-            Image hex = new Image("normalTerrain.png");
-            if (i % 2 == 0) {
-                for (int pos = 112; pos <= 496; pos+= 96) {
-                    for (int j = 32; j < 640; j += 64) {
-                        graphics.drawImage(hex, pos, j);
-                    }
-                }
-
-            } else {
-
-                for (int pos = 64; pos <= 544; pos+=96) {
-                    for (int j = 64; j < 704; j += 64) {
-                        graphics.drawImage(hex, pos, j);
-                    }
-                }
-
-            }
-
-
-        }
+        Map.drawCampaingMap(graphics);
         //Dibujo de las columnas de hexagonos.
 
         player.range(graphics, time);
@@ -410,9 +417,17 @@ public class Campaign {
         player.draw(graphics);
         graphics.drawImage(new Image("narrador1.png"), 40,710);
 
+        if (dropConsumable){
+            Consumables consumible = mapConsumables.getFirst();
+            if (drawConsumable) {
+                graphics.drawImage(new Image(consumible.getImage()), consumible.getX(), consumible.getY());
+            }
+        }
+
+
     }
 
-    private void rangeCollition(long time){
+    private static void rangeCollition(long time){
         int xDistanceEvP = enemy.getX() - player.getX();
         int yDistanceEvP = enemy.getY() - player.getY();
         if (activateRange){

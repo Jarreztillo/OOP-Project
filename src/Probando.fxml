@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="456.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Combat">
+<AnchorPane prefHeight="456.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.gameplayFeatures.Combat">
    <children>
       <ButtonBar layoutX="186.0" layoutY="233.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>

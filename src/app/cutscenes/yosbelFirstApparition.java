@@ -16,13 +16,13 @@ import java.nio.file.Paths;
 import static app.main.game.window;
 
 public class yosbelFirstApparition {
-    private GraphicsContext graphics;
-    private Scene yosbelTalkingScene;
-    private Group root;
-    private Canvas canvas;
+    private static GraphicsContext graphics;
+    private static Scene yosbelTalkingScene;
+    private static Group root;
+    private static Canvas canvas;
 
 
-    public void initialize(){
+    public static void initialize(){
 
         root = new Group();
         yosbelTalkingScene = new Scene(root, 1000, 850);
@@ -36,14 +36,14 @@ public class yosbelFirstApparition {
 
     }
 
-    private void audioConfiguration() {
+    private static void audioConfiguration() {
         AudioClip audio = new AudioClip(Paths.get("src/DAO/audios/music/capareza.mp3").toUri().toString());
         audio.play();
         audio.setVolume(0.7);
     }
 
 
-    private void draw(){
+    private static void draw(){
         graphics.fillRect(0, 0, 1000, 850);
         Image yosbelito = new Image("narrador.png");
         graphics.drawImage(yosbelito, 150, -100);
@@ -51,7 +51,7 @@ public class yosbelFirstApparition {
     }
 
 
-    private void labelConfigurations(Group root) {
+    private static void labelConfigurations(Group root) {
         Label message = new Label("¡Hola! Soy Ioxver. Cogiste 2 en tu prueba y ahora reviviste en un mundo de fantasia. ");
         Font font = new Font ("Times_new_roman", 25);
 
