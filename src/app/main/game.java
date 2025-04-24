@@ -23,6 +23,16 @@ public class game extends Application {
     private Scene gameModeScene;
     // Escena, graficos, raiz y lienzo activados para su uso en toda la aplicacion.
 
+
+    private Button play;
+    private Button options;
+    private Button quit;
+    private Button campaign = new Button();
+    private Button pvp = new Button();
+    private Button tournament = new Button();
+
+    // Botones y Labels.
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -39,17 +49,23 @@ public class game extends Application {
     private void windowDesign() {
         Image fondoPrincipal= new Image("fondoPrincipal.png");
         ImageView vista = new ImageView(fondoPrincipal);
-        Button play = new Button("Jugar.");
+        play = new Button("Jugar");
         play.getStyleClass().add("menu-button");
-        Button options = new Button("Opciones. ");
+        options = new Button("Opciones");
         options.getStyleClass().add("menu-button");
-        Button quit = new Button("Salir. ");
+        quit = new Button("Salir");
         quit.getStyleClass().add("menu-button");
-        Label titulo = new Label("Cronicas de Valthar: El torneo de las eras.");
-        // Botones y la marca del titulo.
+        campaign = new Button("Campaña.");
+        campaign.getStyleClass().add("menu-button");
+        pvp = new Button("PvP.");
+        pvp.getStyleClass().add("menu-button");
+        tournament = new Button("Torneo.");
+        tournament.getStyleClass().add("menu-button");
+        // Botones.
 
+        disableGameModesButtons();
         VBox mainMenu = new VBox(20);
-        mainMenu.getChildren().addAll(play, options,quit);
+        mainMenu.getChildren().addAll(play, options,quit,campaign, pvp,tournament);
         mainMenu.setAlignment(Pos.CENTER);
 
         vista.setPreserveRatio(false);
@@ -66,15 +82,24 @@ public class game extends Application {
                 .bind(mainScene.widthProperty().multiply(-0.30)); quit.translateXProperty()
                 .bind(mainScene.widthProperty().multiply(-0.30));
 
+        campaign.translateXProperty().bind(mainScene.widthProperty().multiply(0.30)); pvp.translateXProperty()
+                .bind(mainScene.widthProperty().multiply(0.30)); tournament.translateXProperty()
+                .bind(mainScene.widthProperty().multiply(0.30));
+
+                campaign.setTranslateY(-200);
+                pvp.setTranslateY(-190);
+                tournament.setTranslateY(-180);
 
         mainScene.getStylesheets().add("buttons.css");
 
-        play.setOnAction(_ -> gameModes());
+        play.setOnAction(_ -> enableGameModesButtons());
         // El boton lleva a los modos de juego.
-
 
         quit.setOnAction(_ -> window.close());
         // El boton cierra el programa.
+
+        campaign.setOnAction(_ -> Roaster.initialize());
+        // El boton inicia el modo campaña.
 
         window.setScene(mainScene);
         window.setTitle("Cronicas de Valthar: El torneo de las eras");
@@ -82,32 +107,23 @@ public class game extends Application {
     }
 
 
-
-    public void gameModes() {
-        Button campaig = new Button("Campaña.");
-        campaig.setStyle(
-                "-fx-background-color: blue; "+
-                "-fx-text-fill: white;"+
-                "-fx-border: false; "
-        );
-        //Ceseando.
-        Button pvp = new Button("PvP.");
-        Button tournament = new Button("Torneo.");
-        // Botones para inicializar modos de juego.
-
-        VBox gameModeMenu = new VBox(30);
-        gameModeMenu.getChildren().addAll(campaig, pvp, tournament);
-        gameModeScene = new Scene(gameModeMenu, 832, 850);
-        // Se añaden los botones: primero a su contenedor y luego a la pantalla.
-
-        window.setScene(gameModeScene);
-        // Se activa la escena donde se muestran todos los objetos.
-
-        campaig.setOnAction(_ -> Roaster.initialize());
-        // Cada boton lleva al modo de juego correspondiente.
+    private void disableGameModesButtons(){
+        campaign.setDisable(true);
+        campaign.setVisible(false);
+        pvp.setDisable(true);
+        pvp.setVisible(false);
+        tournament.setDisable(true);
+        tournament.setVisible(false);
     }
 
-
+    private void enableGameModesButtons(){
+        campaign.setDisable(false);
+        campaign.setVisible(true);
+        pvp.setDisable(false);
+        pvp.setVisible(true);
+        tournament.setDisable(false);
+        tournament.setVisible(true);
+    }
 
 }
 
