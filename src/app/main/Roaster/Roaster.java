@@ -511,14 +511,17 @@ public class Roaster {
 
                     if (x == 32 && y == 32){
                         health.setVisible(true);
+                        mana.setVisible(true);
                         attack.setVisible(true);
                         race.setVisible(true);
                         type.setVisible(true);
                         behavior.setVisible(true);
                         movement.setVisible(true);
 
-                        graphics.drawImage(new Image("goblinFace.png"), 740, 32);
+                        graphics.drawImage(new Image("higlobFace.png"), 740, 32);
+
                         health.setFont(font);
+                        mana.setFont(font);
                         attack.setFont(font);
                         race.setFont(font);
                         type.setFont(font);
@@ -526,6 +529,7 @@ public class Roaster {
                         movement.setFont(font);
 
                         health.setTextFill(Color.WHITE);
+                        mana.setTextFill(Color.WHITE);
                         attack.setTextFill(Color.WHITE);
                         race.setTextFill(Color.WHITE);
                         type.setTextFill(Color.WHITE);
@@ -533,14 +537,17 @@ public class Roaster {
                         movement.setTextFill(Color.WHITE);
 
                         health.setText("HP: 7");
-                        attack.setText("Attack: 5");
-                        race.setText("Raza: goblin (te va a robar)");
-                        type.setText("Tipo: berserker");
-                        behavior.setText("Personalidad: principe,\n mal educado e irascible.");
-                        movement.setText("Movimiento: 3");
+                        mana.setText("MP: 15");
+                        attack.setText("Attack: 2");
+                        race.setText("Raza: Goblin");
+                        type.setText("Tipo: Sanador");
+                        behavior.setText("Personalidad: Distraído,\nhalagador e inocente.");
+                        movement.setText("Movimiento: 4");
 
                         health.setTranslateX(720);
                         health.setTranslateY(260);
+                        mana.setTranslateX(780);
+                        mana.setTranslateY(260);
                         attack.setTranslateX(720);
                         attack.setTranslateY(310);
                         race.setTranslateX(720);
@@ -551,10 +558,6 @@ public class Roaster {
                         behavior.setTranslateY(460);
                         movement.setTranslateX(720);
                         movement.setTranslateY(560);
-
-
-
-
                     }
                     if (x == 32 && y ==152){
                         health.setVisible(true);
@@ -584,7 +587,7 @@ public class Roaster {
                         attack.setText("Attack: 3");
                         race.setText("Raza: Humano");
                         type.setText("Tipo: Guerrero");
-                        behavior.setText("Personalidad: Valiente,\n leal e impulsivo.");
+                        behavior.setText("Personalidad: Valiente,\nleal e impulsivo.");
                         movement.setText("Movimiento: 2");
 
                         health.setTranslateX(720);
@@ -608,7 +611,7 @@ public class Roaster {
                         behavior.setVisible(true);
                         movement.setVisible(true);
 
-                        graphics.drawImage(new Image("dravenFace.png"), 740, 32);
+                        graphics.drawImage(new Image("zorakFace.png"), 740, 32);
 
                         health.setFont(font);
                         attack.setFont(font);
@@ -628,7 +631,7 @@ public class Roaster {
                         attack.setText("Attack: 5");
                         race.setText("Raza: Orco");
                         type.setText("Tipo: Berserker");
-                        behavior.setText("Personalidad: Experimentado,\n fuerte y sereno.");
+                        behavior.setText("Personalidad: Experimenta-\ndo, fuerte y sereno.");
                         movement.setText("Movimiento: 3");
 
                         health.setTranslateX(720);
@@ -653,7 +656,7 @@ public class Roaster {
                         behavior.setVisible(true);
                         movement.setVisible(true);
 
-                        graphics.drawImage(new Image("dravenFace.png"), 740, 32);
+                        graphics.drawImage(new Image("lyffaFace.png"), 740, 32);
 
                         health.setFont(font);
                         mana.setFont(font);
@@ -671,13 +674,13 @@ public class Roaster {
                         behavior.setTextFill(Color.WHITE);
                         movement.setTextFill(Color.WHITE);
 
-                        health.setText("HP: 7");
-                        mana.setText("MP: 10 ");
+                        health.setText("HP: 6");
+                        mana.setText("MP: 12 ");
                         attack.setText("Attack: 5");
                         race.setText("Raza: Elfa");
                         type.setText("Tipo: Maga");
-                        behavior.setText("Personalidad: Sabia,\n preocupada y justa.");
-                        movement.setText("Movimiento: 4");
+                        behavior.setText("Personalidad: Princesa,\npervertida y sádica.");
+                        movement.setText("Movimiento: 3");
 
                         health.setTranslateX(720);
                         health.setTranslateY(260);
@@ -702,7 +705,7 @@ public class Roaster {
                         behavior.setVisible(true);
                         movement.setVisible(true);
 
-                        graphics.drawImage(new Image("dravenFace.png"), 740, 32);
+                        graphics.drawImage(new Image("lyrasaFace.png"), 740, 32);
 
                         health.setFont(font);
                         attack.setFont(font);
@@ -721,8 +724,8 @@ public class Roaster {
                         health.setText("HP: 6");
                         attack.setText("Attack: 5");
                         race.setText("Raza: Elfa");
-                        type.setText("Tipo: arquera");
-                        behavior.setText("Personalidad: Silenciosa,\n precisa y desconfiada.");
+                        type.setText("Tipo: Arquera");
+                        behavior.setText("Personalidad: Silenciosa,\nprecisa y desconfiada.");
                         movement.setText("Movimiento: 3");
 
                         health.setTranslateX(720);

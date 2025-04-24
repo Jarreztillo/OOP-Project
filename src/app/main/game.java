@@ -61,6 +61,7 @@ public class game extends Application {
         pvp.getStyleClass().add("menu-button");
         tournament = new Button("Torneo.");
         tournament.getStyleClass().add("menu-button");
+
         // Botones.
 
         disableGameModesButtons();
@@ -100,6 +101,7 @@ public class game extends Application {
 
         campaign.setOnAction(_ -> Roaster.initialize());
         // El boton inicia el modo campaña.
+
 
         window.setScene(mainScene);
         window.setTitle("Cronicas de Valthar: El torneo de las eras");
