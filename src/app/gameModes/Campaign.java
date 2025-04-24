@@ -241,7 +241,6 @@ public class Campaign {
             public void handle(long actualTime) {
                 long time = (actualTime - initialTime) / 1000000000;
                 if (time == 60){
-                    System.out.println("Se cumple. ");
                     time = 0;
                 }
                 actionPoint.setText("Action Points: "+actionPoints);

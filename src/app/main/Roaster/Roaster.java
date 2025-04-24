@@ -78,8 +78,6 @@ public class Roaster {
 
         root.getChildren().addAll(health, mana, attack, race, type, behavior, movement);
 
-        System.out.println(selected[0]);
-
         moveSelectionSquare();
         drawAndActualizePosition();
 

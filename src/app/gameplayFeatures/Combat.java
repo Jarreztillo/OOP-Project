@@ -285,7 +285,6 @@ public class Combat {
             Canvas looserCanvas = new Canvas(832, 850);
             Label perdiste = new Label("Game over.");
             Label perdiste2 = new Label("Reinicie la partida con R. ");
-            GraphicsContext looserGraphics = looserCanvas.getGraphicsContext2D();
             gameOverRoot.getChildren().addAll(looserCanvas, perdiste, perdiste2);
             perdiste.setFont(gameover);
             perdiste.setTranslateX(250);
@@ -294,7 +293,6 @@ public class Combat {
             perdiste.setTranslateX(250);
             perdiste.setTranslateY(200);
 
-            looserGraphics.drawImage(new Image("fondo.jpg"), 116, 325);
             window.setScene(gameOverScene);
             comeBack(gameOverScene);
         }
@@ -348,7 +346,6 @@ public class Combat {
                         animationForOtherThings.stop();
                         animationTimer.start();
                         player[0].setHealth(5);
-                        System.out.println(gameScene);
                         break;
                 }
             }
