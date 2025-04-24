@@ -27,6 +27,7 @@ public class Roaster {
     private static int selectedCharacters = -1;
     private static selectedCharacters[] selected;
     private static String[] numberImages = {"first.png", "second.png", "third.png", "fourth.png", "fifth.png"};
+    private static boolean cantMove = false;
     public static PlayerCharacter[] player;
 
     private static int x = 32;
@@ -88,385 +89,387 @@ public class Roaster {
         roasterScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                switch(event.getCode().toString()){
-                    case "W":
-                        if (y == 32){
-                            break;
-                        }
-                        y -= 120;
-                        break;
-                    case "S":
-                        if(y == 392 && x == 392){
-                            y+=120;
-                            break;
-                        }
-                        if(y == 392 && x == 512){
-                            y+=120;
-                            break;
-                        }
-                        if(y == 512 && x == 512){
-                            break;
-                        }
-                        if(y == 512 && x == 392){
-                            break;
-                        }
-                        if (y == 392){
-                            break;
-                        }
-                        y += 120;
-                        break;
-                    case "D":
-                        if(y == 512 && x == 512){
-                            break;
-                        }
-                        if (x == 512){
-                            break;
-                        }
-                        x+= 120;
-                        break;
-
-                    case "A":
-                        if(y == 512 && x == 392){
-                            break;
-                        }
-                        if (x == 32){
-                            break;
-                        }
-                        x-= 120;
-                        break;
-                    case "R":
-                        reset();
-                        break;
-                    case "SPACE":
-                        if (!(selectedCharacters == 4)){
-                            selectedCharacters++;
-                        }else{
-                            break;
-                        }
-                        switch (x){
-                            case 32:
-                                switch (y) {
-                                    case 32:
-
-                                        switch (selectedCharacters) {
-                                            case 0:
-
-                                                player[selectedCharacters].setImageName("goblin.png");
-                                                player[selectedCharacters].setClosestImageName("closerGoblin.png");
-                                                selected[0] = new selectedCharacters(32, 32, 0, true);
-                                                player[selectedCharacters].setX(64);
-                                                player[selectedCharacters].setY(64);
-                                                player[selectedCharacters].setHealth(7);
-                                                player[selectedCharacters].setAttack(2);
-                                                break;
-                                            case 1:
-                                                if (!(player[0].getImageName() == "goblin.png")){
-                                                    player[selectedCharacters].setImageName("goblin.png");
-                                                    player[selectedCharacters].setClosestImageName("closerGoblin.png");
-                                                    player[selectedCharacters].setHealth(7);
-                                                    player[selectedCharacters].setAttack(2);
-                                                    selected[1] = new selectedCharacters(32, 32, 1, true);
-
-                                                }else{
-                                                    System.out.println("No puede seleccionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                            case 2:
-                                                if (!(player[0].getImageName() == "goblin.png") && !(player[1].getImageName() == "goblin.png")){
-                                                    player[selectedCharacters].setImageName("goblin.png");
-                                                    player[selectedCharacters].setClosestImageName("closerGoblin.png");
-                                                    player[selectedCharacters].setHealth(7);
-                                                    player[selectedCharacters].setAttack(2);
-                                                    selected[2] = new selectedCharacters(32, 32, 2, true);
-                                                }else{
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                            case 3:
-                                                if (!(player[2].getImageName() == "goblin.png") && !(player[0].getImageName() == "goblin.png") && !(player[1].getImageName() == "goblin.png")) {
-                                                    player[selectedCharacters].setImageName("goblin.png");
-                                                    player[selectedCharacters].setClosestImageName("closerGoblin.png");
-                                                    player[selectedCharacters].setHealth(7);
-                                                    player[selectedCharacters].setAttack(2);
-                                                    selected[3] = new selectedCharacters(32, 32, 3, true);
-                                                }else{
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }break;
-                                            case 4:
-                                                if (!(player[3].getImageName() == "goblin.png") && !(player[2].getImageName() == "goblin.png") && !(player[0].getImageName() == "goblin.png") && !(player[1].getImageName() == "goblin.png")) {
-                                                    player[selectedCharacters].setImageName("goblin.png");
-                                                    player[selectedCharacters].setClosestImageName("closerGoblin.png");
-                                                    player[selectedCharacters].setHealth(7);
-                                                    player[selectedCharacters].setAttack(2);
-                                                    selected[4] = new selectedCharacters(32, 32, 4, true);
-
-                                                }else{
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                        }
-                                        break;
-                                    case 152:
-                                        switch(selectedCharacters) {
-                                            case 0:
-                                                player[selectedCharacters].setImageName("draven.png");
-                                                player[selectedCharacters].setClosestImageName("closerDraven.png");
-                                                selected[0] = new selectedCharacters(32, 152, 0, true);
-                                                player[selectedCharacters].setHealth(5);
-                                                player[selectedCharacters].setAttack(3);
-                                                player[selectedCharacters].setX(64);
-                                                player[selectedCharacters].setY(64);
-                                                break;
-                                            case 1:
-                                                if (!(player[0].getImageName() == "draven.png")) {
-                                                    player[selectedCharacters].setImageName("draven.png");
-                                                    player[selectedCharacters].setClosestImageName("closerDraven.png");
-                                                    player[selectedCharacters].setHealth(5);
-                                                    player[selectedCharacters].setAttack(3);
-                                                    selected[1] = new selectedCharacters(32, 152, 1, true);
-                                                } else {
-                                                    System.out.println("No puede seleccionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                            case 2:
-                                                if (!(player[1].getImageName() == "draven.png") && !(player[0].getImageName() == "draven.png")) {
-                                                    player[selectedCharacters].setImageName("draven.png");
-                                                    player[selectedCharacters].setClosestImageName("closerDraven.png");
-                                                    player[selectedCharacters].setHealth(5);
-                                                    player[selectedCharacters].setAttack(3);
-                                                    selected[2] = new selectedCharacters(32, 152, 2, true);
-                                                } else {
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                            case 3:
-                                                if (!(player[2].getImageName() == "draven.png") && !(player[1].getImageName() == "draven.png") && !(player[0].getImageName() == "draven.png")) {
-                                                    player[selectedCharacters].setImageName("draven.png");
-                                                    player[selectedCharacters].setClosestImageName("closerDraven.png");
-                                                    player[selectedCharacters].setHealth(5);
-                                                    player[selectedCharacters].setAttack(3);
-                                                    selected[3] = new selectedCharacters(32, 152, 3, true);
-                                                } else {
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                            case 4:
-                                                if (!(player[3].getImageName() == "draven.png") && !(player[2].getImageName() == "draven.png") && !(player[1].getImageName() == "draven.png") && !(player[0].getImageName() == "draven.png")) {
-                                                    player[selectedCharacters].setImageName("draven.png");
-                                                    player[selectedCharacters].setClosestImageName("closerDraven.png");
-                                                    player[selectedCharacters].setHealth(5);
-                                                    player[selectedCharacters].setAttack(3);
-                                                    selected[4] = new selectedCharacters(32, 152, 4, true);
-
-                                                } else {
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                        }
-                                        break;
-                                    case 272:
-                                        switch(selectedCharacters){
-                                            case 0:
-                                                player[selectedCharacters].setImageName("berserker.png");
-                                                player[selectedCharacters].setClosestImageName("closerBerserker.png");
-                                                selected[0] = new selectedCharacters(32, 272, 0, true);
-                                                player[selectedCharacters].setX(64);
-                                                player[selectedCharacters].setY(64);
-                                                player[selectedCharacters].setHealth(5);
-                                                player[selectedCharacters].setAttack(1);
-                                                break;
-                                            case 1:
-                                                if (!(player[0].getImageName() == "berserker.png")) {
-                                                    player[selectedCharacters].setImageName("berserker.png");
-                                                    player[selectedCharacters].setClosestImageName("closerBerserker.png");
-                                                    player[selectedCharacters].setHealth(5);
-                                                    player[selectedCharacters].setAttack(1);
-                                                    selected[1] = new selectedCharacters(32, 272, 1, true);
-                                                } else {
-                                                    System.out.println("No puede seleccionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                            case 2:
-                                                if (!(player[1].getImageName() == "berserker.png") && !(player[0].getImageName() == "berserker.png")) {
-                                                    player[selectedCharacters].setImageName("berserker.png");
-                                                    player[selectedCharacters].setClosestImageName("closerBerserker.png");
-                                                    player[selectedCharacters].setHealth(5);
-                                                    player[selectedCharacters].setAttack(1);
-                                                    selected[2] = new selectedCharacters(32, 272, 2, true);
-                                                } else {
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                            case 3:
-                                                if (!(player[2].getImageName() == "berserker.png") && !(player[1].getImageName() == "berserker.png") && !(player[0].getImageName() == "berserker.png")) {
-                                                    player[selectedCharacters].setImageName("berserker.png");
-                                                    player[selectedCharacters].setClosestImageName("closerBerserker.png");
-                                                    player[selectedCharacters].setHealth(5);
-                                                    player[selectedCharacters].setAttack(1);
-                                                    selected[3] = new selectedCharacters(32, 272, 3, true);
-                                                } else {
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                            case 4:
-                                                if (!(player[3].getImageName() == "berserker.png") && !(player[2].getImageName() == "berserker.png") && !(player[1].getImageName() == "berserker.png") && !(player[0].getImageName() == "berserker.png")) {
-                                                    player[selectedCharacters].setImageName("berserker.png");
-                                                    player[selectedCharacters].setClosestImageName("closerBerserker.png");
-                                                    player[selectedCharacters].setHealth(5);
-                                                    player[selectedCharacters].setAttack(1);
-                                                    selected[4] = new selectedCharacters(32, 272, 4, true);
-
-                                                } else {
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                        }
-                                        break;
-                                    case 392:
-                                        switch(selectedCharacters){
-                                            case 0:
-                                                player[selectedCharacters].setImageName("goodElven.png");
-                                                player[selectedCharacters].setClosestImageName("closerElven.png");
-                                                player[selectedCharacters].setHealth(5);
-                                                player[selectedCharacters].setAttack(1);
-                                                selected[0] = new selectedCharacters(32, 392, 0, true);
-                                                player[selectedCharacters].setX(64);
-                                                player[selectedCharacters].setY(64);
-                                                break;
-                                            case 1:
-                                                if (!(player[0].getImageName() == "goodElven.png")) {
-                                                    player[selectedCharacters].setImageName("goodElven.png");
-                                                    player[selectedCharacters].setClosestImageName("closerElven.png");
-                                                    player[selectedCharacters].setHealth(5);
-                                                    player[selectedCharacters].setAttack(1);
-                                                    selected[1] = new selectedCharacters(32, 392, 1, true);
-                                                } else {
-                                                    System.out.println("No puede seleccionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                            case 2:
-                                                if (!(player[1].getImageName() == "goodElven.png") && !(player[0].getImageName() == "goodElven.png")) {
-                                                    player[selectedCharacters].setImageName("goodElven.png");
-                                                    player[selectedCharacters].setClosestImageName("closerElven.png");
-                                                    player[selectedCharacters].setHealth(5);
-                                                    player[selectedCharacters].setAttack(1);
-                                                    selected[2] = new selectedCharacters(32, 392, 2, true);
-                                                } else {
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                            case 3:
-                                                if (!(player[2].getImageName() == "goodElven.png") && !(player[1].getImageName() == "goodElven.png") && !(player[0].getImageName() == "goodElven.png")) {
-                                                    player[selectedCharacters].setImageName("goodElven.png");
-                                                    player[selectedCharacters].setClosestImageName("closerElven.png");
-                                                    player[selectedCharacters].setHealth(5);
-                                                    player[selectedCharacters].setAttack(1);
-                                                    selected[3] = new selectedCharacters(32, 392, 3, true);
-                                                } else {
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                            case 4:
-                                                if (!(player[3].getImageName() == "goodElven.png") && !(player[2].getImageName() == "goodElven.png") && !(player[1].getImageName() == "goodElven.png") && !(player[0].getImageName() == "goodElven.png")) {
-                                                    player[selectedCharacters].setImageName("goodElven.png");
-                                                    player[selectedCharacters].setClosestImageName("closerElven.png");
-                                                    player[selectedCharacters].setHealth(5);
-                                                    player[selectedCharacters].setAttack(1);
-                                                    selected[4] = new selectedCharacters(32, 392, 4, true);
-
-                                                } else {
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                        }
-                                        break;
-                                }
+                if (!cantMove) {
+                    switch (event.getCode().toString()) {
+                        case "W":
+                            if (y == 32) {
                                 break;
-                            case 152:
-                                switch (y){
-                                    case 32:
-                                        switch (selectedCharacters) {
-                                            case 0:
-                                                player[selectedCharacters].setImageName("anotherElven.png");
-                                                player[selectedCharacters].setClosestImageName("closerAnotherElven.png");
-                                                player[selectedCharacters].setHealth(6);
-                                                player[selectedCharacters].setAttack(2);
-                                                selected[0] = new selectedCharacters(152, 32, 0, true);
-                                                player[selectedCharacters].setX(64);
-                                                player[selectedCharacters].setY(64);
-                                                break;
-                                            case 1:
-                                                if (!(player[0].getImageName() == "anotherElven.png")) {
+                            }
+                            y -= 120;
+                            break;
+                        case "S":
+                            if (y == 392 && x == 392) {
+                                y += 120;
+                                break;
+                            }
+                            if (y == 392 && x == 512) {
+                                y += 120;
+                                break;
+                            }
+                            if (y == 512 && x == 512) {
+                                break;
+                            }
+                            if (y == 512 && x == 392) {
+                                break;
+                            }
+                            if (y == 392) {
+                                break;
+                            }
+                            y += 120;
+                            break;
+                        case "D":
+                            if (y == 512 && x == 512) {
+                                break;
+                            }
+                            if (x == 512) {
+                                break;
+                            }
+                            x += 120;
+                            break;
+
+                        case "A":
+                            if (y == 512 && x == 392) {
+                                break;
+                            }
+                            if (x == 32) {
+                                break;
+                            }
+                            x -= 120;
+                            break;
+                        case "R":
+                            reset();
+                            break;
+                        case "SPACE":
+                            if (!(selectedCharacters == 4)) {
+                                selectedCharacters++;
+                            } else {
+                                break;
+                            }
+                            switch (x) {
+                                case 32:
+                                    switch (y) {
+                                        case 32:
+
+                                            switch (selectedCharacters) {
+                                                case 0:
+
+                                                    player[selectedCharacters].setImageName("goblin.png");
+                                                    player[selectedCharacters].setClosestImageName("closerGoblin.png");
+                                                    selected[0] = new selectedCharacters(32, 32, 0, true);
+                                                    player[selectedCharacters].setX(64);
+                                                    player[selectedCharacters].setY(64);
+                                                    player[selectedCharacters].setHealth(7);
+                                                    player[selectedCharacters].setAttack(2);
+                                                    break;
+                                                case 1:
+                                                    if (!(player[0].getImageName() == "goblin.png")) {
+                                                        player[selectedCharacters].setImageName("goblin.png");
+                                                        player[selectedCharacters].setClosestImageName("closerGoblin.png");
+                                                        player[selectedCharacters].setHealth(7);
+                                                        player[selectedCharacters].setAttack(2);
+                                                        selected[1] = new selectedCharacters(32, 32, 1, true);
+
+                                                    } else {
+                                                        System.out.println("No puede seleccionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 2:
+                                                    if (!(player[0].getImageName() == "goblin.png") && !(player[1].getImageName() == "goblin.png")) {
+                                                        player[selectedCharacters].setImageName("goblin.png");
+                                                        player[selectedCharacters].setClosestImageName("closerGoblin.png");
+                                                        player[selectedCharacters].setHealth(7);
+                                                        player[selectedCharacters].setAttack(2);
+                                                        selected[2] = new selectedCharacters(32, 32, 2, true);
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 3:
+                                                    if (!(player[2].getImageName() == "goblin.png") && !(player[0].getImageName() == "goblin.png") && !(player[1].getImageName() == "goblin.png")) {
+                                                        player[selectedCharacters].setImageName("goblin.png");
+                                                        player[selectedCharacters].setClosestImageName("closerGoblin.png");
+                                                        player[selectedCharacters].setHealth(7);
+                                                        player[selectedCharacters].setAttack(2);
+                                                        selected[3] = new selectedCharacters(32, 32, 3, true);
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 4:
+                                                    if (!(player[3].getImageName() == "goblin.png") && !(player[2].getImageName() == "goblin.png") && !(player[0].getImageName() == "goblin.png") && !(player[1].getImageName() == "goblin.png")) {
+                                                        player[selectedCharacters].setImageName("goblin.png");
+                                                        player[selectedCharacters].setClosestImageName("closerGoblin.png");
+                                                        player[selectedCharacters].setHealth(7);
+                                                        player[selectedCharacters].setAttack(2);
+                                                        selected[4] = new selectedCharacters(32, 32, 4, true);
+
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                            }
+                                            break;
+                                        case 152:
+                                            switch (selectedCharacters) {
+                                                case 0:
+                                                    player[selectedCharacters].setImageName("draven.png");
+                                                    player[selectedCharacters].setClosestImageName("closerDraven.png");
+                                                    selected[0] = new selectedCharacters(32, 152, 0, true);
+                                                    player[selectedCharacters].setHealth(5);
+                                                    player[selectedCharacters].setAttack(3);
+                                                    player[selectedCharacters].setX(64);
+                                                    player[selectedCharacters].setY(64);
+                                                    break;
+                                                case 1:
+                                                    if (!(player[0].getImageName() == "draven.png")) {
+                                                        player[selectedCharacters].setImageName("draven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerDraven.png");
+                                                        player[selectedCharacters].setHealth(5);
+                                                        player[selectedCharacters].setAttack(3);
+                                                        selected[1] = new selectedCharacters(32, 152, 1, true);
+                                                    } else {
+                                                        System.out.println("No puede seleccionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 2:
+                                                    if (!(player[1].getImageName() == "draven.png") && !(player[0].getImageName() == "draven.png")) {
+                                                        player[selectedCharacters].setImageName("draven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerDraven.png");
+                                                        player[selectedCharacters].setHealth(5);
+                                                        player[selectedCharacters].setAttack(3);
+                                                        selected[2] = new selectedCharacters(32, 152, 2, true);
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 3:
+                                                    if (!(player[2].getImageName() == "draven.png") && !(player[1].getImageName() == "draven.png") && !(player[0].getImageName() == "draven.png")) {
+                                                        player[selectedCharacters].setImageName("draven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerDraven.png");
+                                                        player[selectedCharacters].setHealth(5);
+                                                        player[selectedCharacters].setAttack(3);
+                                                        selected[3] = new selectedCharacters(32, 152, 3, true);
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 4:
+                                                    if (!(player[3].getImageName() == "draven.png") && !(player[2].getImageName() == "draven.png") && !(player[1].getImageName() == "draven.png") && !(player[0].getImageName() == "draven.png")) {
+                                                        player[selectedCharacters].setImageName("draven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerDraven.png");
+                                                        player[selectedCharacters].setHealth(5);
+                                                        player[selectedCharacters].setAttack(3);
+                                                        selected[4] = new selectedCharacters(32, 152, 4, true);
+
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                            }
+                                            break;
+                                        case 272:
+                                            switch (selectedCharacters) {
+                                                case 0:
+                                                    player[selectedCharacters].setImageName("berserker.png");
+                                                    player[selectedCharacters].setClosestImageName("closerBerserker.png");
+                                                    selected[0] = new selectedCharacters(32, 272, 0, true);
+                                                    player[selectedCharacters].setX(64);
+                                                    player[selectedCharacters].setY(64);
+                                                    player[selectedCharacters].setHealth(5);
+                                                    player[selectedCharacters].setAttack(1);
+                                                    break;
+                                                case 1:
+                                                    if (!(player[0].getImageName() == "berserker.png")) {
+                                                        player[selectedCharacters].setImageName("berserker.png");
+                                                        player[selectedCharacters].setClosestImageName("closerBerserker.png");
+                                                        player[selectedCharacters].setHealth(5);
+                                                        player[selectedCharacters].setAttack(1);
+                                                        selected[1] = new selectedCharacters(32, 272, 1, true);
+                                                    } else {
+                                                        System.out.println("No puede seleccionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 2:
+                                                    if (!(player[1].getImageName() == "berserker.png") && !(player[0].getImageName() == "berserker.png")) {
+                                                        player[selectedCharacters].setImageName("berserker.png");
+                                                        player[selectedCharacters].setClosestImageName("closerBerserker.png");
+                                                        player[selectedCharacters].setHealth(5);
+                                                        player[selectedCharacters].setAttack(1);
+                                                        selected[2] = new selectedCharacters(32, 272, 2, true);
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 3:
+                                                    if (!(player[2].getImageName() == "berserker.png") && !(player[1].getImageName() == "berserker.png") && !(player[0].getImageName() == "berserker.png")) {
+                                                        player[selectedCharacters].setImageName("berserker.png");
+                                                        player[selectedCharacters].setClosestImageName("closerBerserker.png");
+                                                        player[selectedCharacters].setHealth(5);
+                                                        player[selectedCharacters].setAttack(1);
+                                                        selected[3] = new selectedCharacters(32, 272, 3, true);
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 4:
+                                                    if (!(player[3].getImageName() == "berserker.png") && !(player[2].getImageName() == "berserker.png") && !(player[1].getImageName() == "berserker.png") && !(player[0].getImageName() == "berserker.png")) {
+                                                        player[selectedCharacters].setImageName("berserker.png");
+                                                        player[selectedCharacters].setClosestImageName("closerBerserker.png");
+                                                        player[selectedCharacters].setHealth(5);
+                                                        player[selectedCharacters].setAttack(1);
+                                                        selected[4] = new selectedCharacters(32, 272, 4, true);
+
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                            }
+                                            break;
+                                        case 392:
+                                            switch (selectedCharacters) {
+                                                case 0:
+                                                    player[selectedCharacters].setImageName("goodElven.png");
+                                                    player[selectedCharacters].setClosestImageName("closerElven.png");
+                                                    player[selectedCharacters].setHealth(5);
+                                                    player[selectedCharacters].setAttack(1);
+                                                    selected[0] = new selectedCharacters(32, 392, 0, true);
+                                                    player[selectedCharacters].setX(64);
+                                                    player[selectedCharacters].setY(64);
+                                                    break;
+                                                case 1:
+                                                    if (!(player[0].getImageName() == "goodElven.png")) {
+                                                        player[selectedCharacters].setImageName("goodElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerElven.png");
+                                                        player[selectedCharacters].setHealth(5);
+                                                        player[selectedCharacters].setAttack(1);
+                                                        selected[1] = new selectedCharacters(32, 392, 1, true);
+                                                    } else {
+                                                        System.out.println("No puede seleccionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 2:
+                                                    if (!(player[1].getImageName() == "goodElven.png") && !(player[0].getImageName() == "goodElven.png")) {
+                                                        player[selectedCharacters].setImageName("goodElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerElven.png");
+                                                        player[selectedCharacters].setHealth(5);
+                                                        player[selectedCharacters].setAttack(1);
+                                                        selected[2] = new selectedCharacters(32, 392, 2, true);
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 3:
+                                                    if (!(player[2].getImageName() == "goodElven.png") && !(player[1].getImageName() == "goodElven.png") && !(player[0].getImageName() == "goodElven.png")) {
+                                                        player[selectedCharacters].setImageName("goodElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerElven.png");
+                                                        player[selectedCharacters].setHealth(5);
+                                                        player[selectedCharacters].setAttack(1);
+                                                        selected[3] = new selectedCharacters(32, 392, 3, true);
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 4:
+                                                    if (!(player[3].getImageName() == "goodElven.png") && !(player[2].getImageName() == "goodElven.png") && !(player[1].getImageName() == "goodElven.png") && !(player[0].getImageName() == "goodElven.png")) {
+                                                        player[selectedCharacters].setImageName("goodElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerElven.png");
+                                                        player[selectedCharacters].setHealth(5);
+                                                        player[selectedCharacters].setAttack(1);
+                                                        selected[4] = new selectedCharacters(32, 392, 4, true);
+
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 152:
+                                    switch (y) {
+                                        case 32:
+                                            switch (selectedCharacters) {
+                                                case 0:
                                                     player[selectedCharacters].setImageName("anotherElven.png");
                                                     player[selectedCharacters].setClosestImageName("closerAnotherElven.png");
                                                     player[selectedCharacters].setHealth(6);
                                                     player[selectedCharacters].setAttack(2);
-                                                    selected[1] = new selectedCharacters(152, 32, 1, true);
-                                                } else {
-                                                    System.out.println("No puede seleccionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                            case 2:
-                                                if (!(player[0].getImageName() == "anotherElven.png") && !(player[1].getImageName() == "anotherElven.png")) {
-                                                    player[selectedCharacters].setImageName("anotherElven.png");
-                                                    player[selectedCharacters].setClosestImageName("closerAnotherElven.png");
-                                                    player[selectedCharacters].setHealth(6);
-                                                    player[selectedCharacters].setAttack(2);
-                                                    selected[2] = new selectedCharacters(152, 32, 2, true);
-                                                } else {
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                            case 3:
-                                                if (!(player[2].getImageName() == "anotherElven.png") && !(player[0].getImageName() == "anotherElven.png") && !(player[1].getImageName() == "anotherElven.png")) {
-                                                    player[selectedCharacters].setImageName("anotherElven.png");
-                                                    player[selectedCharacters].setClosestImageName("closerAnotherElven.png");
-                                                    player[selectedCharacters].setHealth(6);
-                                                    player[selectedCharacters].setAttack(2);
-                                                    selected[3] = new selectedCharacters(152, 32, 3, true);
-                                                } else {
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                            case 4:
-                                                if (!(player[3].getImageName() == "anotherElven.png") && !(player[2].getImageName() == "anotherElven.png") && !(player[0].getImageName() == "anotherElven.png") && !(player[1].getImageName() == "anotherElven.png")) {
-                                                    player[selectedCharacters].setImageName("anotherElven.png");
-                                                    player[selectedCharacters].setClosestImageName("closerAnotherElven.png");
-                                                    player[selectedCharacters].setHealth(6);
-                                                    player[selectedCharacters].setAttack(2);
-                                                    selected[4] = new selectedCharacters(152, 32, 4, true);
+                                                    selected[0] = new selectedCharacters(152, 32, 0, true);
+                                                    player[selectedCharacters].setX(64);
+                                                    player[selectedCharacters].setY(64);
+                                                    break;
+                                                case 1:
+                                                    if (!(player[0].getImageName() == "anotherElven.png")) {
+                                                        player[selectedCharacters].setImageName("anotherElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerAnotherElven.png");
+                                                        player[selectedCharacters].setHealth(6);
+                                                        player[selectedCharacters].setAttack(2);
+                                                        selected[1] = new selectedCharacters(152, 32, 1, true);
+                                                    } else {
+                                                        System.out.println("No puede seleccionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 2:
+                                                    if (!(player[0].getImageName() == "anotherElven.png") && !(player[1].getImageName() == "anotherElven.png")) {
+                                                        player[selectedCharacters].setImageName("anotherElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerAnotherElven.png");
+                                                        player[selectedCharacters].setHealth(6);
+                                                        player[selectedCharacters].setAttack(2);
+                                                        selected[2] = new selectedCharacters(152, 32, 2, true);
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 3:
+                                                    if (!(player[2].getImageName() == "anotherElven.png") && !(player[0].getImageName() == "anotherElven.png") && !(player[1].getImageName() == "anotherElven.png")) {
+                                                        player[selectedCharacters].setImageName("anotherElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerAnotherElven.png");
+                                                        player[selectedCharacters].setHealth(6);
+                                                        player[selectedCharacters].setAttack(2);
+                                                        selected[3] = new selectedCharacters(152, 32, 3, true);
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                                case 4:
+                                                    if (!(player[3].getImageName() == "anotherElven.png") && !(player[2].getImageName() == "anotherElven.png") && !(player[0].getImageName() == "anotherElven.png") && !(player[1].getImageName() == "anotherElven.png")) {
+                                                        player[selectedCharacters].setImageName("anotherElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerAnotherElven.png");
+                                                        player[selectedCharacters].setHealth(6);
+                                                        player[selectedCharacters].setAttack(2);
+                                                        selected[4] = new selectedCharacters(152, 32, 4, true);
 
-                                                } else {
-                                                    System.out.println("No puede selecctionar este personaje de nuevo. ");
-                                                    selectedCharacters--;
-                                                }
-                                                break;
-                                        }
-                                        break;
+                                                    } else {
+                                                        System.out.println("No puede selecctionar este personaje de nuevo. ");
+                                                        selectedCharacters--;
+                                                    }
+                                                    break;
+                                            }
+                                            break;
 
 
-
-                                }
-                        }
+                                    }
+                            }
+                    }
                 }
             }
         });
@@ -759,7 +762,6 @@ public class Roaster {
                         graphics.drawImage(new Image(numberImages[selected[0].getNumberImage()]), selected[0].getX(), selected[0].getY());
                     }
                     if (selectedCharacters == 4){
-                        System.out.println("Me estoy activando.");
                         Font font = new Font(18);
                         message = new Label("¿Esta seguro de haber elegido todos los personajes en el orden correcto?");
                         message.setFont(font);
@@ -792,6 +794,7 @@ public class Roaster {
                         no.setVisible(true);
                         root.getChildren().addAll(message, yes, no);
                         animationTimer.stop();
+                        cantMove = true;
                     }
 
                 }
@@ -806,7 +809,7 @@ public class Roaster {
         }
         private static void reset(){
             selectedCharacters = -1;
-
+            cantMove = false;
             player[0] = new PlayerCharacter();
             player[1] = new PlayerCharacter();
             player[2] = new PlayerCharacter();
