@@ -312,7 +312,7 @@ public class Campaign {
             rangeCollition(time);
         }
         graphics.drawImage(new Image(player[0].getImageName()), player[0].getX(), player[0].getY());
-        graphics.drawImage(new Image("narrador1.png"), 40,710);
+        //graphics.drawImage(new Image("narrador1.png"), 40,710);
 
         if (dropConsumable){
             Consumables consumible = mapConsumables.getFirst();
