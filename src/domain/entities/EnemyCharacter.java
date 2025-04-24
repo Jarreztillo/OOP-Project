@@ -13,7 +13,7 @@ public class EnemyCharacter {
     private int attack = 1;
     private int Health = 5;
     private boolean alive = true;
-    private String imageName = "enemigomortal1.jpg";
+    private String imageName = "enemigomortal1.png";
     private String closestImageName = "decercaenemigo.png";
     private PlayerCharacter character;
     public static boolean collidePlayer;

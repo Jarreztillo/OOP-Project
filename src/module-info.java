@@ -6,4 +6,5 @@ module Game {
     opens app.gameModes;
     opens app.main;
     opens app.gameplayFeatures;
+    opens app.main.Roaster;
 }

@@ -22,6 +22,11 @@
       <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/roasterImages/selectionHexagons" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/DAO/audios/sound_effects" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/DAO/txtArchives" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/roasterImages/someNumbers" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DAO/fonts" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/gameLogo" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DAO/css" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/mainWallpaper" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

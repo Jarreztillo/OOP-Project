@@ -13,16 +13,25 @@ import java.util.ArrayList;
 public class PlayerCharacter {
     private int x;
     private int y;
-    private int attack = 1;
-    private int Health =  5;
+    private int attack;
+    private int Health;
     private String imageName;
     private String closestImageName;
     private EnemyCharacter enemy;
+    private boolean isSelected;
     public static boolean collideEnemy;
     private ArrayList<Consumables> consumables = new ArrayList<>();
 
     public ArrayList<Consumables> getConsumables() {
         return consumables;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public boolean consumablesIsEmpty(){
@@ -49,14 +58,6 @@ public class PlayerCharacter {
         this.consumables.add(consumables);
     }
 
-
-
-
-
-    public void draw(GraphicsContext graphics) {
-        graphics.drawImage(new Image(imageName), x, y);
-    }
-    //Se ejecuta por cada iteracion del gameLoop.
 
 
 

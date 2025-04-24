@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bbeda9a4-a7b2-4747-b40c-e0b3cefcaad9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Game.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manifest.mf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/audios/music/capareza.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/backgrounds/fondo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/characterDialogues/narrador.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/characterDialogues/narrador1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/consumables/vitality_potion.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/frontCharacters/closerBerserker.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/frontCharacters/closerDraven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/frontCharacters/decerca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/frontEnemies/decercaenemigo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/inGameplayCharacters/berserker.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/inGameplayCharacters/draven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/inGameplayCharacters/monigote.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/inGameplayEnemies/enemigomortal1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/roasterImages/selectionHexagons/selectHex.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/roasterImages/selectionHexagons/selectSquare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/terrains/forest.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/terrains/grass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/terrains/mountain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/terrains/normalTerrain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/terrains/overRangeTerrain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/terrains/rangeTerrain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/terrains/ruins.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/terrains/sand.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/images/terrains/water.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/styles/probando.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/DAO/txtArchives/map1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/Probando.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/cutscenes/yosbelFirstApparition.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/gameModes/Campaign$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/gameModes/Campaign$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/gameModes/Campaign.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/gameModes/PvP.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/gameModes/Tournament.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/gameplayFeatures/Combat$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/gameplayFeatures/Combat$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/gameplayFeatures/Combat.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/gameplayFeatures/Consumables.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/gameplayFeatures/Dangers.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/gameplayFeatures/Entities.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/gameplayFeatures/Map.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/gameplayFeatures/TerrainType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/main/Roaster$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/main/Roaster$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/main/Roaster.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/app/main/game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/berserker.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/capareza.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/closerBerserker.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/closerDraven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/decerca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/decercaenemigo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/domain/consumables/vitality_potion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/domain/entities/EnemyCharacter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/domain/entities/PlayerCharacter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/draven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/enemigomortal1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/fondo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/forest.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/grass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/map1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/module-info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/monigote.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/mountain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/narrador.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/narrador1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/normalTerrain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/overRangeTerrain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/rangeTerrain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/ruins.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/sand.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/selectHex.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/selectSquare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/vitality_potion.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game/water.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/audios/music/capareza.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/backgrounds/fondo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/characterDialogues/narrador.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/characterDialogues/narrador1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/consumables/vitality_potion.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/frontCharacters/closerAnotherElven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/frontCharacters/closerBerserker.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/frontCharacters/closerDraven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/frontCharacters/closerElven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/frontCharacters/closerGoblin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/frontCharacters/decerca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/frontCharacters/decercamonigota.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/frontEnemies/R" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/frontEnemies/decercaenemigo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/inGameplayCharacters/Elfa Arquera.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/inGameplayCharacters/Elfa mala.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/inGameplayCharacters/Mago Elfo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/inGameplayCharacters/anotherElven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/inGameplayCharacters/berserker.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/inGameplayCharacters/draven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/inGameplayCharacters/goblin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/inGameplayCharacters/goodElven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/inGameplayCharacters/monigota.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/inGameplayCharacters/monigote.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/inGameplayEnemies/enemigomortal1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/roasterImages/selectionHexagons/selectHex.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/roasterImages/selectionHexagons/selectSquare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/terrains/forest.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/terrains/grass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/terrains/mountain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/terrains/normalTerrain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/terrains/overRangeTerrain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/terrains/rangeTerrain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/terrains/ruins.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/terrains/sand.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/images/terrains/water.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/styles/probando.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/txtArchives/map1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Probando.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/cutscenes/yosbelFirstApparition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/gameModes/Campaign.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/gameModes/PvP.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/gameModes/Tournament.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/gameplayFeatures/Combat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/gameplayFeatures/Consumables.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/gameplayFeatures/Dangers.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/gameplayFeatures/Entities.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/gameplayFeatures/Map.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/gameplayFeatures/TerrainType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/main/Roaster.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/main/game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/consumables/vitality_potion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/entities/EnemyCharacter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/entities/PlayerCharacter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/module-info.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2w75S1YHLnwxWFo66E6XZB1EjiV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.game.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/jarreztillo/Descargas/javafx-sdk-24/lib/jfx.incubator.richtext.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bbeda9a4-a7b2-4747-b40c-e0b3cefcaad9" name="Changes" comment="" />
+      <created>1745379767650</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1745379767650</updated>
+    </task>
+    <servers />
+  </component>
+</project>

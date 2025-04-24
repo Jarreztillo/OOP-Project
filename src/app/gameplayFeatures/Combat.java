@@ -20,6 +20,7 @@ import javafx.scene.text.Font;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static app.main.Roaster.Roaster.player;
 import static app.main.game.*;
 import static domain.entities.EnemyCharacter.collidePlayer;
 import static domain.entities.PlayerCharacter.collideEnemy;
@@ -27,12 +28,13 @@ import static app.gameModes.Campaign.*;
 
 
 public class Combat {
-
-    private PlayerCharacter player;
+    private int selectedCharacter = 0;
+    private int playerTurn = 4;
     private EnemyCharacter enemy;
     private static GraphicsContext graphics;
     private AnimationTimer animationTimer;
     private AnimationTimer animationForOtherThings;
+    private AnimationTimer combatTimer;
     private boolean enemyAttack;
     private Random probabilities;
     private Scene gameScene;
@@ -40,6 +42,9 @@ public class Combat {
     private vitality_potion potion = new vitality_potion();
 
     private Label message;
+    private Label playerLife;
+    private Label playerAttack;
+
 
     public static boolean noRandomPosition;
     public static boolean dropConsumable;
@@ -51,19 +56,19 @@ public class Combat {
         Canvas canvas = new Canvas(832, 850);
         //Configuraciones minimas.
 
-        Label playerLife = new Label();
-        Label playerAttack = new Label();
+        playerLife = new Label();
+        playerAttack = new Label();
         Label enemyLife = new Label();
         Label enemyAttack = new Label();
         message = new Label();
-        labelConfigurations(playerLife, playerAttack, enemyLife, enemyAttack, message);
+        labelConfigurations (enemyLife, enemyAttack, message);
         // Configuraciones de titulos
 
         Button attack = new Button("Atacar.");
         Button passTurn = new Button("Pasar turno.");
         Button runAway = new Button("Huir.");
         Button useConsumable = new Button("Usar item.");
-        buttonConfigurations(attack, passTurn, runAway, useConsumable, playerLife, playerAttack, enemyLife,enemyAttack);
+        buttonConfigurations(attack, passTurn, runAway, useConsumable, enemyLife,enemyAttack);
 
 
         // Configuraciones de ataques.
@@ -71,25 +76,81 @@ public class Combat {
         graphics = canvas.getGraphicsContext2D();
         graphics.fillRect(0, 440, 832, 410);
         window.setScene(combatScene);
+        switchCharacters(combatScene);
         drawing();
         animationForOtherThings = new AnimationTimer() {
             @Override
             public void handle(long l) {
-
                 lifeChecker();
                 actualizeState();
+                drawingPortraits();
             }
         };
         animationForOtherThings.start();
 
     }
 
+    private void drawingPortraits() {
+        graphics.fillRect(0, 440, 120, 120);
+        graphics.drawImage(new Image(player[selectedCharacter].getClosestImageName()), 0, 440);
+    }
 
+    private void switchCharacters(Scene combatScene) {
+
+        combatScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                switch (event.getCode().toString()){
+                    case "W":
+                        if(selectedCharacter == 4){
+                            break;
+                        }
+                        selectedCharacter++;
+                        playerLife.setText("HP: "+player[selectedCharacter].getHealth());
+                        playerAttack.setText("Attack points: "+player[selectedCharacter].getAttack());
+                        break;
+                    case "S":
+                        if (selectedCharacter == 0){
+                            break;
+                        }
+                        selectedCharacter--;
+                        playerLife.setText("HP: "+player[selectedCharacter].getHealth());
+                        playerAttack.setText("Attack points: "+player[selectedCharacter].getAttack());
+                        break;
+
+
+                }
+            }
+        });
+    }
 
 
     private void drawing() {
-        graphics.drawImage(new Image(player.getImageName()), 104, 325);
-        graphics.drawImage(new Image(player.getClosestImageName()), 0, 440);
+        if (player[0].getHealth() != 0) {
+            graphics.drawImage(new Image(player[0].getImageName()), 104, 325);
+        }
+        if(player[1].getHealth() != 0){
+            graphics.drawImage(new Image(player[1].getImageName()), 104, 255);
+
+        }
+        if(player[2].getHealth() != 0){
+            graphics.drawImage(new Image(player[2].getImageName()), 104, 185);
+        }
+        if(player[3].getHealth() != 0){
+            graphics.drawImage(new Image(player[3].getImageName()), 104, 115);
+        }
+        if(player[4].getHealth() != 0){
+            graphics.drawImage(new Image(player[4].getImageName()), 104, 55);
+        }
+
+
+
+
+
+
+
+
+
         graphics.drawImage(new Image(enemy.getImageName()), 684, 325);
         graphics.drawImage(new Image(enemy.getClosestImageName()), 712, 440);
 
@@ -98,18 +159,18 @@ public class Combat {
 
 
 
-    private void labelConfigurations(Label playerLife, Label playerAttack, Label enemyLife, Label enemyAttack, Label message) {
+    private void labelConfigurations(Label enemyLife, Label enemyAttack, Label message) {
         Font stadisticsFont = new Font("ARIAL",20);
 
         playerLife.setTranslateX(150);
         playerLife.setTranslateY(450);
-        playerLife.setText("HP: "+player.getHealth());
+        playerLife.setText("HP: "+player[0].getHealth());
         playerLife.setTextFill(Color.WHITE);
 
 
         playerAttack.setTranslateX(150);
         playerAttack.setTranslateY(480);
-        playerAttack.setText("Attack points: "+player.getAttack());
+        playerAttack.setText("Attack points: "+player[0].getAttack());
         playerAttack.setTextFill(Color.WHITE);
 
         playerLife.setFont(stadisticsFont);
@@ -141,10 +202,12 @@ public class Combat {
 
     }
 
-    private void buttonConfigurations(Button attack, Button passTurn, Button runAway, Button useConsumable, Label playerLife, Label playerAttack, Label enemyLife, Label enemyAttack) {
+    private void buttonConfigurations(Button attack, Button passTurn, Button runAway, Button useConsumable, Label enemyLife, Label enemyAttack) {
         attack.setTranslateX(150);
         attack.setTranslateY(550);
-        attack.setOnAction(e -> playerAttack(enemyLife, playerLife));
+
+            attack.setOnAction(e -> playerAttack(enemyLife, playerLife));
+
 
         passTurn.setTranslateX(150);
         passTurn.setTranslateY(600);
@@ -193,11 +256,11 @@ public class Combat {
     }
 
     private void playerUseConsumable(Label playerLife){
-        if (player.consumablesIsEmpty()){
-            message.setText("¡No tienes consumibles! ¿¡Para que pinga tocas el boton!?");
+        if (player[selectedCharacter].consumablesIsEmpty()){
+            message.setText("¡No tienes consumibles! ¿¡Para que #@|~@ tocas el boton!?");
         }else {
-            potion = (vitality_potion) player.getConsumablesAtIndex(0);
-            if (player.getConsumablesAtIndex(0) == potion) {
+            potion = (vitality_potion) player[0].getConsumablesAtIndex(0);
+            if (player[selectedCharacter].getConsumablesAtIndex(0) == potion) {
                 Button Potion = new Button("Usar poción de vitalidad. ");
                 Potion.setTranslateX(250);
                 Potion.setTranslateY(550);
@@ -214,7 +277,7 @@ public class Combat {
 
     private void lifeChecker(){
 
-        if (player.getHealth() <= 0){
+        if (player[0].getHealth() <= 0){
             animationForOtherThings.stop();
             Group gameOverRoot = new Group();
             Scene gameOverScene = new Scene(gameOverRoot, 832, 850);
@@ -235,6 +298,7 @@ public class Combat {
             window.setScene(gameOverScene);
             comeBack(gameOverScene);
         }
+
 
         if (enemy.getHealth() <= 0){
             enemy.setHealth(1);
@@ -283,7 +347,7 @@ public class Combat {
                         window.setScene(gameScene);
                         animationForOtherThings.stop();
                         animationTimer.start();
-                        player.setHealth(5);
+                        player[0].setHealth(5);
                         System.out.println(gameScene);
                         break;
                 }
@@ -295,10 +359,10 @@ public class Combat {
     private void usePotion(vitality_potion potion, Label playerLife){
         if (potion.getQuantity() > 0) {
 
-            player.setHealth(player.getHealth() + potion.getHealthAdded());
+            player[0].setHealth(player[0].getHealth() + potion.getHealthAdded());
             message.setText("¡Has usado una pocion de vitalidad! ¡Te curas "+potion.getHealthAdded()+" de vida!");
             potion.setQuantity(potion.getQuantity() - 1);
-            playerLife.setText("HP: "+player.getHealth());
+            playerLife.setText("HP: "+player[selectedCharacter].getHealth());
 
         }else{
             message.setText("¿Crees que vas a usar una pocion de vitalidad que no tienes?");
@@ -310,7 +374,7 @@ public class Combat {
 
     private void playerAttack(Label enemyLife, Label playerLife){
         probabilities = new Random();
-        enemy.setHealth(enemy.getHealth() - player.getAttack());
+        enemy.setHealth(enemy.getHealth() - player[selectedCharacter].getAttack());
         System.out.println("Al enemigo le queda: "+enemy.getHealth());
         enemyLife.setText("HP: "+ enemy.getHealth());
         enemyAttack = probabilities.nextBoolean();
@@ -322,8 +386,8 @@ public class Combat {
         }
     }
     private void enemyAttack(Label playerLife){
-            player.setHealth(player.getHealth() - enemy.getAttack());
-            playerLife.setText("HP: "+player.getHealth());
+            player[selectedCharacter].setHealth(player[selectedCharacter].getHealth() - enemy.getAttack());
+            playerLife.setText("HP: "+player[selectedCharacter].getHealth());
 
     }
 
@@ -336,8 +400,7 @@ public class Combat {
         this.animationTimer = animationTimer;
     }
 
-    public Combat(PlayerCharacter player, EnemyCharacter enemy){
-        this.player = player;
+    public Combat(EnemyCharacter enemy){
         this.enemy = enemy;
 
     }

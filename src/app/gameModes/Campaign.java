@@ -21,14 +21,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 // Java FX.
 
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
 // Utilidades de Java.
 
 import static app.gameplayFeatures.Combat.dropConsumable;
+import static app.main.Roaster.Roaster.player;
 import static domain.entities.EnemyCharacter.collidePlayer;
 import static app.main.game.window;
 import static domain.entities.PlayerCharacter.collideEnemy;
@@ -50,7 +49,6 @@ public class Campaign {
     private static Group root;
     private static Canvas canvas;
     private static GraphicsContext graphics;
-    private static PlayerCharacter player;
     private static EnemyCharacter enemy;
     private static int actionPoints = 2;
     private static Random random = new Random();
@@ -59,7 +57,7 @@ public class Campaign {
 
 
 
-    public static void initialize(PlayerCharacter roasterPlayer) {
+    public static void initialize() {
 
         root = new Group();
         campaignGameScene = new Scene(root, 1000, 850);
@@ -67,21 +65,14 @@ public class Campaign {
         root.getChildren().add(canvas);
         graphics = canvas.getGraphicsContext2D();
         window.setScene(campaignGameScene);
-        player = new PlayerCharacter(64, 64);
         enemy = new EnemyCharacter();
-        player.setImageName(roasterPlayer.getImageName());
-        player.setClosestImageName(roasterPlayer.getClosestImageName());
         // Se pone la pantalla y se instancian los jugadores y enemigos.
         vitality_potion potion = new vitality_potion();
         potion.setQuantity(3);
-        player.setConsumables(potion);
+        //player.setConsumables(potion);
 
         if (enemy.isAlive()){
-        if (!noRandomPosition){
-            randomPosition();
-        }
-        }else{
-
+        if (!noRandomPosition){randomPosition();}
         }
 
         playerMovement(campaignGameScene);
@@ -107,9 +98,9 @@ public class Campaign {
         if (enemy.isAlive()){
 
 
-        enemy.setCharacter(player);
+        enemy.setCharacter(player[0]);
         }
-        player.setEnemy(enemy);
+        player[0].setEnemy(enemy);
 
         // Colisiones que llevan al combate.
 
@@ -163,168 +154,75 @@ public class Campaign {
         */
 
 
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                System.out.println("X: "+ player.getX());
-                System.out.println("Y: "+ player.getY());
-                switch (event.getCode().toString()) {
-                    case "A":
-                        if (actionPoints != 0){
+        scene.setOnKeyPressed(event -> {
+            switch (event.getCode().toString()) {
+                case "A":
+                    if (actionPoints != 0){actionPoints--;}
+                    else{break;}
+                    if (actionPoints >= 0) {
+                        if (player[0].getY() == 640) {actionPoints++; break;}
+                        if (player[0].getX() == 64) {actionPoints++; break;}
+                        player[0].setX(player[0].getX()-48);
+                        player[0].setY(player[0].getY()+32);
 
-                            actionPoints--;
-
-                        }else{
-                            break;
-                        }
-                        if (actionPoints >= 0) {
-                            if (player.getY() == 640) {
-                                actionPoints++;
-                                break;
-                            }
-                            if (player.getX() == 64) {
-                                actionPoints++;
-                                break;
-                            }
-
-                            player.setX(player.getX()-48);
-                            player.setY(player.getY()+32);
-
-
-                            break;
-                        }
-                    case "D":
-                        if (actionPoints != 0){
-
-                        actionPoints--;
-
-                        }else{
-                            break;
-                        }
-
-                        if (actionPoints >= 0) {
-                            if (player.getY() == 640) {
-                                actionPoints++;
-                                break;
-                            }
-                            if (player.getX() == 544) {
-                                actionPoints++;
-                                break;
-                            }
-                            player.setX(player.getX()+48);
-                            player.setY(player.getY()+32);
-                        }
-                        break;
-
-                    case "W":
-                        if (actionPoints != 0){
-
-                            actionPoints--;
-
-                        }else{
-                            break;
-                        }
-                        if (actionPoints >= 0) {
-                            if (player.getY() == 32) {
-                                actionPoints++;
-                                break;
-                            } else if (player.getY() == 64) {
-                                actionPoints++;
-                                break;
-                            }
-
-                            player.setY(player.getY()-64);
-                            }
-                        break;
-
-                    case "S":
-                        if (actionPoints != 0){
-
-                            actionPoints--;
-
-                        }else{
-                            break;
-                        }
-                        if (actionPoints >= 0) {
-                            if (player.getY() == 640) {
-                                actionPoints++;
-                                break;
-                            }
-                            if (player.getY() == 608) {
-                                actionPoints++;
-                                break;
-                            }
-                            player.setY(player.getY()+64);
-                        }
-                        break;
-
-                    case "Q":
-                        if (actionPoints != 0){
-
-                        actionPoints--;
-
-                    }else{
-                        break;
                     }
-                        if (actionPoints >= 0) {
-                            if (player.getY() == 32) {
-                                actionPoints++;
-                                break;
-                            }
-                            if (player.getX() == 64) {
-                                actionPoints++;
-                                break;
-                            }
-
-                            player.setX(player.getX()-48);
-                            player.setY(player.getY()-32);
-                        }
-                        break;
-                    case "E":
-                        if (actionPoints != 0){
-
-                        actionPoints--;
-
-                    }else{
-                        break;
+                    break;
+                case "D":
+                    if (actionPoints != 0){actionPoints--;}
+                    else{break;}
+                    if (actionPoints >= 0) {
+                        if (player[0].getY() == 640) {actionPoints++; break;}
+                        if (player[0].getX() == 544) {actionPoints++; break;}
+                        player[0].setX(player[0].getX()+48);
+                        player[0].setY(player[0].getY()+32);
                     }
-                        if (actionPoints >= 0) {
-                            if (player.getY() == 32) {
-                                actionPoints++;
-                                break;
-                            }
-                            if (player.getX() == 544) {
-                                actionPoints++;
-                                break;
-                            }
-
-                            player.setX(player.getX()+48);
-                            player.setY(player.getY()-32);
-
+                    break;
+                case "W":
+                    if (actionPoints != 0){actionPoints--;}
+                    else{break;}
+                    if (actionPoints >= 0) {
+                        if (player[0].getY() == 32) {actionPoints++; break;}
+                        if (player[0].getY() == 64) {actionPoints++; break;}
+                        player[0].setY(player[0].getY()-64);
                         }
+                    break;
+                case "S":
+                    if (actionPoints != 0){actionPoints--;}
+                    else{break;}
+                    if (actionPoints >= 0) {
+                        if (player[0].getY() == 640) {actionPoints++;break;}
+                        if (player[0].getY() == 608) {actionPoints++; break;}
+                        player[0].setY(player[0].getY()+64);
+                    }
+                    break;
+                case "Q":
+                    if (actionPoints != 0){actionPoints--;}
+                    else{break;}
+                    if (actionPoints >= 0) {
+                        if (player[0].getY() == 32) {actionPoints++; break;}
+                        if (player[0].getX() == 64) {actionPoints++; break;}
+                        player[0].setX(player[0].getX()-48);
+                        player[0].setY(player[0].getY()-32);
+                    }
+                    break;
+                case "E":
+                    if (actionPoints != 0){actionPoints--;}
+                    else{break;}
+                    if (actionPoints >= 0) {
+                        if (player[0].getY() == 32) {actionPoints++; break;}
+                        if (player[0].getX() == 544) {actionPoints++; break;}
+                        player[0].setX(player[0].getX()+48);
+                        player[0].setY(player[0].getY()-32);
+                    }
+                    break;
+                case "R":
+                    actionPoints = 2;
+                    enemy.move(player[0].getX(), player[0].getY(), enemy.getX(), enemy.getY());
+                    break;
+                case "T":
+                    activateRange = !activateRange;
+                    break;
 
-                        break;
-                    case "R":
-                        actionPoints = 2;
-                        System.out.println("xDistanceEvP: "+(player.getX()-enemy.getX()));
-                        System.out.println("yDistanceEvP: "+(player.getY()-enemy.getY()));
-                        for (int i = 1; i<=2; i++){
-                            enemy.move(player.getX(), player.getY(), enemy.getX(), enemy.getY());
-                        }
-
-                        break;
-                    case "T":
-                        activateRange = !activateRange;
-
-                        break;
-                    case "K":
-                        enemy.setAlive(true);
-                        drawConsumable = true;
-                        enemy.setX(544);
-                        enemy.setY(64);
-                        break;
-
-                }
             }
         });
 
@@ -335,7 +233,7 @@ public class Campaign {
 
     private static void gameLoop(GraphicsContext graphics, Label actionPoint) {
         long initialTime = System.nanoTime();
-        Combat combat = new Combat(player, enemy);
+        Combat combat = new Combat(enemy);
         AnimationTimer animationTimer = new AnimationTimer() {
 
             //Este metodo es el que maneja los frames por segundo, que son 60.
@@ -343,16 +241,16 @@ public class Campaign {
             public void handle(long actualTime) {
                 long time = (actualTime - initialTime) / 1000000000;
                 if (time == 60){
+                    System.out.println("Se cumple. ");
                     time = 0;
                 }
                 actionPoint.setText("Action Points: "+actionPoints);
                 /* Aqui se calcula el tiempo, que luego se usara
                 para que parpadee el rango.
                 */
-
                     draw(time, graphics);
 
-                actualizeState(combat);
+                    actualizeState(combat);
 
             }
         };
@@ -370,9 +268,9 @@ public class Campaign {
 
 
         if (!mapConsumables.isEmpty()){
-            player.collideWithConsumable(mapConsumables);
+            player[0].collideWithConsumable(mapConsumables);
         }
-        player.collideRange();
+        player[0].collideRange();
 
         /* Llama a los metodos que comprueban las
          colisiones en cada enemigo y personaje.
@@ -381,20 +279,20 @@ public class Campaign {
         if (collidePlayer && collideEnemy) {
             combat.setGameScene(campaignGameScene);
             combat.initializeWindow();
-            player.setX(64);
-            player.setY(64);
+            player[0].setX(64);
+            player[0].setY(64);
         }
         if (collidePlayer) {
             combat.setGameScene(campaignGameScene);
             combat.initializeWindow();
-            player.setX(64);
-            player.setY(64);
+            player[0].setX(64);
+            player[0].setY(64);
         }
         if (collideEnemy) {
             combat.setGameScene(campaignGameScene);
             combat.initializeWindow();
-            player.setX(64);
-            player.setY(64);
+            player[0].setX(64);
+            player[0].setY(64);
         }
 
 
@@ -408,13 +306,13 @@ public class Campaign {
         Map.drawCampaingMap(graphics);
         //Dibujo de las columnas de hexagonos.
 
-        player.range(graphics, time);
+        player[0].range(graphics, time);
         if(enemy.isAlive()) {
             enemy.range(graphics, time);
             enemy.draw(graphics);
             rangeCollition(time);
         }
-        player.draw(graphics);
+        graphics.drawImage(new Image(player[0].getImageName()), player[0].getX(), player[0].getY());
         graphics.drawImage(new Image("narrador1.png"), 40,710);
 
         if (dropConsumable){
@@ -428,71 +326,59 @@ public class Campaign {
     }
 
     private static void rangeCollition(long time){
-        int xDistanceEvP = enemy.getX() - player.getX();
-        int yDistanceEvP = enemy.getY() - player.getY();
+        int xDistanceEvP = enemy.getX() - player[0].getX();
+        int yDistanceEvP = enemy.getY() - player[0].getY();
         if (activateRange){
         if (time % 2== 0){
         Image rangoSobrepuesto = new Image("overRangeTerrain.png");
         if (xDistanceEvP == 96 && yDistanceEvP == 0){
-            graphics.drawImage(rangoSobrepuesto, player.getX()+48, player.getY()+32);
-            graphics.drawImage(rangoSobrepuesto, player.getX()+48, player.getY()-32);
+            graphics.drawImage(rangoSobrepuesto, player[0].getX()+48, player[0].getY()+32);
+            graphics.drawImage(rangoSobrepuesto, player[0].getX()+48, player[0].getY()-32);
         }
             if (xDistanceEvP == -96 && yDistanceEvP == 0){
-                graphics.drawImage(rangoSobrepuesto, player.getX()-48, player.getY()+32);
-                graphics.drawImage(rangoSobrepuesto, player.getX()-48, player.getY()-32);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX()-48, player[0].getY()+32);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX()-48, player[0].getY()-32);
             }
             if (xDistanceEvP == 96 && yDistanceEvP == 64){
-                graphics.drawImage(rangoSobrepuesto, player.getX()+48, player.getY()+32);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX()+48, player[0].getY()+32);
             }
             if (xDistanceEvP == 96 && yDistanceEvP == -64){
-                graphics.drawImage(rangoSobrepuesto, player.getX()+48, player.getY()-32);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX()+48, player[0].getY()-32);
             }
             if (xDistanceEvP == -96 && yDistanceEvP == 64){
-                graphics.drawImage(rangoSobrepuesto, player.getX()-48, player.getY()+32);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX()-48, player[0].getY()+32);
             }
             if (xDistanceEvP == -96 && yDistanceEvP == -64){
-                graphics.drawImage(rangoSobrepuesto, player.getX()-48, player.getY()-32);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX()-48, player[0].getY()-32);
             }
             // Los tres primeros ifs son a la izquierda y los tres ultimos a la derecha.
 
 
             if (xDistanceEvP == 0 && yDistanceEvP == 128){
-                graphics.drawImage(rangoSobrepuesto, player.getX(), player.getY()+64);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY()+64);
 
             }
             if (xDistanceEvP == 48 && yDistanceEvP == 96){
-                graphics.drawImage(rangoSobrepuesto, player.getX(), player.getY()+64);
-                graphics.drawImage(rangoSobrepuesto, player.getX()+48, player.getY()+32);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY()+64);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX()+48, player[0].getY()+32);
             }
             if (xDistanceEvP == -48 && yDistanceEvP == 96){
-                graphics.drawImage(rangoSobrepuesto, player.getX(), player.getY()+64);
-                graphics.drawImage(rangoSobrepuesto, player.getX()-48, player.getY()+32);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY()+64);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX()-48, player[0].getY()+32);
             }
             if (xDistanceEvP == 0 && yDistanceEvP == -128){
-                graphics.drawImage(rangoSobrepuesto, player.getX(), player.getY()-64);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY()-64);
 
             }
             if (xDistanceEvP == 48 && yDistanceEvP == -96){
-                graphics.drawImage(rangoSobrepuesto, player.getX(), player.getY()-64);
-                graphics.drawImage(rangoSobrepuesto, player.getX()+48, player.getY()-32);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY()-64);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX()+48, player[0].getY()-32);
             }
             if (xDistanceEvP == -48 && yDistanceEvP == -96){
-                graphics.drawImage(rangoSobrepuesto, player.getX(), player.getY()-64);
-                graphics.drawImage(rangoSobrepuesto, player.getX()-48, player.getY()-32);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY()-64);
+                graphics.drawImage(rangoSobrepuesto, player[0].getX()-48, player[0].getY()-32);
             }
-
-
-
-
             }
         }
-
-
-
-
     }
-
-
-
-
 }
