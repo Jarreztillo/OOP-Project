@@ -23,7 +23,6 @@ public class Map {
             {1, 1, 0, 0, 0, 0, 0, 4, 5, 5},
             {1, 1, 0, 0, 0, 0, 0, 4, 5, 5},
             {1, 1, 0, 0, 0, 0, 0, 4, 5, 5},   
-            {1, 1, 0, 0, 0, 0, 0, 4, 5, 5},   
             {3, 0, 0, 0, 0, 0, 0, 4, 5, 5}};
 
     public static void drawNormalMap(GraphicsContext graphics) {
