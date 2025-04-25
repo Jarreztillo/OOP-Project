@@ -28,7 +28,7 @@ import static app.gameModes.Campaign.*;
 
 
 public class Combat {
-    private int selectedCharacter = 0;
+    private int selectedCharacter;
     private int playerTurn = 4;
     private EnemyCharacter enemy;
     private static GraphicsContext graphics;
