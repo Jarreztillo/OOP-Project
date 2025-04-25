@@ -28,6 +28,7 @@ import static app.gameModes.Campaign.*;
 
 
 public class Combat {
+    //Esta pinga me tiene mal
     private int selectedCharacter = 0;
     private int playerTurn = 4;
     private EnemyCharacter enemy;
