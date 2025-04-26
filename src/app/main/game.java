@@ -23,7 +23,7 @@ public class game extends Application {
     private VBox mainMenu;
     // Escena, graficos, raiz y lienzo activados para su uso en toda la aplicacion.
 
-//probando esta cojonera
+
     private Button play;
     private Button options;
     private Button quit;
