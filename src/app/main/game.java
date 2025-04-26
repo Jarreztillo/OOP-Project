@@ -139,20 +139,6 @@ public class game extends Application {
         atras.translateYProperty().bind(mainScene.widthProperty().multiply(-0.105));
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         mainScene.getStylesheets().add("buttons.css");
 
 
@@ -196,6 +182,8 @@ public class game extends Application {
         tournament.setVisible(true);
         Audio.setVisible(false);
         atras.setVisible(false);
+        controles.setVisible(false);
+        video.setVisible(false);
     }
 
     private void enableOptionsButton(){
