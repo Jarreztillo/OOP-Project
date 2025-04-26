@@ -2,7 +2,6 @@ package app.gameplayFeatures;
 
 import domain.consumables.vitality_potion;
 import domain.entities.EnemyCharacter;
-import domain.entities.PlayerCharacter;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -17,7 +16,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import static app.main.Roaster.Roaster.player;
@@ -28,9 +26,8 @@ import static app.gameModes.Campaign.*;
 
 
 public class Combat {
-    //Esta pinga me tiene mal
     private int selectedCharacter = 0;
-    private int playerTurn = 4;
+    private int playerTurn = 5;
     private EnemyCharacter enemy;
     private static GraphicsContext graphics;
     private AnimationTimer animationTimer;
@@ -40,7 +37,6 @@ public class Combat {
     private Random probabilities;
     private Scene gameScene;
     private Group root;
-    private vitality_potion potion = new vitality_potion();
 
     private Label message;
     private Label playerLife;
@@ -77,7 +73,6 @@ public class Combat {
         graphics = canvas.getGraphicsContext2D();
         graphics.fillRect(0, 440, 832, 410);
         window.setScene(combatScene);
-        switchCharacters(combatScene);
         drawing();
         animationForOtherThings = new AnimationTimer() {
             @Override
@@ -85,10 +80,17 @@ public class Combat {
                 lifeChecker();
                 actualizeState();
                 drawingPortraits();
+                if(playerTurn == 0){
+                    enemyTurn();
+                }
             }
         };
         animationForOtherThings.start();
+        switchCharacters(combatScene);
+    }
 
+    private void enemyTurn() {
+        boolean enemyAttack = probabilities.nextBoolean();
     }
 
     private void drawingPortraits() {
@@ -107,16 +109,13 @@ public class Combat {
                             break;
                         }
                         selectedCharacter++;
-                        playerLife.setText("HP: "+player[selectedCharacter].getHealth());
-                        playerAttack.setText("Attack points: "+player[selectedCharacter].getAttack());
+
                         break;
                     case "S":
                         if (selectedCharacter == 0){
                             break;
                         }
                         selectedCharacter--;
-                        playerLife.setText("HP: "+player[selectedCharacter].getHealth());
-                        playerAttack.setText("Attack points: "+player[selectedCharacter].getAttack());
                         break;
 
 
@@ -143,14 +142,6 @@ public class Combat {
         if(player[4].getHealth() != 0){
             graphics.drawImage(new Image(player[4].getImageName()), 104, 55);
         }
-
-
-
-
-
-
-
-
 
         graphics.drawImage(new Image(enemy.getImageName()), 684, 325);
         graphics.drawImage(new Image(enemy.getClosestImageName()), 712, 440);
@@ -247,28 +238,24 @@ public class Combat {
     private void playerPassTurn(Label playerLife) {
         probabilities = new Random();
         enemyAttack = probabilities.nextBoolean();
-        if(enemyAttack){
-            enemyAttack(playerLife);
-            message.setText("¡El enemigo aprovecho tu descanso para golpearte!");
-        }else{
-            message.setText("¡El enemigo recogió tremendo boniato y no te golpeo pese a haberte quedado quieto!");
-        }
+        playerTurn = 0;
 
     }
 
     private void playerUseConsumable(Label playerLife){
-        if (player[selectedCharacter].consumablesIsEmpty()){
+        if(!(inventory.isEmpty())) {
+            System.out.println(inventory.getFirst().getQuantity());
+        }
+        if (inventory.getFirst().getQuantity()== 0){
             message.setText("¡No tienes consumibles! ¿¡Para que #@|~@ tocas el boton!?");
         }else {
-            potion = (vitality_potion) player[0].getConsumablesAtIndex(0);
-            if (player[selectedCharacter].getConsumablesAtIndex(0) == potion) {
                 Button Potion = new Button("Usar poción de vitalidad. ");
                 Potion.setTranslateX(250);
                 Potion.setTranslateY(550);
-                Potion.setOnAction(e -> usePotion(potion, playerLife));
-                message.setText("¡Guau, tienes "+potion.getQuantity()+" pociones de vitalidad!");
+                Potion.setOnAction(e -> usePotion(playerLife));
+                message.setText("¡Guau, tienes "+ inventory.getFirst().getQuantity()+" pociones de vitalidad!");
                 root.getChildren().add(Potion);
-            }
+
         }
 
 
@@ -277,26 +264,48 @@ public class Combat {
     }
 
     private void lifeChecker(){
-
-        if (player[0].getHealth() <= 0){
-            animationForOtherThings.stop();
-            Group gameOverRoot = new Group();
-            Scene gameOverScene = new Scene(gameOverRoot, 832, 850);
-            Font gameover = new Font(40);
-            Canvas looserCanvas = new Canvas(832, 850);
-            Label perdiste = new Label("Game over.");
-            Label perdiste2 = new Label("Reinicie la partida con R. ");
-            gameOverRoot.getChildren().addAll(looserCanvas, perdiste, perdiste2);
-            perdiste.setFont(gameover);
-            perdiste.setTranslateX(250);
-            perdiste.setTranslateY(150);
-            perdiste2.setFont(gameover);
-            perdiste.setTranslateX(250);
-            perdiste.setTranslateY(200);
-
-            window.setScene(gameOverScene);
-            comeBack(gameOverScene);
+        for (int n = 0; n<=player.length-1; n++) {
+            if (player[n].getHealth() <= 0) {
+            if (player[selectedCharacter] == player[n]){
+                if(selectedCharacter == 0){
+                    selectedCharacter++;
+                    return;
+                }
+                if(selectedCharacter == 4){
+                    selectedCharacter--;
+                    return;
+                }
+                boolean arriba = probabilities.nextBoolean();
+                if(arriba){
+                    selectedCharacter++;
+                }else{
+                    selectedCharacter--;
+                }
+            }
+            }
         }
+
+
+            if (player[4].getHealth() <= 0 && player[3].getHealth() <= 0 &&player[2].getHealth() <= 0 &&player[1].getHealth() <= 0 && player[0].getHealth() <= 0) {
+                animationForOtherThings.stop();
+                Group gameOverRoot = new Group();
+                Scene gameOverScene = new Scene(gameOverRoot, 832, 850);
+                Font gameover = new Font(40);
+                Canvas looserCanvas = new Canvas(832, 850);
+                Label perdiste = new Label("Game over.");
+                Label perdiste2 = new Label("Reinicie la partida con R. ");
+                gameOverRoot.getChildren().addAll(looserCanvas, perdiste, perdiste2);
+                perdiste.setFont(gameover);
+                perdiste.setTranslateX(250);
+                perdiste.setTranslateY(150);
+                perdiste2.setFont(gameover);
+                perdiste.setTranslateX(250);
+                perdiste.setTranslateY(200);
+
+                window.setScene(gameOverScene);
+                comeBack(gameOverScene);
+            }
+
 
 
         if (enemy.getHealth() <= 0){
@@ -305,17 +314,13 @@ public class Combat {
             noRandomPosition = true;
             collideEnemy = false;
             collidePlayer = false;
-            dropConsumable = probabilities.nextBoolean();
+            dropConsumable = true;
             if(dropConsumable) {
-                potion.setX(enemy.getX());
-                potion.setY(enemy.getY());
-                potion.setImage("vitality_potion.png");
-                if (mapConsumables.isEmpty()){
-                mapConsumables.add(potion);
+                inventory.getFirst().setX(enemy.getX());
+                inventory.getFirst().setY(enemy.getY());
+                inventory.getFirst().setImage("vitality_potion.png");
                 addConsumable = true;
                 drawConsumable = true;
-                }
-
             }
             window.setScene(campaignGameScene);
             animationForOtherThings.stop();
@@ -325,12 +330,11 @@ public class Combat {
     }
 
     private void actualizeState() {
-        if (grabConsumable && potion.getQuantity() >= 0){
-            System.out.println("Hay "+ mapConsumables.getFirst().getQuantity()+" pociones añadidas. ");
-            System.out.println("Tienes "+ potion.getQuantity()+" pociones. ");
-            potion.setQuantity(mapConsumables.getFirst().getQuantity());
+        if (grabConsumable && inventory.getFirst().getQuantity() >= 0){
             grabConsumable = false;
         }
+        playerLife.setText("HP: "+player[selectedCharacter].getHealth());
+        playerAttack.setText("Attack points: "+player[selectedCharacter].getAttack());
     }
 
     private void comeBack(Scene gameOverScene) {
@@ -346,7 +350,9 @@ public class Combat {
                         window.setScene(gameScene);
                         animationForOtherThings.stop();
                         animationTimer.start();
-                        player[0].setHealth(5);
+                        for (int n = player.length-1; n >= 0; n--){
+                            player[n].setHealth(5);
+                        }
                         break;
                 }
             }
@@ -354,13 +360,14 @@ public class Combat {
 
     }
 
-    private void usePotion(vitality_potion potion, Label playerLife){
-        if (potion.getQuantity() > 0) {
-
-            player[0].setHealth(player[0].getHealth() + potion.getHealthAdded());
+    private void usePotion(Label playerLife){
+        if (inventory.getFirst().getQuantity() > 0) {
+            vitality_potion potion = new vitality_potion();
+            player[selectedCharacter].setHealth(player[selectedCharacter].getHealth() + potion.getHealthAdded());
             message.setText("¡Has usado una pocion de vitalidad! ¡Te curas "+potion.getHealthAdded()+" de vida!");
-            potion.setQuantity(potion.getQuantity() - 1);
+            inventory.getFirst().setQuantity(inventory.getFirst().getQuantity() - 1);
             playerLife.setText("HP: "+player[selectedCharacter].getHealth());
+            playerTurn--;
 
         }else{
             message.setText("¿Crees que vas a usar una pocion de vitalidad que no tienes?");
@@ -375,13 +382,7 @@ public class Combat {
         enemy.setHealth(enemy.getHealth() - player[selectedCharacter].getAttack());
         System.out.println("Al enemigo le queda: "+enemy.getHealth());
         enemyLife.setText("HP: "+ enemy.getHealth());
-        enemyAttack = probabilities.nextBoolean();
-        if(enemyAttack){
-            enemyAttack(playerLife);
-            message.setText("¡El enemigo te golpeo en el estomago!");
-        }else{
-            message.setText("¡El enemigo se ha resbalado y has evitado su ataque!");
-        }
+        playerTurn--;
     }
     private void enemyAttack(Label playerLife){
             player[selectedCharacter].setHealth(player[selectedCharacter].getHealth() - enemy.getAttack());

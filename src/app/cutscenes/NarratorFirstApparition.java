@@ -32,14 +32,7 @@ public class NarratorFirstApparition {
         window.setScene(narratorTalkingScene);
         draw();
         labelConfigurations(root);
-        audioConfiguration();
 
-    }
-
-    private static void audioConfiguration() {
-        AudioClip audio = new AudioClip(Paths.get("src/DAO/audios/music/capareza.mp3").toUri().toString());
-        audio.play();
-        audio.setVolume(0.7);
     }
 
 

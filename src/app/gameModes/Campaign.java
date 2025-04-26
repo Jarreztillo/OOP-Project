@@ -3,20 +3,18 @@ package app.gameModes;
 import app.gameplayFeatures.Combat;
 import app.gameplayFeatures.Consumables;
 import app.gameplayFeatures.Map;
+import domain.consumables.Inventory;
 import domain.consumables.vitality_potion;
 import domain.entities.EnemyCharacter;
-import domain.entities.PlayerCharacter;
 // Clases locales que usa Campaign.
 
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 // Java FX.
@@ -42,7 +40,8 @@ public class Campaign {
     public static boolean addConsumable;
     public static boolean activateRange;
     public static Scene campaignGameScene;
-    public static ArrayList<Consumables> mapConsumables = new ArrayList<>();
+    public static ArrayList<Consumables> inventory;
+
 
     // Variables públicas estaticas.
 
@@ -67,9 +66,11 @@ public class Campaign {
         window.setScene(campaignGameScene);
         enemy = new EnemyCharacter();
         // Se pone la pantalla y se instancian los jugadores y enemigos.
-        vitality_potion potion = new vitality_potion();
-        potion.setQuantity(3);
-        //player.setConsumables(potion);
+        if(!(Inventory.isAlreadyCreated())){
+            inventory = Inventory.createInventory();
+
+        }
+
 
         if (enemy.isAlive()){
         if (!noRandomPosition){randomPosition();}
@@ -266,8 +267,8 @@ public class Campaign {
         }
 
 
-        if (!mapConsumables.isEmpty()){
-            player[0].collideWithConsumable(mapConsumables);
+        if (!inventory.isEmpty()){
+            player[0].collideWithConsumable(inventory);
         }
         player[0].collideRange();
 
@@ -315,7 +316,7 @@ public class Campaign {
         //graphics.drawImage(new Image("narrador1.png"), 40,710);
 
         if (dropConsumable){
-            Consumables consumible = mapConsumables.getFirst();
+            Consumables consumible = inventory.getFirst();
             if (drawConsumable) {
                 graphics.drawImage(new Image(consumible.getImage()), consumible.getX(), consumible.getY());
             }

@@ -1,6 +1,7 @@
 package app.main.Roaster;
 
 import app.gameModes.Campaign;
+import app.main.audioPlayer;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -140,6 +141,7 @@ public class Roaster {
                             reset();
                             break;
                         case "SPACE":
+                            audioPlayer.playSelectedCharacter();
                             if (!(selectedCharacters == 4)) {
                                 selectedCharacters++;
                             } else {
@@ -154,7 +156,7 @@ public class Roaster {
                                                 case 0:
 
                                                     player[selectedCharacters].setImageName("goblin.png");
-                                                    player[selectedCharacters].setClosestImageName("closerGoblin.png");
+                                                    player[selectedCharacters].setClosestImageName("closerHiglob.png");
                                                     selected[0] = new selectedCharacters(32, 32, 0, true);
                                                     player[selectedCharacters].setX(64);
                                                     player[selectedCharacters].setY(64);
@@ -164,7 +166,7 @@ public class Roaster {
                                                 case 1:
                                                     if (!(player[0].getImageName() == "goblin.png")) {
                                                         player[selectedCharacters].setImageName("goblin.png");
-                                                        player[selectedCharacters].setClosestImageName("closerGoblin.png");
+                                                        player[selectedCharacters].setClosestImageName("closerHiglob.png");
                                                         player[selectedCharacters].setHealth(7);
                                                         player[selectedCharacters].setAttack(2);
                                                         selected[1] = new selectedCharacters(32, 32, 1, true);
@@ -177,7 +179,7 @@ public class Roaster {
                                                 case 2:
                                                     if (!(player[0].getImageName() == "goblin.png") && !(player[1].getImageName() == "goblin.png")) {
                                                         player[selectedCharacters].setImageName("goblin.png");
-                                                        player[selectedCharacters].setClosestImageName("closerGoblin.png");
+                                                        player[selectedCharacters].setClosestImageName("closerHiglob.png");
                                                         player[selectedCharacters].setHealth(7);
                                                         player[selectedCharacters].setAttack(2);
                                                         selected[2] = new selectedCharacters(32, 32, 2, true);
@@ -189,7 +191,7 @@ public class Roaster {
                                                 case 3:
                                                     if (!(player[2].getImageName() == "goblin.png") && !(player[0].getImageName() == "goblin.png") && !(player[1].getImageName() == "goblin.png")) {
                                                         player[selectedCharacters].setImageName("goblin.png");
-                                                        player[selectedCharacters].setClosestImageName("closerGoblin.png");
+                                                        player[selectedCharacters].setClosestImageName("closerHiglob.png");
                                                         player[selectedCharacters].setHealth(7);
                                                         player[selectedCharacters].setAttack(2);
                                                         selected[3] = new selectedCharacters(32, 32, 3, true);
@@ -201,7 +203,7 @@ public class Roaster {
                                                 case 4:
                                                     if (!(player[3].getImageName() == "goblin.png") && !(player[2].getImageName() == "goblin.png") && !(player[0].getImageName() == "goblin.png") && !(player[1].getImageName() == "goblin.png")) {
                                                         player[selectedCharacters].setImageName("goblin.png");
-                                                        player[selectedCharacters].setClosestImageName("closerGoblin.png");
+                                                        player[selectedCharacters].setClosestImageName("closerHiglob.png");
                                                         player[selectedCharacters].setHealth(7);
                                                         player[selectedCharacters].setAttack(2);
                                                         selected[4] = new selectedCharacters(32, 32, 4, true);
@@ -279,7 +281,7 @@ public class Roaster {
                                             switch (selectedCharacters) {
                                                 case 0:
                                                     player[selectedCharacters].setImageName("berserker.png");
-                                                    player[selectedCharacters].setClosestImageName("closerBerserker.png");
+                                                    player[selectedCharacters].setClosestImageName("closerZorak.png");
                                                     selected[0] = new selectedCharacters(32, 272, 0, true);
                                                     player[selectedCharacters].setX(64);
                                                     player[selectedCharacters].setY(64);
@@ -289,7 +291,7 @@ public class Roaster {
                                                 case 1:
                                                     if (!(player[0].getImageName() == "berserker.png")) {
                                                         player[selectedCharacters].setImageName("berserker.png");
-                                                        player[selectedCharacters].setClosestImageName("closerBerserker.png");
+                                                        player[selectedCharacters].setClosestImageName("closerZorak.png");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
                                                         selected[1] = new selectedCharacters(32, 272, 1, true);
@@ -301,7 +303,7 @@ public class Roaster {
                                                 case 2:
                                                     if (!(player[1].getImageName() == "berserker.png") && !(player[0].getImageName() == "berserker.png")) {
                                                         player[selectedCharacters].setImageName("berserker.png");
-                                                        player[selectedCharacters].setClosestImageName("closerBerserker.png");
+                                                        player[selectedCharacters].setClosestImageName("closerZorak.png");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
                                                         selected[2] = new selectedCharacters(32, 272, 2, true);
@@ -313,7 +315,7 @@ public class Roaster {
                                                 case 3:
                                                     if (!(player[2].getImageName() == "berserker.png") && !(player[1].getImageName() == "berserker.png") && !(player[0].getImageName() == "berserker.png")) {
                                                         player[selectedCharacters].setImageName("berserker.png");
-                                                        player[selectedCharacters].setClosestImageName("closerBerserker.png");
+                                                        player[selectedCharacters].setClosestImageName("closerZorak.png");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
                                                         selected[3] = new selectedCharacters(32, 272, 3, true);
@@ -325,7 +327,7 @@ public class Roaster {
                                                 case 4:
                                                     if (!(player[3].getImageName() == "berserker.png") && !(player[2].getImageName() == "berserker.png") && !(player[1].getImageName() == "berserker.png") && !(player[0].getImageName() == "berserker.png")) {
                                                         player[selectedCharacters].setImageName("berserker.png");
-                                                        player[selectedCharacters].setClosestImageName("closerBerserker.png");
+                                                        player[selectedCharacters].setClosestImageName("closerZorak.png");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
                                                         selected[4] = new selectedCharacters(32, 272, 4, true);
@@ -341,7 +343,7 @@ public class Roaster {
                                             switch (selectedCharacters) {
                                                 case 0:
                                                     player[selectedCharacters].setImageName("goodElven.png");
-                                                    player[selectedCharacters].setClosestImageName("closerElven.png");
+                                                    player[selectedCharacters].setClosestImageName("closerHeloro.png");
                                                     player[selectedCharacters].setHealth(5);
                                                     player[selectedCharacters].setAttack(1);
                                                     selected[0] = new selectedCharacters(32, 392, 0, true);
@@ -351,7 +353,7 @@ public class Roaster {
                                                 case 1:
                                                     if (!(player[0].getImageName() == "goodElven.png")) {
                                                         player[selectedCharacters].setImageName("goodElven.png");
-                                                        player[selectedCharacters].setClosestImageName("closerElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerHeloro.png");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
                                                         selected[1] = new selectedCharacters(32, 392, 1, true);
@@ -363,7 +365,7 @@ public class Roaster {
                                                 case 2:
                                                     if (!(player[1].getImageName() == "goodElven.png") && !(player[0].getImageName() == "goodElven.png")) {
                                                         player[selectedCharacters].setImageName("goodElven.png");
-                                                        player[selectedCharacters].setClosestImageName("closerElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerHeloro.png");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
                                                         selected[2] = new selectedCharacters(32, 392, 2, true);
@@ -375,7 +377,7 @@ public class Roaster {
                                                 case 3:
                                                     if (!(player[2].getImageName() == "goodElven.png") && !(player[1].getImageName() == "goodElven.png") && !(player[0].getImageName() == "goodElven.png")) {
                                                         player[selectedCharacters].setImageName("goodElven.png");
-                                                        player[selectedCharacters].setClosestImageName("closerElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerHeloro.png");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
                                                         selected[3] = new selectedCharacters(32, 392, 3, true);
@@ -387,7 +389,7 @@ public class Roaster {
                                                 case 4:
                                                     if (!(player[3].getImageName() == "goodElven.png") && !(player[2].getImageName() == "goodElven.png") && !(player[1].getImageName() == "goodElven.png") && !(player[0].getImageName() == "goodElven.png")) {
                                                         player[selectedCharacters].setImageName("goodElven.png");
-                                                        player[selectedCharacters].setClosestImageName("closerElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerHeloro.png");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
                                                         selected[4] = new selectedCharacters(32, 392, 4, true);
@@ -407,7 +409,7 @@ public class Roaster {
                                             switch (selectedCharacters) {
                                                 case 0:
                                                     player[selectedCharacters].setImageName("anotherElven.png");
-                                                    player[selectedCharacters].setClosestImageName("closerAnotherElven.png");
+                                                    player[selectedCharacters].setClosestImageName("closerLyrasa.png");
                                                     player[selectedCharacters].setHealth(6);
                                                     player[selectedCharacters].setAttack(2);
                                                     selected[0] = new selectedCharacters(152, 32, 0, true);
@@ -417,7 +419,7 @@ public class Roaster {
                                                 case 1:
                                                     if (!(player[0].getImageName() == "anotherElven.png")) {
                                                         player[selectedCharacters].setImageName("anotherElven.png");
-                                                        player[selectedCharacters].setClosestImageName("closerAnotherElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerLyrasa.png");
                                                         player[selectedCharacters].setHealth(6);
                                                         player[selectedCharacters].setAttack(2);
                                                         selected[1] = new selectedCharacters(152, 32, 1, true);
@@ -429,7 +431,7 @@ public class Roaster {
                                                 case 2:
                                                     if (!(player[0].getImageName() == "anotherElven.png") && !(player[1].getImageName() == "anotherElven.png")) {
                                                         player[selectedCharacters].setImageName("anotherElven.png");
-                                                        player[selectedCharacters].setClosestImageName("closerAnotherElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerLyrasa.png");
                                                         player[selectedCharacters].setHealth(6);
                                                         player[selectedCharacters].setAttack(2);
                                                         selected[2] = new selectedCharacters(152, 32, 2, true);
@@ -441,7 +443,7 @@ public class Roaster {
                                                 case 3:
                                                     if (!(player[2].getImageName() == "anotherElven.png") && !(player[0].getImageName() == "anotherElven.png") && !(player[1].getImageName() == "anotherElven.png")) {
                                                         player[selectedCharacters].setImageName("anotherElven.png");
-                                                        player[selectedCharacters].setClosestImageName("closerAnotherElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerLyrasa.png");
                                                         player[selectedCharacters].setHealth(6);
                                                         player[selectedCharacters].setAttack(2);
                                                         selected[3] = new selectedCharacters(152, 32, 3, true);
@@ -453,7 +455,7 @@ public class Roaster {
                                                 case 4:
                                                     if (!(player[3].getImageName() == "anotherElven.png") && !(player[2].getImageName() == "anotherElven.png") && !(player[0].getImageName() == "anotherElven.png") && !(player[1].getImageName() == "anotherElven.png")) {
                                                         player[selectedCharacters].setImageName("anotherElven.png");
-                                                        player[selectedCharacters].setClosestImageName("closerAnotherElven.png");
+                                                        player[selectedCharacters].setClosestImageName("closerLyrasa.png");
                                                         player[selectedCharacters].setHealth(6);
                                                         player[selectedCharacters].setAttack(2);
                                                         selected[4] = new selectedCharacters(152, 32, 4, true);
@@ -493,11 +495,11 @@ public class Roaster {
 
                     graphics.setFill(Color.BLACK);
 
-                    graphics.drawImage(new Image("closerGoblin.png"), 32,32);
+                    graphics.drawImage(new Image("closerHiglob.png"), 32,32);
                     graphics.drawImage(new Image("closerDraven.png"), 32, 152);
-                    graphics.drawImage(new Image("closerBerserker.png"), 32, 272);
-                    graphics.drawImage(new Image("closerElven.png"), 32, 392);
-                    graphics.drawImage(new Image("closerAnotherElven.png"), 152, 32);
+                    graphics.drawImage(new Image("closerZorak.png"), 32, 272);
+                    graphics.drawImage(new Image("closerHeloro.png"), 32, 392);
+                    graphics.drawImage(new Image("closerLyrasa.png"), 152, 32);
                     //60 x 90.
                     Image cuadraito = new Image("selectSquare.png");
                     graphics.drawImage(cuadraito, x, y);
@@ -657,7 +659,7 @@ public class Roaster {
                         behavior.setVisible(true);
                         movement.setVisible(true);
 
-                        graphics.drawImage(new Image("lyffaFace.png"), 740, 32);
+                        graphics.drawImage(new Image("heloroFace.png"), 740, 32);
 
                         health.setFont(font);
                         mana.setFont(font);
@@ -675,13 +677,13 @@ public class Roaster {
                         behavior.setTextFill(Color.WHITE);
                         movement.setTextFill(Color.WHITE);
 
-                        health.setText("HP: 6");
-                        mana.setText("MP: 12 ");
+                        health.setText("HP: 7");
+                        mana.setText("MP: 10 ");
                         attack.setText("Attack: 5");
-                        race.setText("Raza: Elfa");
-                        type.setText("Tipo: Maga");
-                        behavior.setText("Personalidad: Princesa,\npervertida y sádica.");
-                        movement.setText("Movimiento: 3");
+                        race.setText("Raza: Elfo");
+                        type.setText("Tipo: Mago");
+                        behavior.setText("Personalidad: Sabio,\npreocupado y justo.");
+                        movement.setText("Movimiento: 4");
 
                         health.setTranslateX(720);
                         health.setTranslateY(260);

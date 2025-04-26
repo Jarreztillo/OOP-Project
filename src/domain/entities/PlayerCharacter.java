@@ -20,43 +20,7 @@ public class PlayerCharacter {
     private EnemyCharacter enemy;
     private boolean isSelected;
     public static boolean collideEnemy;
-    private ArrayList<Consumables> consumables = new ArrayList<>();
 
-    public ArrayList<Consumables> getConsumables() {
-        return consumables;
-    }
-
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
-
-    public boolean consumablesIsEmpty(){
-
-        return consumables.isEmpty();
-    }
-
-    public Consumables getConsumablesAtIndex(int i) {
-        if (i == 0){
-            return consumables.getFirst();
-        }
-        if (i == 1){
-            return consumables.get(1);
-        }if (i == 2){
-            return consumables.get(2);
-        }if (i == 3){
-            return consumables.get(3);
-        }
-
-        return null;
-    }
-
-    public void setConsumables(Consumables consumables) {
-        this.consumables.add(consumables);
-    }
 
 
 
@@ -179,21 +143,11 @@ public class PlayerCharacter {
 
         }
     }
-    public void collideWithConsumable(ArrayList<Consumables> mapConsumables){
+    public void collideWithConsumable(ArrayList<Consumables> inventory){
         if (!enemy.isAlive()){
-            if (mapConsumables.size() == 1) {
-                if (mapConsumables.getFirst().getX() == x && mapConsumables.getFirst().getY() == y){
-                    mapConsumables.getFirst().setQuantity(mapConsumables.getFirst().getQuantity() + 3);
-                    Campaign.grabConsumable = true;
-                    Campaign.drawConsumable = false;
-                    enemy.setX(544);
-                    enemy.setY(64);
-                    enemy.setAlive(true);
-                }
-            }
-            if (mapConsumables.size() == 2) {
-                if (mapConsumables.getFirst().getX() == x && mapConsumables.getFirst().getY() == y){
-                    mapConsumables.getFirst().setQuantity(mapConsumables.getFirst().getQuantity() + 3);
+            if (inventory.size() == 1){
+                if (inventory.getFirst().getX() == x && inventory.getFirst().getY() == y) {
+                    inventory.getFirst().setQuantity(inventory.getFirst().getQuantity() + 3);
                     Campaign.grabConsumable = true;
                     Campaign.drawConsumable = false;
                     x = 64;
@@ -201,51 +155,20 @@ public class PlayerCharacter {
                     enemy.setX(544);
                     enemy.setY(64);
                     enemy.setAlive(true);
+                }
+                }else if (inventory.get(1).getX() == x && inventory.get(1).getY() == y){
 
-                }else if (mapConsumables.get(1).getX() == x && mapConsumables.get(1).getY() == y){
+                }else if (inventory.get(2).getX() == x && inventory.get(2).getY() == y){
+
+                }else if (inventory.get(3).getX() == x && inventory.get(3).getY() == y){
 
                 }
             }
-            if (mapConsumables.size() == 3) {
-                if (mapConsumables.getFirst().getX() == x && mapConsumables.getFirst().getY() == y){
-                    mapConsumables.getFirst().setQuantity(mapConsumables.getFirst().getQuantity() + 3);
-                    Campaign.grabConsumable = true;
-                    Campaign.drawConsumable = false;
-                    x = 64;
-                    y = 64;
-                    enemy.setX(544);
-                    enemy.setY(64);
-                    enemy.setAlive(true);
-
-                }else if (mapConsumables.get(1).getX() == x && mapConsumables.get(1).getY() == y){
-
-                }else if (mapConsumables.get(2).getX() == x && mapConsumables.get(2).getY() == y){
-
-                }
-            }
-            if (mapConsumables.size() == 4) {
-                if (mapConsumables.getFirst().getX() == x && mapConsumables.getFirst().getY() == y){
-                    mapConsumables.getFirst().setQuantity(mapConsumables.getFirst().getQuantity()+3);
-                    Campaign.grabConsumable = true;
-                    Campaign.drawConsumable = false;
-                    x = 64;
-                    y = 64;
-                    enemy.setX(544);
-                    enemy.setY(64);
-                    enemy.setAlive(true);
-
-                }else if (mapConsumables.get(1).getX() == x && mapConsumables.get(1).getY() == y){
-
-                }else if (mapConsumables.get(2).getX() == x && mapConsumables.get(2).getY() == y){
-
-                }else if (mapConsumables.get(3).getX() == x && mapConsumables.get(3).getY() == y){
-
-                }
-            }
-
-
-        }
     }
+
+
+
+
 
     public int getAttack() {return attack;}
 

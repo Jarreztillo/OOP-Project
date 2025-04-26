@@ -5,10 +5,9 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
@@ -21,7 +20,6 @@ public class game extends Application {
     public static Stage window;
     public static AudioClip audio;
     private Scene mainScene;
-    private Scene gameModeScene;
     private VBox mainMenu;
     // Escena, graficos, raiz y lienzo activados para su uso en toda la aplicacion.
 
@@ -53,9 +51,9 @@ public class game extends Application {
         windowDesign();
     }
 
-
-
     private void windowDesign() {
+        audioPlayer.playMainMenu();
+
         Image fondoPrincipal= new Image("fondoPrincipal.png");
         ImageView vista = new ImageView(fondoPrincipal);
         play = new Button("Jugar");
@@ -80,31 +78,22 @@ public class game extends Application {
         controles.getStyleClass().add("menu-button");
 
 
-
         // Botones.
-
-
 
 
         mainMenu = new VBox(10);
         mainMenu.getChildren().addAll(play, options,quit,campaign, pvp,tournament,Audio,atras,video,controles);
         mainMenu.setAlignment(Pos.CENTER);
 
-
-
         disableGameModesButtons();
         disableOptionsButton();
-
 
         vista.setPreserveRatio(false);
         vista.setFitWidth(850);
         vista.setFitHeight(832);
 
-
-
         StackPane root = new StackPane();
         root.getChildren().addAll(vista, mainMenu);
-
         mainScene = new Scene(root,832, 850);
         vista.fitWidthProperty().bind(mainScene.widthProperty());
         vista.fitHeightProperty().bind(mainScene.heightProperty());
@@ -141,20 +130,19 @@ public class game extends Application {
 
         mainScene.getStylesheets().add("buttons.css");
 
-
         play.setOnAction(_ -> enableGameModesButtons());
         // El boton lleva a los modos de juego.
 
         quit.setOnAction(_ -> window.close());
         // El boton cierra el programa.
 
-        campaign.setOnAction(_ -> Roaster.initialize());
+        campaign.setOnAction(_ -> initializeRoaster());
         // El boton inicia el modo campaña.
 
         options.setOnAction(_ -> enableOptionsButton());
         //El boton lleva al interior del menu de opciones.
 
-        atras.setOnAction(_ -> disableOptionsButton() );
+        atras.setOnAction(_ -> disableOptionsButtonByBack() );
         //El boton cierra el menu de opciones.
 
 
@@ -163,6 +151,11 @@ public class game extends Application {
         window.show();
     }
 
+    private void initializeRoaster(){
+        audioPlayer.playButtonSound();
+        audioPlayer.stopMainMenu();
+        Roaster.initialize();
+    }
 
     private void disableGameModesButtons(){
         campaign.setDisable(true);
@@ -174,6 +167,7 @@ public class game extends Application {
     }
 
     private void enableGameModesButtons(){
+        audioPlayer.playButtonSound();
         campaign.setDisable(false);
         campaign.setVisible(true);
         pvp.setDisable(false);
@@ -187,6 +181,7 @@ public class game extends Application {
     }
 
     private void enableOptionsButton(){
+        audioPlayer.playButtonSound();
         campaign.setVisible(false);
         pvp.setVisible(false);
         tournament.setVisible(false);
@@ -197,13 +192,19 @@ public class game extends Application {
 
     }
 
+    private void disableOptionsButtonByBack(){
+        audioPlayer.playButtonSound();
+        controles.setVisible(false);
+        video.setVisible(false);
+        Audio.setVisible(false);
+        atras.setVisible(false);
+    }
     private void disableOptionsButton(){
         controles.setVisible(false);
         video.setVisible(false);
         Audio.setVisible(false);
         atras.setVisible(false);
     }
-
 
 }
 
