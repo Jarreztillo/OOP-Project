@@ -17,6 +17,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Slider;
 
+import java.util.Observable;
+
 // Cosas de JavaFX.
 
 
@@ -57,6 +59,7 @@ public class game extends Application {
         /* Game.window es la variable publica estatica que usaran
         todas las clases para instanciar la ventana que necesiten.
          */
+        audioPlayer.init();
         windowDesign();
     }
 
@@ -86,7 +89,7 @@ public class game extends Application {
         controles = new Button("Controls");
         controles.getStyleClass().add("menu-button");
 
-        volumen=new Slider(0,1,0.5);
+        volumen=new Slider(0,1,0.4);
         volumen.setShowTickLabels(true);
 
         sliderContainer=new HBox();
@@ -94,10 +97,11 @@ public class game extends Application {
         sliderContainer.getChildren().add(volumen);
         sliderContainer.setPrefSize(200,20);
         volumen.setPrefSize(200,20);
-        volumen.valueProperty().addListener((observable, oldValue, newValue) -> {
-            audioPlayer.setVolume(newValue.doubleValue());
-        });
 
+        volumen.valueProperty().addListener((observable, oldValue, newValue) -> {
+           double newVolumen= newValue.doubleValue();
+           audioPlayer.setVolumeForAllSounds(newVolumen);
+        });
 
 
         // Botones.
@@ -182,12 +186,7 @@ public class game extends Application {
                 disableOptionsButtonByBack();
 
             }
-
         });
-
-
-
-
 
         window.setScene(mainScene);
         window.setTitle("Cronicas de Valthar: El torneo de las eras");
