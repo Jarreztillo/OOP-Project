@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,6 +13,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Slider;
+
 // Cosas de JavaFX.
 
 
@@ -34,6 +39,10 @@ public class game extends Application {
     private Button Audio;
     private Button video;
     private Button controles;
+    private Slider volumen;
+    private HBox sliderContainer;
+
+
 
 
     // Botones y Labels.
@@ -77,16 +86,33 @@ public class game extends Application {
         controles = new Button("Controls");
         controles.getStyleClass().add("menu-button");
 
+        volumen=new Slider(0,1,0.5);
+        volumen.setShowTickLabels(true);
+
+        sliderContainer=new HBox();
+        sliderContainer.setAlignment(Pos.CENTER);
+        sliderContainer.getChildren().add(volumen);
+        sliderContainer.setPrefSize(200,20);
+        volumen.setPrefSize(200,20);
+        volumen.valueProperty().addListener((observable, oldValue, newValue) -> {
+            audioPlayer.setVolume(newValue.doubleValue());
+        });
+
+
 
         // Botones.
 
 
         mainMenu = new VBox(10);
-        mainMenu.getChildren().addAll(play, options,quit,campaign, pvp,tournament,Audio,atras,video,controles);
+        mainMenu.getChildren().addAll(play, options,quit,campaign, pvp,tournament,Audio,atras,video,controles,sliderContainer);
         mainMenu.setAlignment(Pos.CENTER);
 
+
         disableGameModesButtons();
+        disableVolumenSlider();
         disableOptionsButton();
+
+
 
         vista.setPreserveRatio(false);
         vista.setFitWidth(850);
@@ -111,6 +137,8 @@ public class game extends Application {
         video.translateXProperty().bind(mainScene.widthProperty().multiply(0.30));
         Audio.translateXProperty().bind(mainScene.widthProperty().multiply(0.30));
         atras.translateXProperty().bind(mainScene.widthProperty().multiply(0.30));
+        sliderContainer.translateXProperty().bind(mainScene.widthProperty().multiply(0.30));
+
 
 
         //Traslacion de los botones en el eje de las Y
@@ -126,8 +154,9 @@ public class game extends Application {
         video.translateYProperty().bind(mainScene.widthProperty().multiply(-0.31));
         Audio.translateYProperty().bind(mainScene.widthProperty().multiply(-0.105));
         atras.translateYProperty().bind(mainScene.widthProperty().multiply(-0.105));
+        sliderContainer.translateYProperty().bind(mainScene.widthProperty().multiply(-0.35));
 
-
+        //Añadiendo hoja de estilos de CSS a la escena.
         mainScene.getStylesheets().add("buttons.css");
 
         play.setOnAction(_ -> enableGameModesButtons());
@@ -142,8 +171,22 @@ public class game extends Application {
         options.setOnAction(_ -> enableOptionsButton());
         //El boton lleva al interior del menu de opciones.
 
-        atras.setOnAction(_ -> disableOptionsButtonByBack() );
-        //El boton cierra el menu de opciones.
+        Audio.setOnAction(_ -> enableVolumenSlider());
+        //EL boton abre la barra de volumen.
+
+        atras.setOnAction(_ -> {
+            if (sliderContainer.isVisible()){
+                disableVolumenSlider();
+                enableOptionsButton();
+            } else if (controles.isVisible()||video.isVisible()||Audio.isVisible()) {
+                disableOptionsButtonByBack();
+
+            }
+
+        });
+
+
+
 
 
         window.setScene(mainScene);
@@ -205,6 +248,25 @@ public class game extends Application {
         Audio.setVisible(false);
         atras.setVisible(false);
     }
+
+    private void enableVolumenSlider(){
+        audioPlayer.playButtonSound();
+        controles.setVisible(false);
+        video.setVisible(false);
+        Audio.setVisible(false);
+        atras.setVisible(true);
+        sliderContainer.setVisible(true);
+
+
+    }
+
+    private void disableVolumenSlider(){
+        sliderContainer.setVisible(false);
+
+    }
+
+
+
 
 }
 

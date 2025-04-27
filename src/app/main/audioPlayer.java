@@ -8,6 +8,8 @@ import static app.main.game.audio;
 
 
 public class audioPlayer {
+
+    private static double globalVolumen= 0.5;
     public static void playInit(){
 
     }
@@ -43,5 +45,8 @@ public class audioPlayer {
         audio.play();
     }
 
+    public static void setVolume(double volumen) {
+        globalVolumen=volumen;
+    }
 
 }
