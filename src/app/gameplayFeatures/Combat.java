@@ -1,6 +1,6 @@
 package app.gameplayFeatures;
 
-import domain.consumables.vitality_potion;
+import domain.consumables.VitalityPotion;
 import domain.entities.EnemyCharacter;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -19,7 +19,7 @@ import javafx.scene.text.Font;
 import java.util.Random;
 
 import static app.main.Roaster.Roaster.player;
-import static app.main.game.*;
+import static app.main.Game.*;
 import static domain.entities.EnemyCharacter.collidePlayer;
 import static domain.entities.PlayerCharacter.collideEnemy;
 import static app.gameModes.Campaign.*;
@@ -41,6 +41,7 @@ public class Combat {
     private Label message;
     private Label playerLife;
     private Label playerAttack;
+    private Label playerTurnLabel;
 
 
     public static boolean noRandomPosition;
@@ -55,46 +56,42 @@ public class Combat {
 
         playerLife = new Label();
         playerAttack = new Label();
+        playerTurnLabel = new Label();
         Label enemyLife = new Label();
         Label enemyAttack = new Label();
         message = new Label();
-        labelConfigurations (enemyLife, enemyAttack, message);
+        labelConfigurations (enemyLife, enemyAttack);
         // Configuraciones de titulos
 
         Button attack = new Button("Atacar.");
         Button passTurn = new Button("Pasar turno.");
         Button runAway = new Button("Huir.");
         Button useConsumable = new Button("Usar item.");
-        buttonConfigurations(attack, passTurn, runAway, useConsumable, enemyLife,enemyAttack);
+        buttonConfigurations(attack, passTurn, runAway, useConsumable, enemyLife, enemyAttack);
 
 
         // Configuraciones de ataques.
-        root.getChildren().addAll(canvas,playerLife, playerAttack, enemyLife, enemyAttack, attack, runAway, passTurn, useConsumable, message);
+        root.getChildren().addAll(canvas,playerLife, playerAttack, enemyLife, enemyAttack, attack, runAway, passTurn, useConsumable, message, playerTurnLabel);
         graphics = canvas.getGraphicsContext2D();
-        graphics.fillRect(0, 440, 832, 410);
         window.setScene(combatScene);
-        drawing();
         animationForOtherThings = new AnimationTimer() {
             @Override
             public void handle(long l) {
                 lifeChecker();
                 actualizeState();
+                drawing();
                 drawingPortraits();
                 if(playerTurn == 0){
                     enemyTurn();
                 }
+
             }
         };
         animationForOtherThings.start();
         switchCharacters(combatScene);
     }
 
-    private void enemyTurn() {
-        boolean enemyAttack = probabilities.nextBoolean();
-    }
-
     private void drawingPortraits() {
-        graphics.fillRect(0, 440, 120, 120);
         graphics.drawImage(new Image(player[selectedCharacter].getClosestImageName()), 0, 440);
     }
 
@@ -126,6 +123,7 @@ public class Combat {
 
 
     private void drawing() {
+        graphics.drawImage(new Image("combatSquare.png"), 0, 440);
         if (player[0].getHealth() != 0) {
             graphics.drawImage(new Image(player[0].getImageName()), 104, 325);
         }
@@ -151,7 +149,7 @@ public class Combat {
 
 
 
-    private void labelConfigurations(Label enemyLife, Label enemyAttack, Label message) {
+    private void labelConfigurations(Label enemyLife, Label enemyAttack) {
         Font stadisticsFont = new Font("ARIAL",20);
 
         playerLife.setTranslateX(150);
@@ -165,8 +163,14 @@ public class Combat {
         playerAttack.setText("Attack points: "+player[0].getAttack());
         playerAttack.setTextFill(Color.WHITE);
 
+        playerTurnLabel.setTranslateX(20);
+        playerTurnLabel.setTranslateY(780);
+        playerTurnLabel.setText("Acciones por turno: "+playerTurn);
+        playerTurnLabel.setTextFill(Color.WHITE);
+
         playerLife.setFont(stadisticsFont);
         playerAttack.setFont(stadisticsFont);
+        playerTurnLabel.setFont(stadisticsFont);
         //Label del jugador.
 
 
@@ -226,8 +230,9 @@ public class Combat {
             animationTimer.start();
         }else {
             enemyAttack = probabilities.nextBoolean();
+            playerTurn--;
             if(enemyAttack){
-                enemyAttack(playerLife);
+                enemyAttack();
                 message.setText("¡El enemigo te metio un trampie y no te dejo huir! ¡-1 de vida!");
             }else{
                 message.setText("¡No escapaste y el enemigo no te daño porque se tropezo con un charco!");
@@ -239,13 +244,10 @@ public class Combat {
         probabilities = new Random();
         enemyAttack = probabilities.nextBoolean();
         playerTurn = 0;
-
     }
 
     private void playerUseConsumable(Label playerLife){
-        if(!(inventory.isEmpty())) {
-            System.out.println(inventory.getFirst().getQuantity());
-        }
+
         if (inventory.getFirst().getQuantity()== 0){
             message.setText("¡No tienes consumibles! ¿¡Para que #@|~@ tocas el boton!?");
         }else {
@@ -257,9 +259,6 @@ public class Combat {
                 root.getChildren().add(Potion);
 
         }
-
-
-
 
     }
 
@@ -309,12 +308,12 @@ public class Combat {
 
 
         if (enemy.getHealth() <= 0){
-            enemy.setHealth(1);
+            enemy.setHealth(10);
             enemy.setAlive(false);
             noRandomPosition = true;
             collideEnemy = false;
             collidePlayer = false;
-            dropConsumable = true;
+            dropConsumable = probabilities.nextBoolean();
             if(dropConsumable) {
                 inventory.getFirst().setX(enemy.getX());
                 inventory.getFirst().setY(enemy.getY());
@@ -335,6 +334,7 @@ public class Combat {
         }
         playerLife.setText("HP: "+player[selectedCharacter].getHealth());
         playerAttack.setText("Attack points: "+player[selectedCharacter].getAttack());
+        playerTurnLabel.setText("Acciones por turno: "+playerTurn);
     }
 
     private void comeBack(Scene gameOverScene) {
@@ -362,7 +362,7 @@ public class Combat {
 
     private void usePotion(Label playerLife){
         if (inventory.getFirst().getQuantity() > 0) {
-            vitality_potion potion = new vitality_potion();
+            VitalityPotion potion = new VitalityPotion();
             player[selectedCharacter].setHealth(player[selectedCharacter].getHealth() + potion.getHealthAdded());
             message.setText("¡Has usado una pocion de vitalidad! ¡Te curas "+potion.getHealthAdded()+" de vida!");
             inventory.getFirst().setQuantity(inventory.getFirst().getQuantity() - 1);
@@ -370,24 +370,38 @@ public class Combat {
             playerTurn--;
 
         }else{
-            message.setText("¿Crees que vas a usar una pocion de vitalidad que no tienes?");
+            message.setText("¿Crees que vas a usar una poción de vitalidad que no tienes?");
         }
 
     }
 
-
-
     private void playerAttack(Label enemyLife, Label playerLife){
         probabilities = new Random();
-        enemy.setHealth(enemy.getHealth() - player[selectedCharacter].getAttack());
-        System.out.println("Al enemigo le queda: "+enemy.getHealth());
-        enemyLife.setText("HP: "+ enemy.getHealth());
+        boolean playerAttack = probabilities.nextBoolean();
+        if(playerAttack) {
+            enemy.setHealth(enemy.getHealth() - player[selectedCharacter].getAttack());
+            enemyLife.setText("HP: " + enemy.getHealth());
+            message.setText("¡Ay Dios, "+player[selectedCharacter].getCharacterName()+" le ha hecho "+player[selectedCharacter].getAttack()+" de daño!");
+        }else{
+            message.setText("¡"+player[selectedCharacter].getCharacterName()+" ha fallado el ataque!");
+        }
         playerTurn--;
     }
-    private void enemyAttack(Label playerLife){
-            player[selectedCharacter].setHealth(player[selectedCharacter].getHealth() - enemy.getAttack());
-            playerLife.setText("HP: "+player[selectedCharacter].getHealth());
+    private void enemyAttack(){
+        boolean enemyAttack = probabilities.nextBoolean();
+        int damagedPlayer = probabilities.nextInt(0, 4);
+        if (enemyAttack){
+            player[damagedPlayer].setHealth(player[damagedPlayer].getHealth() - enemy.getAttack());
+            message.setText("¡El enemigo ha atacado a "+player[damagedPlayer].getCharacterName()+" y le ha hecho "+enemy.getAttack()+" de daño!");
+        }else{
+            message.setText("¡El enemigo intento atacar a "+player[damagedPlayer].getCharacterName()+", pero se resbalo y no pudo!");
 
+        }
+        }
+
+    private void enemyTurn() {
+        enemyAttack();
+        playerTurn = 5;
     }
 
 

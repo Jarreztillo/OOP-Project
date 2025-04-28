@@ -1,7 +1,7 @@
 package app.main.Roaster;
 
 import app.gameModes.Campaign;
-import app.main.audioPlayer;
+import app.main.AudioPlayer;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 
-import static app.main.game.window;
+import static app.main.Game.window;
 
 import domain.entities.PlayerCharacter;
 import javafx.scene.paint.Color;
@@ -26,7 +26,7 @@ public class Roaster {
     private static Scene roasterScene;
     private static AnimationTimer animationTimer;
     private static int selectedCharacters = -1;
-    private static selectedCharacters[] selected;
+    private static SelectedCharacters[] selected;
     private static String[] numberImages = {"first.png", "second.png", "third.png", "fourth.png", "fifth.png"};
     private static boolean cantMove = false;
     public static PlayerCharacter[] player;
@@ -70,12 +70,12 @@ public class Roaster {
         player[3] = new PlayerCharacter();
         player[4] = new PlayerCharacter();
 
-        selected = new selectedCharacters[5];
-        selected[0] = new selectedCharacters();
-        selected[1] = new selectedCharacters();
-        selected[2] = new selectedCharacters();
-        selected[3] = new selectedCharacters();
-        selected[4] = new selectedCharacters();
+        selected = new SelectedCharacters[5];
+        selected[0] = new SelectedCharacters();
+        selected[1] = new SelectedCharacters();
+        selected[2] = new SelectedCharacters();
+        selected[3] = new SelectedCharacters();
+        selected[4] = new SelectedCharacters();
 
 
         root.getChildren().addAll(health, mana, attack, race, type, behavior, movement);
@@ -141,7 +141,7 @@ public class Roaster {
                             reset();
                             break;
                         case "SPACE":
-                            audioPlayer.playSelectedCharacter();
+                            AudioPlayer.playSelectedCharacter();
                             if (!(selectedCharacters == 4)) {
                                 selectedCharacters++;
                             } else {
@@ -157,7 +157,8 @@ public class Roaster {
 
                                                     player[selectedCharacters].setImageName("goblin.png");
                                                     player[selectedCharacters].setClosestImageName("closerHiglob.png");
-                                                    selected[0] = new selectedCharacters(32, 32, 0, true);
+                                                    player[selectedCharacters].setCharacterName("Higlob");
+                                                    selected[0] = new SelectedCharacters(32, 32, 0, true);
                                                     player[selectedCharacters].setX(64);
                                                     player[selectedCharacters].setY(64);
                                                     player[selectedCharacters].setHealth(7);
@@ -167,9 +168,10 @@ public class Roaster {
                                                     if (!(player[0].getImageName() == "goblin.png")) {
                                                         player[selectedCharacters].setImageName("goblin.png");
                                                         player[selectedCharacters].setClosestImageName("closerHiglob.png");
+                                                        player[selectedCharacters].setCharacterName("Higlob");
                                                         player[selectedCharacters].setHealth(7);
                                                         player[selectedCharacters].setAttack(2);
-                                                        selected[1] = new selectedCharacters(32, 32, 1, true);
+                                                        selected[1] = new SelectedCharacters(32, 32, 1, true);
 
                                                     } else {
                                                         System.out.println("No puede seleccionar este personaje de nuevo. ");
@@ -180,9 +182,10 @@ public class Roaster {
                                                     if (!(player[0].getImageName() == "goblin.png") && !(player[1].getImageName() == "goblin.png")) {
                                                         player[selectedCharacters].setImageName("goblin.png");
                                                         player[selectedCharacters].setClosestImageName("closerHiglob.png");
+                                                        player[selectedCharacters].setCharacterName("Higlob");
                                                         player[selectedCharacters].setHealth(7);
                                                         player[selectedCharacters].setAttack(2);
-                                                        selected[2] = new selectedCharacters(32, 32, 2, true);
+                                                        selected[2] = new SelectedCharacters(32, 32, 2, true);
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
                                                         selectedCharacters--;
@@ -192,9 +195,10 @@ public class Roaster {
                                                     if (!(player[2].getImageName() == "goblin.png") && !(player[0].getImageName() == "goblin.png") && !(player[1].getImageName() == "goblin.png")) {
                                                         player[selectedCharacters].setImageName("goblin.png");
                                                         player[selectedCharacters].setClosestImageName("closerHiglob.png");
+                                                        player[selectedCharacters].setCharacterName("Higlob");
                                                         player[selectedCharacters].setHealth(7);
                                                         player[selectedCharacters].setAttack(2);
-                                                        selected[3] = new selectedCharacters(32, 32, 3, true);
+                                                        selected[3] = new SelectedCharacters(32, 32, 3, true);
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
                                                         selectedCharacters--;
@@ -204,9 +208,10 @@ public class Roaster {
                                                     if (!(player[3].getImageName() == "goblin.png") && !(player[2].getImageName() == "goblin.png") && !(player[0].getImageName() == "goblin.png") && !(player[1].getImageName() == "goblin.png")) {
                                                         player[selectedCharacters].setImageName("goblin.png");
                                                         player[selectedCharacters].setClosestImageName("closerHiglob.png");
+                                                        player[selectedCharacters].setCharacterName("Higlob");
                                                         player[selectedCharacters].setHealth(7);
                                                         player[selectedCharacters].setAttack(2);
-                                                        selected[4] = new selectedCharacters(32, 32, 4, true);
+                                                        selected[4] = new SelectedCharacters(32, 32, 4, true);
 
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
@@ -220,7 +225,8 @@ public class Roaster {
                                                 case 0:
                                                     player[selectedCharacters].setImageName("draven.png");
                                                     player[selectedCharacters].setClosestImageName("closerDraven.png");
-                                                    selected[0] = new selectedCharacters(32, 152, 0, true);
+                                                    player[selectedCharacters].setCharacterName("Draven");
+                                                    selected[0] = new SelectedCharacters(32, 152, 0, true);
                                                     player[selectedCharacters].setHealth(5);
                                                     player[selectedCharacters].setAttack(3);
                                                     player[selectedCharacters].setX(64);
@@ -230,9 +236,10 @@ public class Roaster {
                                                     if (!(player[0].getImageName() == "draven.png")) {
                                                         player[selectedCharacters].setImageName("draven.png");
                                                         player[selectedCharacters].setClosestImageName("closerDraven.png");
+                                                        player[selectedCharacters].setCharacterName("Draven");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(3);
-                                                        selected[1] = new selectedCharacters(32, 152, 1, true);
+                                                        selected[1] = new SelectedCharacters(32, 152, 1, true);
                                                     } else {
                                                         System.out.println("No puede seleccionar este personaje de nuevo. ");
                                                         selectedCharacters--;
@@ -242,9 +249,10 @@ public class Roaster {
                                                     if (!(player[1].getImageName() == "draven.png") && !(player[0].getImageName() == "draven.png")) {
                                                         player[selectedCharacters].setImageName("draven.png");
                                                         player[selectedCharacters].setClosestImageName("closerDraven.png");
+                                                        player[selectedCharacters].setCharacterName("Draven");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(3);
-                                                        selected[2] = new selectedCharacters(32, 152, 2, true);
+                                                        selected[2] = new SelectedCharacters(32, 152, 2, true);
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
                                                         selectedCharacters--;
@@ -254,9 +262,10 @@ public class Roaster {
                                                     if (!(player[2].getImageName() == "draven.png") && !(player[1].getImageName() == "draven.png") && !(player[0].getImageName() == "draven.png")) {
                                                         player[selectedCharacters].setImageName("draven.png");
                                                         player[selectedCharacters].setClosestImageName("closerDraven.png");
+                                                        player[selectedCharacters].setCharacterName("Draven");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(3);
-                                                        selected[3] = new selectedCharacters(32, 152, 3, true);
+                                                        selected[3] = new SelectedCharacters(32, 152, 3, true);
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
                                                         selectedCharacters--;
@@ -266,9 +275,10 @@ public class Roaster {
                                                     if (!(player[3].getImageName() == "draven.png") && !(player[2].getImageName() == "draven.png") && !(player[1].getImageName() == "draven.png") && !(player[0].getImageName() == "draven.png")) {
                                                         player[selectedCharacters].setImageName("draven.png");
                                                         player[selectedCharacters].setClosestImageName("closerDraven.png");
+                                                        player[selectedCharacters].setCharacterName("Draven");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(3);
-                                                        selected[4] = new selectedCharacters(32, 152, 4, true);
+                                                        selected[4] = new SelectedCharacters(32, 152, 4, true);
 
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
@@ -282,7 +292,8 @@ public class Roaster {
                                                 case 0:
                                                     player[selectedCharacters].setImageName("berserker.png");
                                                     player[selectedCharacters].setClosestImageName("closerZorak.png");
-                                                    selected[0] = new selectedCharacters(32, 272, 0, true);
+                                                    player[selectedCharacters].setCharacterName("Zorak");
+                                                    selected[0] = new SelectedCharacters(32, 272, 0, true);
                                                     player[selectedCharacters].setX(64);
                                                     player[selectedCharacters].setY(64);
                                                     player[selectedCharacters].setHealth(5);
@@ -292,9 +303,10 @@ public class Roaster {
                                                     if (!(player[0].getImageName() == "berserker.png")) {
                                                         player[selectedCharacters].setImageName("berserker.png");
                                                         player[selectedCharacters].setClosestImageName("closerZorak.png");
+                                                        player[selectedCharacters].setCharacterName("Zorak");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
-                                                        selected[1] = new selectedCharacters(32, 272, 1, true);
+                                                        selected[1] = new SelectedCharacters(32, 272, 1, true);
                                                     } else {
                                                         System.out.println("No puede seleccionar este personaje de nuevo. ");
                                                         selectedCharacters--;
@@ -304,9 +316,10 @@ public class Roaster {
                                                     if (!(player[1].getImageName() == "berserker.png") && !(player[0].getImageName() == "berserker.png")) {
                                                         player[selectedCharacters].setImageName("berserker.png");
                                                         player[selectedCharacters].setClosestImageName("closerZorak.png");
+                                                        player[selectedCharacters].setCharacterName("Zorak");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
-                                                        selected[2] = new selectedCharacters(32, 272, 2, true);
+                                                        selected[2] = new SelectedCharacters(32, 272, 2, true);
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
                                                         selectedCharacters--;
@@ -316,9 +329,10 @@ public class Roaster {
                                                     if (!(player[2].getImageName() == "berserker.png") && !(player[1].getImageName() == "berserker.png") && !(player[0].getImageName() == "berserker.png")) {
                                                         player[selectedCharacters].setImageName("berserker.png");
                                                         player[selectedCharacters].setClosestImageName("closerZorak.png");
+                                                        player[selectedCharacters].setCharacterName("Zorak");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
-                                                        selected[3] = new selectedCharacters(32, 272, 3, true);
+                                                        selected[3] = new SelectedCharacters(32, 272, 3, true);
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
                                                         selectedCharacters--;
@@ -328,9 +342,10 @@ public class Roaster {
                                                     if (!(player[3].getImageName() == "berserker.png") && !(player[2].getImageName() == "berserker.png") && !(player[1].getImageName() == "berserker.png") && !(player[0].getImageName() == "berserker.png")) {
                                                         player[selectedCharacters].setImageName("berserker.png");
                                                         player[selectedCharacters].setClosestImageName("closerZorak.png");
+                                                        player[selectedCharacters].setCharacterName("Zorak");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
-                                                        selected[4] = new selectedCharacters(32, 272, 4, true);
+                                                        selected[4] = new SelectedCharacters(32, 272, 4, true);
 
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
@@ -344,9 +359,10 @@ public class Roaster {
                                                 case 0:
                                                     player[selectedCharacters].setImageName("goodElven.png");
                                                     player[selectedCharacters].setClosestImageName("closerHeloro.png");
+                                                    player[selectedCharacters].setCharacterName("Heloro");
                                                     player[selectedCharacters].setHealth(5);
                                                     player[selectedCharacters].setAttack(1);
-                                                    selected[0] = new selectedCharacters(32, 392, 0, true);
+                                                    selected[0] = new SelectedCharacters(32, 392, 0, true);
                                                     player[selectedCharacters].setX(64);
                                                     player[selectedCharacters].setY(64);
                                                     break;
@@ -354,9 +370,10 @@ public class Roaster {
                                                     if (!(player[0].getImageName() == "goodElven.png")) {
                                                         player[selectedCharacters].setImageName("goodElven.png");
                                                         player[selectedCharacters].setClosestImageName("closerHeloro.png");
+                                                        player[selectedCharacters].setCharacterName("Heloro");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
-                                                        selected[1] = new selectedCharacters(32, 392, 1, true);
+                                                        selected[1] = new SelectedCharacters(32, 392, 1, true);
                                                     } else {
                                                         System.out.println("No puede seleccionar este personaje de nuevo. ");
                                                         selectedCharacters--;
@@ -366,9 +383,10 @@ public class Roaster {
                                                     if (!(player[1].getImageName() == "goodElven.png") && !(player[0].getImageName() == "goodElven.png")) {
                                                         player[selectedCharacters].setImageName("goodElven.png");
                                                         player[selectedCharacters].setClosestImageName("closerHeloro.png");
+                                                        player[selectedCharacters].setCharacterName("Heloro");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
-                                                        selected[2] = new selectedCharacters(32, 392, 2, true);
+                                                        selected[2] = new SelectedCharacters(32, 392, 2, true);
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
                                                         selectedCharacters--;
@@ -378,9 +396,10 @@ public class Roaster {
                                                     if (!(player[2].getImageName() == "goodElven.png") && !(player[1].getImageName() == "goodElven.png") && !(player[0].getImageName() == "goodElven.png")) {
                                                         player[selectedCharacters].setImageName("goodElven.png");
                                                         player[selectedCharacters].setClosestImageName("closerHeloro.png");
+                                                        player[selectedCharacters].setCharacterName("Heloro");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
-                                                        selected[3] = new selectedCharacters(32, 392, 3, true);
+                                                        selected[3] = new SelectedCharacters(32, 392, 3, true);
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
                                                         selectedCharacters--;
@@ -390,9 +409,10 @@ public class Roaster {
                                                     if (!(player[3].getImageName() == "goodElven.png") && !(player[2].getImageName() == "goodElven.png") && !(player[1].getImageName() == "goodElven.png") && !(player[0].getImageName() == "goodElven.png")) {
                                                         player[selectedCharacters].setImageName("goodElven.png");
                                                         player[selectedCharacters].setClosestImageName("closerHeloro.png");
+                                                        player[selectedCharacters].setCharacterName("Heloro");
                                                         player[selectedCharacters].setHealth(5);
                                                         player[selectedCharacters].setAttack(1);
-                                                        selected[4] = new selectedCharacters(32, 392, 4, true);
+                                                        selected[4] = new SelectedCharacters(32, 392, 4, true);
 
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
@@ -410,9 +430,10 @@ public class Roaster {
                                                 case 0:
                                                     player[selectedCharacters].setImageName("anotherElven.png");
                                                     player[selectedCharacters].setClosestImageName("closerLyrasa.png");
+                                                    player[selectedCharacters].setCharacterName("Lyrasa");
                                                     player[selectedCharacters].setHealth(6);
                                                     player[selectedCharacters].setAttack(2);
-                                                    selected[0] = new selectedCharacters(152, 32, 0, true);
+                                                    selected[0] = new SelectedCharacters(152, 32, 0, true);
                                                     player[selectedCharacters].setX(64);
                                                     player[selectedCharacters].setY(64);
                                                     break;
@@ -420,9 +441,10 @@ public class Roaster {
                                                     if (!(player[0].getImageName() == "anotherElven.png")) {
                                                         player[selectedCharacters].setImageName("anotherElven.png");
                                                         player[selectedCharacters].setClosestImageName("closerLyrasa.png");
+                                                        player[selectedCharacters].setCharacterName("Lyrasa");
                                                         player[selectedCharacters].setHealth(6);
                                                         player[selectedCharacters].setAttack(2);
-                                                        selected[1] = new selectedCharacters(152, 32, 1, true);
+                                                        selected[1] = new SelectedCharacters(152, 32, 1, true);
                                                     } else {
                                                         System.out.println("No puede seleccionar este personaje de nuevo. ");
                                                         selectedCharacters--;
@@ -432,9 +454,10 @@ public class Roaster {
                                                     if (!(player[0].getImageName() == "anotherElven.png") && !(player[1].getImageName() == "anotherElven.png")) {
                                                         player[selectedCharacters].setImageName("anotherElven.png");
                                                         player[selectedCharacters].setClosestImageName("closerLyrasa.png");
+                                                        player[selectedCharacters].setCharacterName("Lyrasa");
                                                         player[selectedCharacters].setHealth(6);
                                                         player[selectedCharacters].setAttack(2);
-                                                        selected[2] = new selectedCharacters(152, 32, 2, true);
+                                                        selected[2] = new SelectedCharacters(152, 32, 2, true);
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
                                                         selectedCharacters--;
@@ -444,9 +467,10 @@ public class Roaster {
                                                     if (!(player[2].getImageName() == "anotherElven.png") && !(player[0].getImageName() == "anotherElven.png") && !(player[1].getImageName() == "anotherElven.png")) {
                                                         player[selectedCharacters].setImageName("anotherElven.png");
                                                         player[selectedCharacters].setClosestImageName("closerLyrasa.png");
+                                                        player[selectedCharacters].setCharacterName("Lyrasa");
                                                         player[selectedCharacters].setHealth(6);
                                                         player[selectedCharacters].setAttack(2);
-                                                        selected[3] = new selectedCharacters(152, 32, 3, true);
+                                                        selected[3] = new SelectedCharacters(152, 32, 3, true);
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
                                                         selectedCharacters--;
@@ -456,9 +480,10 @@ public class Roaster {
                                                     if (!(player[3].getImageName() == "anotherElven.png") && !(player[2].getImageName() == "anotherElven.png") && !(player[0].getImageName() == "anotherElven.png") && !(player[1].getImageName() == "anotherElven.png")) {
                                                         player[selectedCharacters].setImageName("anotherElven.png");
                                                         player[selectedCharacters].setClosestImageName("closerLyrasa.png");
+                                                        player[selectedCharacters].setCharacterName("Lyrasa");
                                                         player[selectedCharacters].setHealth(6);
                                                         player[selectedCharacters].setAttack(2);
-                                                        selected[4] = new selectedCharacters(152, 32, 4, true);
+                                                        selected[4] = new SelectedCharacters(152, 32, 4, true);
 
                                                     } else {
                                                         System.out.println("No puede selecctionar este personaje de nuevo. ");
@@ -483,16 +508,8 @@ public class Roaster {
             animationTimer = new AnimationTimer() {
                 @Override
                 public void handle(long l) {
-                    for (int i = 0; i <= 4; i++){
-                        int pos = 32+(120 * i);
-                        for (int j = 32; j < 512; j+= 120){
-                            graphics.fillRect(pos, j, 120, 120);
-                        }
-                    }
-                    graphics.fillRect(392, 512, 120,120);
-                    graphics.fillRect(512, 512, 120,120);
-                    graphics.fillRect(702, 32, 280, 600);
-
+                    graphics.drawImage(new Image("roaster1.png"), 8, 8);
+                    graphics.drawImage(new Image("roaster2.png"), 702, 8);
                     graphics.setFill(Color.BLACK);
 
                     graphics.drawImage(new Image("closerHiglob.png"), 32,32);
@@ -512,6 +529,21 @@ public class Roaster {
                     behavior.setVisible(false);
                     movement.setVisible(false);
 
+                    health.setTranslateX(720);
+                    health.setTranslateY(240);
+                    mana.setTranslateX(780);
+                    mana.setTranslateY(240);
+                    attack.setTranslateX(720);
+                    attack.setTranslateY(290);
+                    race.setTranslateX(720);
+                    race.setTranslateY(340);
+                    type.setTranslateX(720);
+                    type.setTranslateY(390);
+                    behavior.setTranslateX(720);
+                    behavior.setTranslateY(440);
+                    movement.setTranslateX(720);
+                    movement.setTranslateY(540);
+
                     if (x == 32 && y == 32){
                         health.setVisible(true);
                         mana.setVisible(true);
@@ -521,7 +553,7 @@ public class Roaster {
                         behavior.setVisible(true);
                         movement.setVisible(true);
 
-                        graphics.drawImage(new Image("higlobFace.png"), 740, 32);
+                        graphics.drawImage(new Image("higlobFace.png"), 740, 20);
 
                         health.setFont(font);
                         mana.setFont(font);
@@ -547,20 +579,20 @@ public class Roaster {
                         behavior.setText("Personalidad: Distraído,\nhalagador e inocente.");
                         movement.setText("Movimiento: 4");
 
-                        health.setTranslateX(720);
-                        health.setTranslateY(260);
-                        mana.setTranslateX(780);
-                        mana.setTranslateY(260);
-                        attack.setTranslateX(720);
-                        attack.setTranslateY(310);
-                        race.setTranslateX(720);
-                        race.setTranslateY(360);
-                        type.setTranslateX(720);
-                        type.setTranslateY(410);
-                        behavior.setTranslateX(720);
-                        behavior.setTranslateY(460);
-                        movement.setTranslateX(720);
-                        movement.setTranslateY(560);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     }
                     if (x == 32 && y ==152){
                         health.setVisible(true);
@@ -570,7 +602,7 @@ public class Roaster {
                         behavior.setVisible(true);
                         movement.setVisible(true);
 
-                        graphics.drawImage(new Image("dravenFace.png"), 740, 32);
+                        graphics.drawImage(new Image("dravenFace.png"), 740, 20);
 
                         health.setFont(font);
                         attack.setFont(font);
@@ -592,19 +624,6 @@ public class Roaster {
                         type.setText("Tipo: Guerrero");
                         behavior.setText("Personalidad: Valiente,\nleal e impulsivo.");
                         movement.setText("Movimiento: 2");
-
-                        health.setTranslateX(720);
-                        health.setTranslateY(260);
-                        attack.setTranslateX(720);
-                        attack.setTranslateY(310);
-                        race.setTranslateX(720);
-                        race.setTranslateY(360);
-                        type.setTranslateX(720);
-                        type.setTranslateY(410);
-                        behavior.setTranslateX(720);
-                        behavior.setTranslateY(460);
-                        movement.setTranslateX(720);
-                        movement.setTranslateY(560);
                     }
                     if (x == 32 && y == 272){
                         health.setVisible(true);
@@ -614,7 +633,7 @@ public class Roaster {
                         behavior.setVisible(true);
                         movement.setVisible(true);
 
-                        graphics.drawImage(new Image("zorakFace.png"), 740, 32);
+                        graphics.drawImage(new Image("zorakFace.png"), 740, 20);
 
                         health.setFont(font);
                         attack.setFont(font);
@@ -634,21 +653,8 @@ public class Roaster {
                         attack.setText("Attack: 5");
                         race.setText("Raza: Orco");
                         type.setText("Tipo: Berserker");
-                        behavior.setText("Personalidad: Experimenta-\ndo, fuerte y sereno.");
+                        behavior.setText("Personalidad: Experimen-\ntado, fuerte y sereno.");
                         movement.setText("Movimiento: 3");
-
-                        health.setTranslateX(720);
-                        health.setTranslateY(260);
-                        attack.setTranslateX(720);
-                        attack.setTranslateY(310);
-                        race.setTranslateX(720);
-                        race.setTranslateY(360);
-                        type.setTranslateX(720);
-                        type.setTranslateY(410);
-                        behavior.setTranslateX(720);
-                        behavior.setTranslateY(460);
-                        movement.setTranslateX(720);
-                        movement.setTranslateY(560);
                     }
                     if (x == 32 && y == 392){
                         health.setVisible(true);
@@ -659,7 +665,7 @@ public class Roaster {
                         behavior.setVisible(true);
                         movement.setVisible(true);
 
-                        graphics.drawImage(new Image("heloroFace.png"), 740, 32);
+                        graphics.drawImage(new Image("heloroFace.png"), 740, 20);
 
                         health.setFont(font);
                         mana.setFont(font);
@@ -684,21 +690,6 @@ public class Roaster {
                         type.setText("Tipo: Mago");
                         behavior.setText("Personalidad: Sabio,\npreocupado y justo.");
                         movement.setText("Movimiento: 4");
-
-                        health.setTranslateX(720);
-                        health.setTranslateY(260);
-                        mana.setTranslateX(780);
-                        mana.setTranslateY(260);
-                        attack.setTranslateX(720);
-                        attack.setTranslateY(310);
-                        race.setTranslateX(720);
-                        race.setTranslateY(360);
-                        type.setTranslateX(720);
-                        type.setTranslateY(410);
-                        behavior.setTranslateX(720);
-                        behavior.setTranslateY(460);
-                        movement.setTranslateX(720);
-                        movement.setTranslateY(560);
                     }
                     if (x == 152 && y == 32){
                         health.setVisible(true);
@@ -708,7 +699,7 @@ public class Roaster {
                         behavior.setVisible(true);
                         movement.setVisible(true);
 
-                        graphics.drawImage(new Image("lyrasaFace.png"), 740, 32);
+                        graphics.drawImage(new Image("lyrasaFace.png"), 740, 20);
 
                         health.setFont(font);
                         attack.setFont(font);
@@ -730,22 +721,6 @@ public class Roaster {
                         type.setText("Tipo: Arquera");
                         behavior.setText("Personalidad: Silenciosa,\nprecisa y desconfiada.");
                         movement.setText("Movimiento: 3");
-
-                        health.setTranslateX(720);
-                        health.setTranslateY(260);
-                        attack.setTranslateX(720);
-                        attack.setTranslateY(310);
-                        race.setTranslateX(720);
-                        race.setTranslateY(360);
-                        type.setTranslateX(720);
-                        type.setTranslateY(410);
-                        behavior.setTranslateX(720);
-                        behavior.setTranslateY(460);
-                        movement.setTranslateX(720);
-                        movement.setTranslateY(560);
-
-
-
                     }
 
                     if (selected[4].isCharacterActivated()) {
@@ -768,7 +743,7 @@ public class Roaster {
                         message = new Label("¿Esta seguro de haber elegido todos los personajes en el orden correcto?");
                         message.setFont(font);
                         message.setTranslateX(32);
-                        message.setTranslateY(650);
+                        message.setTranslateY(670);
                         message.setTextFill(Color.BLACK);
 
 
@@ -776,16 +751,16 @@ public class Roaster {
                         no = new Button ("No.");
                         yes.setFont(font);
                         yes.setTranslateX(32);
-                        yes.setTranslateY(700);
+                        yes.setTranslateY(730);
                         yes.setTextFill(Color.BLACK);
                         yes.setFocusTraversable(false);
                         no.setFont(font);
                         no.setTranslateX(92);
-                        no.setTranslateY(700);
+                        no.setTranslateY(730);
                         no.setTextFill(Color.BLACK);
                         no.setFocusTraversable(false);
 
-                        yes.setOnMouseClicked(e -> twoActions());
+                        yes.setOnMouseClicked(e -> threeActions());
                         no.setOnMouseClicked(e -> reset());
 
                         message.setDisable(false);
@@ -805,9 +780,10 @@ public class Roaster {
         }
 
 
-        private static void twoActions(){
+        private static void threeActions(){
         animationTimer.stop();
         Campaign.initialize();
+        AudioPlayer.playRoasterButtonSound();
         }
         private static void reset(){
             selectedCharacters = -1;
@@ -819,11 +795,11 @@ public class Roaster {
             player[4] = new PlayerCharacter();
 
 
-            selected[0] = new selectedCharacters();
-            selected[1] = new selectedCharacters();
-            selected[2] = new selectedCharacters();
-            selected[3] = new selectedCharacters();
-            selected[4] = new selectedCharacters();
+            selected[0] = new SelectedCharacters();
+            selected[1] = new SelectedCharacters();
+            selected[2] = new SelectedCharacters();
+            selected[3] = new SelectedCharacters();
+            selected[4] = new SelectedCharacters();
 
             if(message != null && yes != null && no != null){
 

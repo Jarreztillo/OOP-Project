@@ -10,8 +10,8 @@ import javafx.scene.image.Image;
 public class EnemyCharacter {
     private int x;
     private int y;
-    private int attack = 1;
-    private int Health = 5;
+    private int attack = 2;
+    private int Health = 10;
     private boolean alive = true;
     private String imageName = "enemigomortal1.png";
     private String closestImageName = "decercaenemigo.png";

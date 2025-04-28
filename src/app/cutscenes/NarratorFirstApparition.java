@@ -6,14 +6,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.control.Label;
-import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 
-import java.nio.file.Paths;
-
-import static app.main.game.window;
+import static app.main.Game.window;
 
 public class NarratorFirstApparition {
     private static GraphicsContext graphics;

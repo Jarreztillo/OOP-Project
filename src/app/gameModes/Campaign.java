@@ -2,9 +2,8 @@ package app.gameModes;
 
 import app.gameplayFeatures.Combat;
 import app.gameplayFeatures.Consumables;
-import app.gameplayFeatures.Map;
+import app.gameplayFeatures.TileMap;
 import domain.consumables.Inventory;
-import domain.consumables.vitality_potion;
 import domain.entities.EnemyCharacter;
 // Clases locales que usa Campaign.
 
@@ -27,7 +26,7 @@ import java.util.Random;
 import static app.gameplayFeatures.Combat.dropConsumable;
 import static app.main.Roaster.Roaster.player;
 import static domain.entities.EnemyCharacter.collidePlayer;
-import static app.main.game.window;
+import static app.main.Game.window;
 import static domain.entities.PlayerCharacter.collideEnemy;
 import static app.gameplayFeatures.Combat.noRandomPosition;
 
@@ -79,18 +78,18 @@ public class Campaign {
         playerMovement(campaignGameScene);
 
 
-        graphics.fillRect(680, 32, 310, 500);
+        graphics.drawImage(new Image("gameplaySquare1.png"), 680, 32);
         // Cuadro de las estadisticas.
 
-        graphics.fillRect(32, 710, 612, 135);
+        graphics.drawImage(new Image("gameplaySquare2.png"), 32, 710);
         // Cuadro de los dialogos.
 
-        graphics.fillRect(680, 542, 310, 303);
+        graphics.drawImage(new Image("gameplaySquare3.png"), 680, 542);
         // Cuadro de las acciones.
 
         Font font = new Font("Arial", 20);
         Label actionPoint = new Label("Action Points: "+actionPoints);
-        actionPoint.setTranslateX(685);
+        actionPoint.setTranslateX(705);
         actionPoint.setTranslateY(48);
         actionPoint.setTextFill(Color.WHITE);
         actionPoint.setFont(font);
@@ -303,7 +302,7 @@ public class Campaign {
     private static void draw(long time, GraphicsContext graphics) {
         //Salvenos Dios por toda esta cantidad de codigo.
 
-        Map.drawCampaingMap(graphics);
+        TileMap.drawTutorialMap(graphics);
         //Dibujo de las columnas de hexagonos.
 
         player[0].range(graphics, time);

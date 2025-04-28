@@ -14,7 +14,8 @@ public class PlayerCharacter {
     private int x;
     private int y;
     private int attack;
-    private int Health;
+    private int health;
+    private String characterName;
     private String imageName;
     private String closestImageName;
     private EnemyCharacter enemy;
@@ -188,6 +189,14 @@ public class PlayerCharacter {
 
     }
 
+    public String getCharacterName() {
+        return characterName;
+    }
+
+    public void setCharacterName(String characterName) {
+        this.characterName = characterName;
+    }
+
     public int getX() {return x;}
 
     public void setX(int x) {this.x = x;}
@@ -210,11 +219,11 @@ public class PlayerCharacter {
     }
 
     public int getHealth() {
-        return Health;
+        return health;
     }
 
     public void setHealth(int health) {
-        this.Health = health;
+        this.health = health;
     }
 
 
