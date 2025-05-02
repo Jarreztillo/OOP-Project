@@ -2,7 +2,7 @@ package domain.entities;
 
 import java.util.Random;
 
-import app.gameModes.Campaign;
+import app.gameplayFeatures.Gameplay;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -80,7 +80,7 @@ public class EnemyCharacter {
 
     public void range(GraphicsContext graphics, long time) {
         Image rango = new Image("rangeTerrain.png");
-        if (Campaign.activateRange) {
+        if (Gameplay.activateRange) {
             boolean actived = false;
             boolean corner = false;
             if (time % 2 == 0) {

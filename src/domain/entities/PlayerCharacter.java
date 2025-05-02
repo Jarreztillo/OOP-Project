@@ -1,7 +1,8 @@
 package domain.entities;
 
-import app.gameModes.Campaign;
 import app.gameplayFeatures.Consumables;
+import app.gameplayFeatures.Gameplay;
+import app.main.Game;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -28,7 +29,7 @@ public class PlayerCharacter {
 
     public void range(GraphicsContext graphics, long time) {
         Image rango = new Image("rangeTerrain.png");
-        if (Campaign.activateRange) {
+        if (Gameplay.activateRange) {
             boolean actived = false;
             boolean corner = false;
             if (time % 2 == 0) {
@@ -149,8 +150,8 @@ public class PlayerCharacter {
             if (inventory.size() == 1){
                 if (inventory.getFirst().getX() == x && inventory.getFirst().getY() == y) {
                     inventory.getFirst().setQuantity(inventory.getFirst().getQuantity() + 3);
-                    Campaign.grabConsumable = true;
-                    Campaign.drawConsumable = false;
+                    Gameplay.grabConsumable = true;
+                    Gameplay.drawConsumable = false;
                     x = 64;
                     y = 64;
                     enemy.setX(544);

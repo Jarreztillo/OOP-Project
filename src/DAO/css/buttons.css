@@ -18,6 +18,7 @@
     -fx-scale-y: 1.05;
 }
 
+
 .slider-label {
     -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     -fx-font-size: 20px;
@@ -28,10 +29,10 @@
     -fx-alignment: center;
 }
 
+
 .slider {
     -fx-padding: 6px;
 }
-
 
 .slider .track {
     -fx-background-color: #a97451;
@@ -45,7 +46,6 @@
     -fx-background-radius: 4;
 }
 
-
 .slider .thumb {
     -fx-background-color: white;
     -fx-background-radius: 10;
@@ -54,7 +54,6 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 1);
     -fx-transition: all 0.3s ease;
 }
-
 
 .slider .thumb:pressed {
     -fx-scale-x: 1.2;

@@ -1,7 +1,7 @@
 package app.gameplayFeatures;
 
+import app.main.AudioPlayer;
 import domain.consumables.VitalityPotion;
-import domain.entities.EnemyCharacter;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -18,39 +18,36 @@ import javafx.scene.text.Font;
 
 import java.util.Random;
 
+import static app.gameplayFeatures.Gameplay.*;
 import static app.main.Roaster.Roaster.player;
 import static app.main.Game.*;
-import static domain.entities.EnemyCharacter.collidePlayer;
-import static domain.entities.PlayerCharacter.collideEnemy;
-import static app.gameModes.Campaign.*;
 
 
 public class Combat {
-    private int selectedCharacter = 0;
-    private int playerTurn = 5;
-    private EnemyCharacter enemy;
+    private static int selectedCharacter = 0;
+    private static int playerTurn = 5;
     private static GraphicsContext graphics;
-    private AnimationTimer animationTimer;
-    private AnimationTimer animationForOtherThings;
-    private AnimationTimer combatTimer;
-    private boolean enemyAttack;
-    private Random probabilities;
-    private Scene gameScene;
-    private Group root;
+    private static AnimationTimer animationForOtherThings;
+    private static AnimationTimer combatTimer;
+    private static boolean enemyAttack;
+    private static Random probabilities;
+    private static Scene combatScene;
+    private static Group root;
 
-    private Label message;
-    private Label playerLife;
-    private Label playerAttack;
-    private Label playerTurnLabel;
+    private static Label message;
+    private static Label playerLife;
+    private static Label playerAttack;
+    private static Label playerTurnLabel;
 
 
     public static boolean noRandomPosition;
     public static boolean dropConsumable;
 
-    public void initializeWindow() {
-        animationTimer.stop();
+    public static void initializeWindow() {
+        gameplayTimer.stop();
+        AudioPlayer.playCombatMusic();
         root = new Group();
-        Scene combatScene = new Scene(root, 832, 850);
+        combatScene = new Scene(root, 832, 850);
         Canvas canvas = new Canvas(832, 850);
         //Configuraciones minimas.
 
@@ -91,11 +88,11 @@ public class Combat {
         switchCharacters(combatScene);
     }
 
-    private void drawingPortraits() {
+    private static void drawingPortraits() {
         graphics.drawImage(new Image(player[selectedCharacter].getClosestImageName()), 0, 440);
     }
 
-    private void switchCharacters(Scene combatScene) {
+    private static void switchCharacters(Scene combatScene) {
 
         combatScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -122,7 +119,8 @@ public class Combat {
     }
 
 
-    private void drawing() {
+    private static void drawing() {
+        graphics.drawImage(new Image("combatBackground.png"), 0, 0);
         graphics.drawImage(new Image("combatSquare.png"), 0, 440);
         if (player[0].getHealth() != 0) {
             graphics.drawImage(new Image(player[0].getImageName()), 104, 325);
@@ -149,7 +147,7 @@ public class Combat {
 
 
 
-    private void labelConfigurations(Label enemyLife, Label enemyAttack) {
+    private static void labelConfigurations(Label enemyLife, Label enemyAttack) {
         Font stadisticsFont = new Font("ARIAL",20);
 
         playerLife.setTranslateX(150);
@@ -198,7 +196,7 @@ public class Combat {
 
     }
 
-    private void buttonConfigurations(Button attack, Button passTurn, Button runAway, Button useConsumable, Label enemyLife, Label enemyAttack) {
+    private static void buttonConfigurations(Button attack, Button passTurn, Button runAway, Button useConsumable, Label enemyLife, Label enemyAttack) {
         attack.setTranslateX(150);
         attack.setTranslateY(550);
 
@@ -219,15 +217,14 @@ public class Combat {
 
 }
 
-    private void playerRunAway(Label playerLife) {
+    private static void playerRunAway(Label playerLife) {
         probabilities = new Random();
         boolean runAway = probabilities.nextBoolean();
         if (runAway){
             noRandomPosition = true;
-            collideEnemy = false;
-            collidePlayer = false;
-            window.setScene(campaignGameScene);
-            animationTimer.start();
+            window.setScene(gameplayScene);
+            AudioPlayer.stopIfPlaying("combatMusic");
+            gameplayTimer.start();
         }else {
             enemyAttack = probabilities.nextBoolean();
             playerTurn--;
@@ -240,13 +237,13 @@ public class Combat {
         }
     }
 
-    private void playerPassTurn(Label playerLife) {
+    private static void playerPassTurn(Label playerLife) {
         probabilities = new Random();
         enemyAttack = probabilities.nextBoolean();
         playerTurn = 0;
     }
 
-    private void playerUseConsumable(Label playerLife){
+    private static void playerUseConsumable(Label playerLife){
 
         if (inventory.getFirst().getQuantity()== 0){
             message.setText("¡No tienes consumibles! ¿¡Para que #@|~@ tocas el boton!?");
@@ -262,7 +259,7 @@ public class Combat {
 
     }
 
-    private void lifeChecker(){
+    private static void lifeChecker(){
         for (int n = 0; n<=player.length-1; n++) {
             if (player[n].getHealth() <= 0) {
             if (player[selectedCharacter] == player[n]){
@@ -286,7 +283,7 @@ public class Combat {
 
 
             if (player[4].getHealth() <= 0 && player[3].getHealth() <= 0 &&player[2].getHealth() <= 0 &&player[1].getHealth() <= 0 && player[0].getHealth() <= 0) {
-                animationForOtherThings.stop();
+                AudioPlayer.stopIfPlaying("combatMusic");
                 Group gameOverRoot = new Group();
                 Scene gameOverScene = new Scene(gameOverRoot, 832, 850);
                 Font gameover = new Font(40);
@@ -301,6 +298,8 @@ public class Combat {
                 perdiste.setTranslateX(250);
                 perdiste.setTranslateY(200);
 
+                combatScene.setRoot(new Group());
+                animationForOtherThings.stop();
                 window.setScene(gameOverScene);
                 comeBack(gameOverScene);
             }
@@ -308,11 +307,10 @@ public class Combat {
 
 
         if (enemy.getHealth() <= 0){
+            AudioPlayer.stopIfPlaying("combatMusic");
             enemy.setHealth(10);
             enemy.setAlive(false);
             noRandomPosition = true;
-            collideEnemy = false;
-            collidePlayer = false;
             dropConsumable = probabilities.nextBoolean();
             if(dropConsumable) {
                 inventory.getFirst().setX(enemy.getX());
@@ -321,14 +319,15 @@ public class Combat {
                 addConsumable = true;
                 drawConsumable = true;
             }
-            window.setScene(campaignGameScene);
+            combatScene.setRoot(new Group());
             animationForOtherThings.stop();
-            animationTimer.start();
+            gameplayTimer.start();
+            window.setScene(gameplayScene);
         }
 
     }
 
-    private void actualizeState() {
+    private static void actualizeState() {
         if (grabConsumable && inventory.getFirst().getQuantity() >= 0){
             grabConsumable = false;
         }
@@ -337,7 +336,7 @@ public class Combat {
         playerTurnLabel.setText("Acciones por turno: "+playerTurn);
     }
 
-    private void comeBack(Scene gameOverScene) {
+    private static void comeBack(Scene gameOverScene) {
 
         gameOverScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -345,11 +344,9 @@ public class Combat {
                 switch (event.getCode().toString()){
                     case "R":
                         noRandomPosition = true;
-                        collideEnemy = false;
-                        collidePlayer = false;
-                        window.setScene(gameScene);
+                        window.setScene(gameplayScene);
                         animationForOtherThings.stop();
-                        animationTimer.start();
+                        gameplayTimer.start();
                         for (int n = player.length-1; n >= 0; n--){
                             player[n].setHealth(5);
                         }
@@ -360,7 +357,7 @@ public class Combat {
 
     }
 
-    private void usePotion(Label playerLife){
+    private static void usePotion(Label playerLife){
         if (inventory.getFirst().getQuantity() > 0) {
             VitalityPotion potion = new VitalityPotion();
             player[selectedCharacter].setHealth(player[selectedCharacter].getHealth() + potion.getHealthAdded());
@@ -375,7 +372,7 @@ public class Combat {
 
     }
 
-    private void playerAttack(Label enemyLife, Label playerLife){
+    private static void playerAttack(Label enemyLife, Label playerLife){
         probabilities = new Random();
         boolean playerAttack = probabilities.nextBoolean();
         if(playerAttack) {
@@ -387,9 +384,10 @@ public class Combat {
         }
         playerTurn--;
     }
-    private void enemyAttack(){
+    private static void enemyAttack(){
         boolean enemyAttack = probabilities.nextBoolean();
-        int damagedPlayer = probabilities.nextInt(0, 4);
+        int damagedPlayer = probabilities.nextInt(0, 5);
+        System.out.println(damagedPlayer);
         if (enemyAttack){
             player[damagedPlayer].setHealth(player[damagedPlayer].getHealth() - enemy.getAttack());
             message.setText("¡El enemigo ha atacado a "+player[damagedPlayer].getCharacterName()+" y le ha hecho "+enemy.getAttack()+" de daño!");
@@ -399,22 +397,12 @@ public class Combat {
         }
         }
 
-    private void enemyTurn() {
+    private static void enemyTurn() {
         enemyAttack();
         playerTurn = 5;
     }
 
-
-    public void setGameScene(Scene gameScene) {
-        this.gameScene = gameScene;
-    }
-
-    public void setAnimationTimer(AnimationTimer animationTimer) {
-        this.animationTimer = animationTimer;
-    }
-
-    public Combat(EnemyCharacter enemy){
-        this.enemy = enemy;
+    public Combat(){
 
     }
 
