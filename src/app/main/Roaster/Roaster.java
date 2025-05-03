@@ -29,9 +29,10 @@ public class Roaster {
     private static SelectedCharacters[] selected;
     private static String[] numberImages = {"first.png", "second.png", "third.png", "fourth.png", "fifth.png"};
     private static boolean cantMove = false;
-    public static PlayerCharacter[] player;
+    private static PlayerCharacter[] player;
 
     private static int x = 32;
+
     private static int y = 32;
 
 
@@ -494,8 +495,12 @@ public class Roaster {
                                             break;
 
 
+                                        default:
+                                            selectedCharacters--;
+                                            break;
                                     }
                             }
+
                     }
                 }
             }
@@ -812,6 +817,13 @@ public class Roaster {
                 animationTimer.start();
             }
         }
+    public static PlayerCharacter[] getPlayer() {
+        return player;
+    }
+
+    public static void setPlayer(PlayerCharacter[] player) {
+        Roaster.player = player;
+    }
     }
 
 

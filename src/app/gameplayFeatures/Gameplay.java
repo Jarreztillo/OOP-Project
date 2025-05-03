@@ -1,7 +1,9 @@
 package app.gameplayFeatures;
 
+import app.main.Roaster.Roaster;
 import domain.consumables.Inventory;
 import domain.entities.EnemyCharacter;
+import domain.entities.PlayerCharacter;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -18,68 +20,49 @@ import java.util.Random;
 import static app.gameplayFeatures.Combat.dropConsumable;
 import static app.gameplayFeatures.Combat.noRandomPosition;
 import static app.main.Game.window;
-import static app.main.Roaster.Roaster.player;
-import static domain.entities.EnemyCharacter.collidePlayer;
-import static domain.entities.PlayerCharacter.collideEnemy;
 
 public class Gameplay {
 
-    public static boolean grabConsumable;
-    public static boolean drawConsumable;
-    public static boolean addConsumable;
-    public static boolean activateRange;
-    public static AnimationTimer gameplayTimer;
-    public static ArrayList<Consumables> inventory;
-    public static EnemyCharacter enemy;
-    public static long time;
-
-    public static boolean cantMoveUp;
-    public static boolean cantMoveDown;
-    public static boolean cantMoveLeftUp;
-    public static boolean cantMoveLeftDown;
-    public static boolean cantMoveRightUp;
-    public static boolean cantMoveRightDown;
-
-    public static int previusX;
-    public static int previusY;
-
-
-    public static Scene gameplayScene;
-
-
-    private static Group root;
-    private static Canvas canvas;
-    public static GraphicsContext graphics;
-    public static int actionPoints = 2;
+    private static boolean grabConsumable;
+    private static boolean drawConsumable;
+    private static boolean addConsumable;
+    private static boolean activateRange;
+    private static AnimationTimer gameplayTimer;
+    private static ArrayList<Consumables> inventory;
+    private static int previusX;
+    private static int previusY;
+    private static Scene gameplayScene;
+    private  static Group root;
+    private  static Canvas canvas;
+    private static GraphicsContext graphics;
+    private static int actionPoints = 2;
     private static Random random = new Random();
-
-
     private static Label actionPoint;
+    private static PlayerCharacter[] player;
+    private static EnemyCharacter[] enemy;
+    private static int size;
+    private static long time;
     // Labels y botones.
 
     public static void initializeGameplay() {
         reviewMission();
+        windowDesign();
+        anotherConfigs();
+        initializeEnemy();
+        playerMovement();
+        labelConfigurations();
+        gameLoop();
+    }
+
+    private static void windowDesign() {
+        player = Roaster.getPlayer();
+        player[0].setEnemy(enemy);
         root = new Group();
         gameplayScene = new Scene(root, 1000, 850);
         canvas = new Canvas(1000, 850);
         root.getChildren().add(canvas);
         graphics = canvas.getGraphicsContext2D();
         window.setScene(gameplayScene);
-        enemy = new EnemyCharacter();
-
-        if (!(Inventory.isAlreadyCreated())) {
-            inventory = Inventory.createInventory();
-
-        }
-
-
-        if (enemy.isAlive()) {
-            if (!noRandomPosition) {
-                randomPosition();
-            }
-        }
-
-        playerMovement();
 
         graphics.drawImage(new Image("background1.png"), 0, 0);
         // Fondo.
@@ -92,19 +75,40 @@ public class Gameplay {
 
         graphics.drawImage(new Image("gameplaySquare3.png"), 680, 542);
         // Cuadro de las acciones.
+    }
 
+
+    private static void initializeEnemy() {
+        size = random.nextInt(1, 5);
+        enemy = new EnemyCharacter[size];
+        for (int i = 0; i < size; i++){
+            enemy[i] = new EnemyCharacter();
+            enemy[i].setAlive(true);
+        }
+        if (enemy[0].isAlive()) {
+            if (!noRandomPosition) {
+                randomPosition();
+                enemy[0].setCharacter(player[0]);
+            }
+        }
+    }
+    private static void labelConfigurations() {
         Font font = new Font("Arial", 20);
         actionPoint = new Label("Action Points: " + actionPoints);
         actionPoint.setTranslateX(705);
         actionPoint.setTranslateY(48);
         actionPoint.setTextFill(Color.WHITE);
         actionPoint.setFont(font);
+
         root.getChildren().add(actionPoint);
-        gameLoop();
-        if (enemy.isAlive()) {
-            enemy.setCharacter(player[0]);
+    }
+    private static void anotherConfigs() {
+        TileMap.setPlayer(player);
+
+        if (!(Inventory.isAlreadyCreated())) {
+            inventory = Inventory.createInventory();
+
         }
-        player[0].setEnemy(enemy);
     }
 
 
@@ -158,8 +162,8 @@ public class Gameplay {
         entre las columnas pares e impares, luego
          */
 
-        enemy.setX(xPos);
-        enemy.setY(yPos);
+        enemy[0].setX(xPos);
+        enemy[0].setY(yPos);
         // Se le pone al enemigo la posicion aleatoria generada.
     }
 
@@ -309,7 +313,7 @@ public class Gameplay {
                     break;
                 case "R":
                     actionPoints = 2;
-                    enemy.move(player[0].getX(), player[0].getY(), enemy.getX(), enemy.getY());
+                    enemy[0].move(player[0].getX(), player[0].getY(), enemy[0].getX(), enemy[0].getY());
                     break;
                 case "T":
                     activateRange = !activateRange;
@@ -328,9 +332,9 @@ public class Gameplay {
         //Dibujo de las columnas de hexagonos.
 
         player[0].range(graphics, time);
-        if (enemy.isAlive()) {
-            enemy.range(graphics, time);
-            enemy.draw(graphics);
+        if (enemy[0].isAlive()) {
+            enemy[0].range(graphics, time);
+            enemy[0].draw(graphics);
             rangeCollition(time);
         }
         graphics.drawImage(new Image(player[0].getImageName()), player[0].getX(), player[0].getY());
@@ -347,8 +351,8 @@ public class Gameplay {
     }
 
     private static void rangeCollition(long time) {
-        int xDistanceEvP = enemy.getX() - player[0].getX();
-        int yDistanceEvP = enemy.getY() - player[0].getY();
+        int xDistanceEvP = enemy[0].getX() - player[0].getX();
+        int yDistanceEvP = enemy[0].getY() - player[0].getY();
         if (activateRange) {
             if (time % 2 == 0) {
                 Image rangoSobrepuesto = new Image("overRangeTerrain.png");
@@ -404,8 +408,9 @@ public class Gameplay {
     }
 
     private static void actualizeState() {
-        if (enemy.isAlive()) {
-            enemy.collideRange();
+        System.out.println(enemy.length);
+        if (enemy[0].isAlive()) {
+            enemy[0].collideRange();
         }
         if (!inventory.isEmpty()) {
             player[0].collideWithConsumable(inventory);
@@ -416,24 +421,24 @@ public class Gameplay {
          colisiones en cada enemigo y personaje.
         */
 
-        if (collidePlayer && collideEnemy) {
-            Combat.initializeWindow();
-            collidePlayer = false;
-            collideEnemy = false;
+        if (EnemyCharacter.isCollidePlayer() && PlayerCharacter.isCollideEnemy()) {
+            Combat.initializeCombat();
+            EnemyCharacter.setCollidePlayer(false);
+            PlayerCharacter.setCollideEnemy(false);
             player[0].setX(64);
             player[0].setY(64);
         }
-        if (collidePlayer) {
-            Combat.initializeWindow();
-            collidePlayer = false;
-            collideEnemy = false;
+        if (EnemyCharacter.isCollidePlayer()) {
+            Combat.initializeCombat();
+            EnemyCharacter.setCollidePlayer(false);
+            PlayerCharacter.setCollideEnemy(false);
             player[0].setX(64);
             player[0].setY(64);
         }
-        if (collideEnemy) {
-            Combat.initializeWindow();
-            collidePlayer = false;
-            collideEnemy = false;
+        if (PlayerCharacter.isCollideEnemy()) {
+            Combat.initializeCombat();
+            EnemyCharacter.setCollidePlayer(false);
+            PlayerCharacter.setCollideEnemy(false);
             player[0].setX(64);
             player[0].setY(64);
         }
@@ -445,5 +450,151 @@ public class Gameplay {
 
     private static void reviewMission() {
     }
+
+    public static boolean isGrabConsumable() {
+        return grabConsumable;
+    }
+
+    public static void setGrabConsumable(boolean grabConsumable) {
+        Gameplay.grabConsumable = grabConsumable;
+    }
+
+    public static boolean isDrawConsumable() {
+        return drawConsumable;
+    }
+
+    public static void setDrawConsumable(boolean drawConsumable) {
+        Gameplay.drawConsumable = drawConsumable;
+    }
+
+    public static boolean isAddConsumable() {
+        return addConsumable;
+    }
+
+    public static void setAddConsumable(boolean addConsumable) {
+        Gameplay.addConsumable = addConsumable;
+    }
+
+    public static boolean isActivateRange() {
+        return activateRange;
+    }
+
+    public static void setActivateRange(boolean activateRange) {
+        Gameplay.activateRange = activateRange;
+    }
+
+    public static void startGameplayTimer() {
+        gameplayTimer.start();
+    }
+
+    public static void stopGameplayTimer() {
+        gameplayTimer.stop();
+    }
+
+    public static ArrayList<Consumables> getInventory() {
+        return inventory;
+    }
+
+    public static void setInventory(ArrayList<Consumables> inventory) {
+        Gameplay.inventory = inventory;
+    }
+
+    public static EnemyCharacter[] getEnemy() {
+        return enemy;
+    }
+
+    public static void setEnemy(EnemyCharacter[] enemy) {
+        Gameplay.enemy = enemy;
+    }
+
+    public static long getTime() {
+        return time;
+    }
+
+    public static void setTime(long time) {
+        Gameplay.time = time;
+    }
+
+    public static int getPreviusX() {
+        return previusX;
+    }
+
+    public static void setPreviusX(int previusX) {
+        Gameplay.previusX = previusX;
+    }
+
+    public static int getPreviusY() {
+        return previusY;
+    }
+
+    public static void setPreviusY(int previusY) {
+        Gameplay.previusY = previusY;
+    }
+
+    public static Scene getGameplayScene() {
+        return gameplayScene;
+    }
+
+    public static void setGameplayScene(Scene gameplayScene) {
+        Gameplay.gameplayScene = gameplayScene;
+    }
+
+    public static Group getRoot() {
+        return root;
+    }
+
+    public static void setRoot(Group root) {
+        Gameplay.root = root;
+    }
+
+    public static Canvas getCanvas() {
+        return canvas;
+    }
+
+    public static void setCanvas(Canvas canvas) {
+        Gameplay.canvas = canvas;
+    }
+
+    public static GraphicsContext getGraphics() {
+        return graphics;
+    }
+
+    public static void setGraphics(GraphicsContext graphics) {
+        Gameplay.graphics = graphics;
+    }
+
+    public static int getActionPoints() {
+        return actionPoints;
+    }
+
+    public static void setActionPoints(int actionPoints) {
+        Gameplay.actionPoints = actionPoints;
+    }
+
+    public static Random getRandom() {
+        return random;
+    }
+
+    public static void setRandom(Random random) {
+        Gameplay.random = random;
+    }
+
+    public static Label getActionPoint() {
+        return actionPoint;
+    }
+
+    public static void setActionPoint(Label actionPoint) {
+        Gameplay.actionPoint = actionPoint;
+    }
+
+
+    public static PlayerCharacter[] getPlayer() {
+        return player;
+    }
+
+    public static void setPlayer(PlayerCharacter[] player) {
+        Gameplay.player = player;
+    }
+
 
 }

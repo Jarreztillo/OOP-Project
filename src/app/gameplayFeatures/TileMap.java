@@ -1,17 +1,17 @@
 package app.gameplayFeatures;
 
 import app.gameplayFeatures.maps.Maps;
+import domain.entities.PlayerCharacter;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 
 import static app.gameplayFeatures.Gameplay.*;
-import static app.main.Roaster.Roaster.player;
 
 public class TileMap {
-    private static int contador = 0;
-    private static int knownPlayerPosition;
+    private static Label privateLabel;
+    private static PlayerCharacter[] player;
     private static boolean returnToNormal = false;
-    private static boolean[][] boleanos = new boolean[11][11];
     private static int[][] matrix;
     private static int[][] upperThingsMatrix;
     private static String[] images = {
@@ -110,13 +110,16 @@ public class TileMap {
         if(actualTerrain >= 6 && actualTerrain <=8){
 
            if (player[0].getX() == x && player[0].getY() == y){
-               player[0].setX(previusX);
-               player[0].setY(previusY);
-               actionPoints++;
+               player[0].setX(Gameplay.getPreviusX());
+               player[0].setY(Gameplay.getPreviusY());
+               Gameplay.setActionPoints(Gameplay.getActionPoints()+1);
+               privateLabel.setText("Action Points: " + Gameplay.getActionPoints());
+               Gameplay.setActionPoint(privateLabel);
            }
-
         }
-
+    }
+    public static void setPlayer(PlayerCharacter[] player){
+        TileMap.player = player;
     }
 }
 

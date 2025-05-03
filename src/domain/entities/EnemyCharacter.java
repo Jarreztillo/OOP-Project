@@ -16,8 +16,8 @@ public class EnemyCharacter {
     private String imageName = "enemigomortal1.png";
     private String closestImageName = "decercaenemigo.png";
     private PlayerCharacter character;
-    public static boolean collidePlayer;
-    Random random = new Random();
+    private static boolean collidePlayer;
+    private static Random random = new Random();
 
 
     public void draw(GraphicsContext graphics) {
@@ -80,7 +80,7 @@ public class EnemyCharacter {
 
     public void range(GraphicsContext graphics, long time) {
         Image rango = new Image("rangeTerrain.png");
-        if (Gameplay.activateRange) {
+        if (Gameplay.isActivateRange()) {
             boolean actived = false;
             boolean corner = false;
             if (time % 2 == 0) {
@@ -275,6 +275,16 @@ public class EnemyCharacter {
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
+
+    public static boolean isCollidePlayer() {
+        return collidePlayer;
+    }
+
+    public static void setCollidePlayer(boolean collidePlayer) {
+        EnemyCharacter.collidePlayer = collidePlayer;
+    }
+
+
 }
 
 

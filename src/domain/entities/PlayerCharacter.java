@@ -19,17 +19,13 @@ public class PlayerCharacter {
     private String characterName;
     private String imageName;
     private String closestImageName;
-    private EnemyCharacter enemy;
-    private boolean isSelected;
-    public static boolean collideEnemy;
-
-
-
+    private EnemyCharacter enemy[];
+    private static boolean collideEnemy;
 
 
     public void range(GraphicsContext graphics, long time) {
         Image rango = new Image("rangeTerrain.png");
-        if (Gameplay.activateRange) {
+        if (Gameplay.isActivateRange()) {
             boolean actived = false;
             boolean corner = false;
             if (time % 2 == 0) {
@@ -134,29 +130,32 @@ public class PlayerCharacter {
     }
 
     public void collideRange() {
-        if (enemy.isAlive()){
-        if (enemy.getX() == x && enemy.getY() == y) {collideEnemy = true;}
-        if (enemy.getX() == x && enemy.getY() == y + 64) {collideEnemy = true;}
-        if (enemy.getX() == x && enemy.getY() == y - 64) {collideEnemy = true;}
-        if (enemy.getX() == x + 48 && enemy.getY() == y + 32) {collideEnemy = true;}
-        if (enemy.getX() == x - 48 && enemy.getY() == y + 32) {collideEnemy = true;}
-        if (enemy.getX() == x + 48 && enemy.getY() == y - 32) {collideEnemy = true;}
-        if (enemy.getX() == x - 48 && enemy.getY() == y - 32) {collideEnemy = true;}
+        if (enemy[0].isAlive()){
+        if (enemy[0].getX() == x && enemy[0].getY() == y) {collideEnemy = true;}
+        if (enemy[0].getX() == x && enemy[0].getY() == y + 64) {collideEnemy = true;}
+        if (enemy[0].getX() == x && enemy[0].getY() == y - 64) {collideEnemy = true;}
+        if (enemy[0].getX() == x + 48 && enemy[0].getY() == y + 32) {collideEnemy = true;}
+        if (enemy[0].getX() == x - 48 && enemy[0].getY() == y + 32) {collideEnemy = true;}
+        if (enemy[0].getX() == x + 48 && enemy[0].getY() == y - 32) {collideEnemy = true;}
+        if (enemy[0].getX() == x - 48 && enemy[0].getY() == y - 32) {collideEnemy = true;}
 
         }
     }
     public void collideWithConsumable(ArrayList<Consumables> inventory){
-        if (!enemy.isAlive()){
+        enemy = Gameplay.getEnemy();
+        if (!enemy[0].isAlive()){
             if (inventory.size() == 1){
                 if (inventory.getFirst().getX() == x && inventory.getFirst().getY() == y) {
                     inventory.getFirst().setQuantity(inventory.getFirst().getQuantity() + 3);
-                    Gameplay.grabConsumable = true;
-                    Gameplay.drawConsumable = false;
+                    Gameplay.setGrabConsumable(true);
+                    Gameplay.setDrawConsumable(false);
                     x = 64;
                     y = 64;
-                    enemy.setX(544);
-                    enemy.setY(64);
-                    enemy.setAlive(true);
+                    enemy[0].setX(544);
+                    enemy[0].setY(64);
+                    for (int i = 0; i < enemy.length; i++){
+                        enemy[i].setAlive(true);
+                    }
                 }
                 }else if (inventory.get(1).getX() == x && inventory.get(1).getY() == y){
 
@@ -168,9 +167,13 @@ public class PlayerCharacter {
             }
     }
 
+    public static boolean isCollideEnemy() {
+        return collideEnemy;
+    }
 
-
-
+    public static void setCollideEnemy(boolean collideEnemy) {
+        PlayerCharacter.collideEnemy = collideEnemy;
+    }
 
     public int getAttack() {return attack;}
 
@@ -178,9 +181,9 @@ public class PlayerCharacter {
 
     public PlayerCharacter(String imageName) {this.imageName = imageName;}
 
-    public EnemyCharacter getEnemy() {return enemy;}
+    public EnemyCharacter[] getEnemy() {return enemy;}
 
-    public void setEnemy(EnemyCharacter enemy) {this.enemy = enemy;}
+    public void setEnemy(EnemyCharacter[] enemy) {this.enemy = enemy;}
 
     public PlayerCharacter(int x, int y) {
         this.x = x;
