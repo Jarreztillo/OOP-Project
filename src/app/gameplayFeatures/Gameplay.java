@@ -17,8 +17,6 @@ import javafx.scene.text.Font;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static app.gameplayFeatures.Combat.dropConsumable;
-import static app.gameplayFeatures.Combat.noRandomPosition;
 import static app.main.Game.window;
 
 public class Gameplay {
@@ -37,11 +35,19 @@ public class Gameplay {
     private static GraphicsContext graphics;
     private static int actionPoints = 2;
     private static Random random = new Random();
-    private static Label actionPoint;
     private static PlayerCharacter[] player;
     private static EnemyCharacter[] enemy;
     private static int size;
     private static long time;
+
+
+    private static Label actionPointLabel;
+    private static Label inventoryLabel;
+    private static Label emptyInventoryLabel;
+    private static Label itemNumber1;
+    private static Label itemNumber2;
+    private static Label itemNumber3;
+    private static Label itemNumber4;
     // Labels y botones.
 
     public static void initializeGameplay() {
@@ -63,30 +69,18 @@ public class Gameplay {
         root.getChildren().add(canvas);
         graphics = canvas.getGraphicsContext2D();
         window.setScene(gameplayScene);
-
-        graphics.drawImage(new Image("background1.png"), 0, 0);
-        // Fondo.
-
-        graphics.drawImage(new Image("gameplaySquare1.png"), 680, 32);
-        // Cuadro de las estadisticas.
-
-        graphics.drawImage(new Image("gameplaySquare2.png"), 32, 710);
-        // Cuadro de los dialogos.
-
-        graphics.drawImage(new Image("gameplaySquare3.png"), 680, 542);
-        // Cuadro de las acciones.
     }
 
 
     private static void initializeEnemy() {
-        size = random.nextInt(1, 5);
-        enemy = new EnemyCharacter[size];
-        for (int i = 0; i < size; i++){
+        enemy = new EnemyCharacter[3];
+        // El lobito tiene tre na ma.
+        for (int i = 0; i < 3; i++){
             enemy[i] = new EnemyCharacter();
             enemy[i].setAlive(true);
         }
         if (enemy[0].isAlive()) {
-            if (!noRandomPosition) {
+            if (!Combat.isNoRandomPosition()) {
                 randomPosition();
                 enemy[0].setCharacter(player[0]);
             }
@@ -94,13 +88,12 @@ public class Gameplay {
     }
     private static void labelConfigurations() {
         Font font = new Font("Arial", 20);
-        actionPoint = new Label("Action Points: " + actionPoints);
-        actionPoint.setTranslateX(705);
-        actionPoint.setTranslateY(48);
-        actionPoint.setTextFill(Color.WHITE);
-        actionPoint.setFont(font);
+        actionPointLabel = LabelCreator.createLabel(705, 48,"Action Points: " + actionPoints, Color.WHITE, font);
+        inventoryLabel = LabelCreator.createLabel(770, 550, "Inventario", Color.WHITE, font);
+        emptyInventoryLabel = LabelCreator.createLabel(720, 600, "El inventario esta vacio", Color.WHITE, font);
 
-        root.getChildren().add(actionPoint);
+
+        root.getChildren().addAll(actionPointLabel, inventoryLabel, emptyInventoryLabel);
     }
     private static void anotherConfigs() {
         TileMap.setPlayer(player);
@@ -123,13 +116,13 @@ public class Gameplay {
                 if (time == 60) {
                     time = 0;
                 }
-                actionPoint.setText("Action Points: " + actionPoints);
+                actionPointLabel.setText("Action Points: " + actionPoints);
                 /* Aqui se calcula el tiempo, que luego se usara
                 para que parpadee el rango.
                 */
                 draw(time);
-
                 actualizeState();
+
 
             }
         };
@@ -326,7 +319,19 @@ public class Gameplay {
     }
 
     private static void draw(long time) {
-        //Salvenos Dios por toda esta cantidad de codigo.
+
+
+        graphics.drawImage(new Image("background1.png"), 0, 0);
+        // Fondo.
+
+        graphics.drawImage(new Image("gameplaySquare1.png"), 680, 32);
+        // Cuadro de las estadisticas.
+
+        graphics.drawImage(new Image("gameplaySquare2.png"), 32, 710);
+        // Cuadro de los dialogos.
+
+        graphics.drawImage(new Image("gameplaySquare3.png"), 680, 542);
+        // Cuadro del inventario.
 
         TileMap.drawCampaignMap(graphics);
         //Dibujo de las columnas de hexagonos.
@@ -337,16 +342,22 @@ public class Gameplay {
             enemy[0].draw(graphics);
             rangeCollition(time);
         }
-        graphics.drawImage(new Image(player[0].getImageName()), player[0].getX(), player[0].getY());
-        //graphics.drawImage(new Image("narrador1.png"), 40,710);
+        // Rangos.
 
-        if (dropConsumable) {
-            Consumables consumible = inventory.getFirst();
+        graphics.drawImage(new Image(player[0].getImageName()), player[0].getX(), player[0].getY());
+        // Imagen del jugador.
+
+        if (Combat.isDropConsumable()) {
             if (drawConsumable) {
-                graphics.drawImage(new Image(consumible.getImage()), consumible.getX(), consumible.getY());
+                graphics.drawImage(new Image(inventory.getFirst().getImage()), inventory.getFirst().getX(), inventory.getFirst().getY());
             }
         }
+        // Consumibles en el mapa.
 
+        if(!drawConsumable && inventory.getFirst().getQuantity() > 0) {
+            graphics.drawImage(new Image(inventory.getFirst().getImage()), 705, 602);
+        }
+        // Consumibles en el inventario.
 
     }
 
@@ -408,13 +419,19 @@ public class Gameplay {
     }
 
     private static void actualizeState() {
-        System.out.println(enemy.length);
         if (enemy[0].isAlive()) {
             enemy[0].collideRange();
         }
-        if (!inventory.isEmpty()) {
+
             player[0].collideWithConsumable(inventory);
+
+        for (int i = 0; i < inventory.size(); i++){
+            if(inventory.get(i).getQuantity() <= 0){
+                emptyInventoryLabel.setVisible(false);
+            }
         }
+
+
         player[0].collideRange();
 
         /* Llama a los metodos que comprueban las
@@ -425,22 +442,16 @@ public class Gameplay {
             Combat.initializeCombat();
             EnemyCharacter.setCollidePlayer(false);
             PlayerCharacter.setCollideEnemy(false);
-            player[0].setX(64);
-            player[0].setY(64);
         }
         if (EnemyCharacter.isCollidePlayer()) {
             Combat.initializeCombat();
             EnemyCharacter.setCollidePlayer(false);
             PlayerCharacter.setCollideEnemy(false);
-            player[0].setX(64);
-            player[0].setY(64);
         }
         if (PlayerCharacter.isCollideEnemy()) {
             Combat.initializeCombat();
             EnemyCharacter.setCollidePlayer(false);
             PlayerCharacter.setCollideEnemy(false);
-            player[0].setX(64);
-            player[0].setY(64);
         }
 
 
@@ -504,7 +515,11 @@ public class Gameplay {
     }
 
     public static void setEnemy(EnemyCharacter[] enemy) {
-        Gameplay.enemy = enemy;
+        Gameplay.enemy = getEnemy(enemy);
+    }
+
+    private static EnemyCharacter[] getEnemy(EnemyCharacter[] enemy) {
+        return enemy;
     }
 
     public static long getTime() {
@@ -579,12 +594,12 @@ public class Gameplay {
         Gameplay.random = random;
     }
 
-    public static Label getActionPoint() {
-        return actionPoint;
+    public static Label getActionPointLabel() {
+        return actionPointLabel;
     }
 
-    public static void setActionPoint(Label actionPoint) {
-        Gameplay.actionPoint = actionPoint;
+    public static void setActionPointLabel(Label actionPointLabel) {
+        Gameplay.actionPointLabel = actionPointLabel;
     }
 
 

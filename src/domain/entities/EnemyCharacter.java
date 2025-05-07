@@ -13,8 +13,9 @@ public class EnemyCharacter {
     private int attack = 2;
     private int Health = 10;
     private boolean alive = true;
-    private String imageName = "enemigomortal1.png";
-    private String closestImageName = "decercaenemigo.png";
+    private String imageName = "gayWolf.png";
+    private String closestImageName = "closerGayWolf.png";
+    // (Bromita)
     private PlayerCharacter character;
     private static boolean collidePlayer;
     private static Random random = new Random();

@@ -6,10 +6,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 
-import static app.gameplayFeatures.Gameplay.*;
-
 public class TileMap {
     private static Label privateLabel;
+    private static GraphicsContext graphics = Gameplay.getGraphics();
     private static PlayerCharacter[] player;
     private static boolean returnToNormal = false;
     private static int[][] matrix;
@@ -107,16 +106,27 @@ public class TileMap {
     }
 
     private static void checkTerrains(int actualTerrain, int upperActualTerrain, int x, int y, int col, int fil) {
+        if (actualTerrain >= 0 && actualTerrain <=2 && player[0].getX() == x && player[0].getY() == y){
+            graphics.drawImage(new Image(images[0]), 705, 350);
+        }
+        if (upperActualTerrain == 2 && player[0].getX() == x && player[0].getY() == y){
+            graphics.drawImage(new Image(upperThingsImages[upperActualTerrain]), 713, 430);
+        }
+
+        if (actualTerrain >= 3 && actualTerrain <=5 && player[0].getX() == x && player[0].getY() == y){
+            graphics.drawImage(new Image(images[actualTerrain]), 705, 350);
+        }
+
+
         if(actualTerrain >= 6 && actualTerrain <=8){
 
            if (player[0].getX() == x && player[0].getY() == y){
                player[0].setX(Gameplay.getPreviusX());
                player[0].setY(Gameplay.getPreviusY());
                Gameplay.setActionPoints(Gameplay.getActionPoints()+1);
-               privateLabel.setText("Action Points: " + Gameplay.getActionPoints());
-               Gameplay.setActionPoint(privateLabel);
            }
         }
+
     }
     public static void setPlayer(PlayerCharacter[] player){
         TileMap.player = player;

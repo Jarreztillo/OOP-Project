@@ -70,7 +70,7 @@ public class Game extends Application {
 
 
         stackPane.getChildren().addAll(wallpaper,mainContainer);
-        mainScene=new Scene(stackPane,832,850);
+        mainScene=new Scene(stackPane,1000,850);
 
 
         mainScene.getStylesheets().add(getClass().getResource("/buttons.css").toExternalForm());

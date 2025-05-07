@@ -11,7 +11,7 @@ import java.util.ArrayList;
 // Temporizador del rango.
 
 
-public class PlayerCharacter {
+public class PlayerCharacter{
     private int x;
     private int y;
     private int attack;
