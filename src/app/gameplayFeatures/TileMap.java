@@ -126,8 +126,15 @@ public class TileMap {
                Gameplay.setActionPoints(Gameplay.getActionPoints()+1);
            }
         }
+           if(upperActualTerrain == 3 && player[0].getX() == x && player[0].getY() == y){
+               graphics.drawImage(new Image(upperThingsImages[upperActualTerrain]), 713, 430);
 
-    }
+           }
+        if (upperActualTerrain == 1 && player[0].getX() == x && player[0].getY() == y){
+            graphics.drawImage(new Image(upperThingsImages[upperActualTerrain]), 713, 430);
+        }
+
+      }
     public static void setPlayer(PlayerCharacter[] player){
         TileMap.player = player;
     }
