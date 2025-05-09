@@ -1,9 +1,6 @@
 package app.main;
 
-import app.menus.GameModeMenu;
-import app.menus.MainMenu;
-import app.menus.OptionsMenu;
-import app.menus.SlidersSoundsMenu;
+import app.menus.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,7 +18,7 @@ import java.util.Collection;
 public class Game extends Application {
     public static Stage window;
     public static AudioClip audio;
-    private Scene mainScene;
+    private static Scene mainScene;
     private StackPane stackPane=new StackPane();
     private HBox mainContainer;
     private VBox leftContainer;
@@ -39,13 +36,13 @@ public class Game extends Application {
         /* Game.window es la variable publica estatica que usaran
         todas las clases para instanciar la ventana que necesiten.
          */
-        AudioPlayer.initMediaPlayer();
-        AudioPlayer.initAudioClips();
-        MainMenu.initMainMenu();
-        GameModeMenu.initGameModeMenu();
-        OptionsMenu.initOptionsMenu();
-        SlidersSoundsMenu.initSlidersForVolumen();
-        AudioPlayer.playMainMenu();
+
+        Initializer.InitAllMethods();
+
+        mainScene=new Scene(stackPane,1000,850);
+        mainScene.getStylesheets().add(getClass().getResource("/buttons.css").toExternalForm());
+        
+        SlidersBrightnessMenu.initBrightnessSlider();
 
         ImageView wallpaper=new ImageView(getClass().getResource("/fondoPrincipal.png").toExternalForm());
         wallpaper.setPreserveRatio(false);
@@ -58,30 +55,26 @@ public class Game extends Application {
         rightContainer.setPrefWidth(300);
         rightContainer.setAlignment(Pos.CENTER_RIGHT);
         rightContainer.getChildren().addAll(OptionsMenu.getOptionsMenu(),GameModeMenu.getGameModeMenu(),
-                SlidersSoundsMenu.getSliders());
-
+                SlidersSoundsMenu.getSliders(),SlidersBrightnessMenu.getBrightnessVbox());
 
 
         mainContainer=new HBox();
         mainContainer.setSpacing(150);
         mainContainer.getChildren().addAll(leftContainer,rightContainer);
 
-
-
-
         stackPane.getChildren().addAll(wallpaper,mainContainer);
-        mainScene=new Scene(stackPane,832,850);
 
 
-        mainScene.getStylesheets().add(getClass().getResource("/buttons.css").toExternalForm());
+
 
         window.setScene(mainScene);
         window.setTitle("Cronicas de Valthar: El Torneo de las Eras");
         window.setResizable(false);
         window.show();
+    }
 
-
-
+    public static Scene getMainScene(){
+        return mainScene;
     }
 
 }

@@ -1,6 +1,7 @@
 package app.menus;
 
 import app.main.AudioPlayer;
+import app.main.Game;
 import app.main.Roaster.Roaster;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

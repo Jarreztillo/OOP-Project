@@ -1,6 +1,7 @@
 package app.menus;
 
 import app.main.AudioPlayer;
+import app.main.Game;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,7 +29,14 @@ public class OptionsMenu {
         optionsMenu.setPadding(new Insets(0,0,0,10));
 
 
+
         hideMenu();
+
+        video.setOnAction(_ -> {
+            AudioPlayer.playButtonSound();
+            hideMenu();
+            SlidersBrightnessMenu.showSlider();
+        });
 
         audio.setOnAction(_ -> {
             AudioPlayer.playButtonSound();
