@@ -12,6 +12,7 @@ public class Initializer {
         OptionsMenu.initOptionsMenu();
         SlidersSoundsMenu.initSlidersForVolumen();
         AudioPlayer.playMainMenu();
+        SlidersBrightnessMenu.initBrightnessSlider();
 
 
     }
