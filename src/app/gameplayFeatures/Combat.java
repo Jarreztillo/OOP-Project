@@ -1,6 +1,8 @@
 package app.gameplayFeatures;
 
 import app.main.AudioPlayer;
+import app.main.Game;
+import app.menus.PauseMenu;
 import domain.consumables.VitalityPotion;
 import domain.entities.EnemyCharacter;
 import domain.entities.PlayerCharacter;
@@ -56,6 +58,16 @@ public class Combat {
     public static void initializeCombat() {
         setupConfigurations();
         setupWindow();
+        isPausable=true;
+        combatScene.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case P -> {
+                    if (Game.isPausable) {
+                        PauseMenu.managePauseMenu();
+                    }
+                }
+            }
+        });
     }
 
     private static void setupConfigurations() {
@@ -69,12 +81,13 @@ public class Combat {
     private static void setupWindow() {
         root = new Group();
         combatScene = new Scene(root, 1000, 850);
+        //combatScene.getStylesheets().add(Combat.class.getResource("/buttons.css").toExternalForm());
         Canvas canvas = new Canvas(1000, 850);
 
         setupLabels();
         setupButtons();
 
-        root.getChildren().addAll(canvas, playerLife, playerAttack, enemyLife, enemyAttackL, attack, runAway, passTurn, useConsumable, message, playerTurnLabel);
+        root.getChildren().addAll(canvas, playerLife, playerAttack, enemyLife, enemyAttackL, attack, runAway, passTurn, useConsumable, message, playerTurnLabel,PauseMenu.getPauseMenu());
         graphics = canvas.getGraphicsContext2D();
 
         setupKeyHandling();

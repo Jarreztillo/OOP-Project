@@ -2,16 +2,12 @@ package app.main;
 
 import app.menus.*;
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
-
-import java.util.Collection;
 // Cosas de JavaFX.
 
 
@@ -19,7 +15,8 @@ public class Game extends Application {
     public static Stage window;
     public static AudioClip audio;
     private static Scene mainScene;
-    private StackPane stackPane=new StackPane();
+    public static boolean isPausable=false;
+    private static StackPane stackPane=new StackPane();
     private HBox mainContainer;
     private VBox leftContainer;
     private StackPane rightContainer;
@@ -42,6 +39,16 @@ public class Game extends Application {
 
         Initializer.InitAllMethods();
 
+        mainScene.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case P -> {
+                    if (Game.isPausable) {
+                        PauseMenu.managePauseMenu();
+                    }
+                }
+            }
+        });
+
         ImageView wallpaper=new ImageView(getClass().getResource("/fondoPrincipal.png").toExternalForm());
         wallpaper.setPreserveRatio(false);
         wallpaper.fitWidthProperty().bind(stackPane.widthProperty());
@@ -63,8 +70,9 @@ public class Game extends Application {
 
 
 
+        stackPane.getChildren().addAll(wallpaper,mainContainer,PauseMenu.getPauseMenu());
 
-        stackPane.getChildren().addAll(wallpaper,mainContainer);
+
 
 
         window.setScene(mainScene);
@@ -78,6 +86,9 @@ public class Game extends Application {
 
     public static Scene getMainScene(){
         return mainScene;
+    }
+    public static StackPane getStackPane(){
+        return stackPane;
     }
 
 }

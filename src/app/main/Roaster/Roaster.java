@@ -2,6 +2,8 @@ package app.main.Roaster;
 
 import app.gameModes.Campaign;
 import app.main.AudioPlayer;
+import app.main.Game;
+import app.menus.PauseMenu;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -59,7 +61,10 @@ public class Roaster {
 
     public static void initialize(){
         root = new Group();
+
         roasterScene = new Scene(root, 1000, 850);
+        roasterScene.getStylesheets().add(Roaster.class.getResource("/buttons.css").toExternalForm());
+
         canvas = new Canvas(1000, 850);
         root.getChildren().add(canvas);
         graphics = canvas.getGraphicsContext2D();
@@ -79,7 +84,18 @@ public class Roaster {
         selected[4] = new SelectedCharacters();
 
 
-        root.getChildren().addAll(health, mana, attack, race, type, behavior, movement);
+
+        root.getChildren().addAll(health, mana, attack, race, type, behavior, movement,PauseMenu.getPauseMenu());
+
+
+        Game.isPausable=true;
+        roasterScene.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == javafx.scene.input.KeyCode.P && Game.isPausable) {
+                PauseMenu.managePauseMenu();
+            }
+        });
+
+
 
         moveSelectionSquare();
         drawAndActualizePosition();
@@ -509,82 +525,80 @@ public class Roaster {
 
     }
 
-        private static void drawAndActualizePosition(){
-            animationTimer = new AnimationTimer() {
-                @Override
-                public void handle(long l) {
-                    graphics.drawImage(new Image("roaster1.png"), 8, 8);
-                    graphics.drawImage(new Image("roaster2.png"), 702, 8);
-                    graphics.setFill(Color.BLACK);
+    private static void drawAndActualizePosition(){
+        animationTimer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                graphics.drawImage(new Image("roaster1.png"), 8, 8);
+                graphics.drawImage(new Image("roaster2.png"), 702, 8);
+                graphics.setFill(Color.BLACK);
 
-                    graphics.drawImage(new Image("closerHiglob.png"), 32,32);
-                    graphics.drawImage(new Image("closerDraven.png"), 32, 152);
-                    graphics.drawImage(new Image("closerZorak.png"), 32, 272);
-                    graphics.drawImage(new Image("closerHeloro.png"), 32, 392);
-                    graphics.drawImage(new Image("closerLyrasa.png"), 152, 32);
-                    //60 x 90.
-                    Image cuadraito = new Image("selectSquare.png");
-                    graphics.drawImage(cuadraito, x, y);
+                graphics.drawImage(new Image("closerHiglob.png"), 32,32);
+                graphics.drawImage(new Image("closerDraven.png"), 32, 152);
+                graphics.drawImage(new Image("closerZorak.png"), 32, 272);
+                graphics.drawImage(new Image("closerHeloro.png"), 32, 392);
+                graphics.drawImage(new Image("closerLyrasa.png"), 152, 32);
+                //60 x 90.
+                Image cuadraito = new Image("selectSquare.png");
+                graphics.drawImage(cuadraito, x, y);
 
-                    health.setVisible(false);
-                    mana.setVisible(false);
-                    attack.setVisible(false);
-                    race.  setVisible(false);
-                    type.  setVisible(false);
-                    behavior.setVisible(false);
-                    movement.setVisible(false);
+                health.setVisible(false);
+                mana.setVisible(false);
+                attack.setVisible(false);
+                race.  setVisible(false);
+                type.  setVisible(false);
+                behavior.setVisible(false);
+                movement.setVisible(false);
 
-                    health.setTranslateX(720);
-                    health.setTranslateY(240);
-                    mana.setTranslateX(780);
-                    mana.setTranslateY(240);
-                    attack.setTranslateX(720);
-                    attack.setTranslateY(290);
-                    race.setTranslateX(720);
-                    race.setTranslateY(340);
-                    type.setTranslateX(720);
-                    type.setTranslateY(390);
-                    behavior.setTranslateX(720);
-                    behavior.setTranslateY(440);
-                    movement.setTranslateX(720);
-                    movement.setTranslateY(540);
+                health.setTranslateX(720);
+                health.setTranslateY(240);
+                mana.setTranslateX(780);
+                mana.setTranslateY(240);
+                attack.setTranslateX(720);
+                attack.setTranslateY(290);
+                race.setTranslateX(720);
+                race.setTranslateY(340);
+                type.setTranslateX(720);
+                type.setTranslateY(390);
+                behavior.setTranslateX(720);
+                behavior.setTranslateY(440);
+                movement.setTranslateX(720);
+                movement.setTranslateY(540);
 
-                    if (x == 32 && y == 32){
-                        health.setVisible(true);
-                        mana.setVisible(true);
-                        attack.setVisible(true);
-                        race.setVisible(true);
-                        type.setVisible(true);
-                        behavior.setVisible(true);
-                        movement.setVisible(true);
+                if (x == 32 && y == 32){
+                    health.setVisible(true);
+                    mana.setVisible(true);
+                    attack.setVisible(true);
+                    race.setVisible(true);
+                    type.setVisible(true);
+                    behavior.setVisible(true);
+                    movement.setVisible(true);
 
-                        graphics.drawImage(new Image("higlobFace.png"), 740, 20);
+                    graphics.drawImage(new Image("higlobFace.png"), 740, 20);
 
-                        health.setFont(font);
-                        mana.setFont(font);
-                        attack.setFont(font);
-                        race.setFont(font);
-                        type.setFont(font);
-                        behavior.setFont(font);
-                        movement.setFont(font);
+                    health.setFont(font);
+                    mana.setFont(font);
+                    attack.setFont(font);
+                    race.setFont(font);
+                    type.setFont(font);
+                    behavior.setFont(font);
+                    movement.setFont(font);
 
-                        health.setTextFill(Color.WHITE);
-                        mana.setTextFill(Color.WHITE);
-                        attack.setTextFill(Color.WHITE);
-                        race.setTextFill(Color.WHITE);
-                        type.setTextFill(Color.WHITE);
-                        behavior.setTextFill(Color.WHITE);
-                        movement.setTextFill(Color.WHITE);
+                    health.setTextFill(Color.WHITE);
+                    mana.setTextFill(Color.WHITE);
+                    attack.setTextFill(Color.WHITE);
+                    race.setTextFill(Color.WHITE);
+                    type.setTextFill(Color.WHITE);
+                    behavior.setTextFill(Color.WHITE);
+                    movement.setTextFill(Color.WHITE);
 
-                        health.setText("HP: 7");
-                        mana.setText("MP: 15");
-                        attack.setText("Attack: 2");
-                        race.setText("Raza: Goblin");
-                        type.setText("Tipo: Sanador");
-                        behavior.setText("Personalidad: Distraído,\nhalagador e inocente.");
-                        movement.setText("Movimiento: 4");
-
-
+                    health.setText("HP: 7");
+                    mana.setText("MP: 15");
+                    attack.setText("Attack: 2");
+                    race.setText("Raza: Goblin");
+                    type.setText("Tipo: Sanador");
+                    behavior.setText("Personalidad: Distraído,\nhalagador e inocente.");
+                    movement.setText("Movimiento: 4");
 
 
 
@@ -598,225 +612,227 @@ public class Roaster {
 
 
 
-                    }
-                    if (x == 32 && y ==152){
-                        health.setVisible(true);
-                        attack.setVisible(true);
-                        race.setVisible(true);
-                        type.setVisible(true);
-                        behavior.setVisible(true);
-                        movement.setVisible(true);
 
-                        graphics.drawImage(new Image("dravenFace.png"), 740, 20);
-
-                        health.setFont(font);
-                        attack.setFont(font);
-                        race.setFont(font);
-                        type.setFont(font);
-                        behavior.setFont(font);
-                        movement.setFont(font);
-
-                        health.setTextFill(Color.WHITE);
-                        attack.setTextFill(Color.WHITE);
-                        race.setTextFill(Color.WHITE);
-                        type.setTextFill(Color.WHITE);
-                        behavior.setTextFill(Color.WHITE);
-                        movement.setTextFill(Color.WHITE);
-
-                        health.setText("HP: 10");
-                        attack.setText("Attack: 3");
-                        race.setText("Raza: Humano");
-                        type.setText("Tipo: Guerrero");
-                        behavior.setText("Personalidad: Valiente,\nleal e impulsivo.");
-                        movement.setText("Movimiento: 2");
-                    }
-                    if (x == 32 && y == 272){
-                        health.setVisible(true);
-                        attack.setVisible(true);
-                        race.setVisible(true);
-                        type.setVisible(true);
-                        behavior.setVisible(true);
-                        movement.setVisible(true);
-
-                        graphics.drawImage(new Image("zorakFace.png"), 740, 20);
-
-                        health.setFont(font);
-                        attack.setFont(font);
-                        race.setFont(font);
-                        type.setFont(font);
-                        behavior.setFont(font);
-                        movement.setFont(font);
-
-                        health.setTextFill(Color.WHITE);
-                        attack.setTextFill(Color.WHITE);
-                        race.setTextFill(Color.WHITE);
-                        type.setTextFill(Color.WHITE);
-                        behavior.setTextFill(Color.WHITE);
-                        movement.setTextFill(Color.WHITE);
-
-                        health.setText("HP: 10");
-                        attack.setText("Attack: 5");
-                        race.setText("Raza: Orco");
-                        type.setText("Tipo: Berserker");
-                        behavior.setText("Personalidad: Experimen-\ntado, fuerte y sereno.");
-                        movement.setText("Movimiento: 3");
-                    }
-                    if (x == 32 && y == 392){
-                        health.setVisible(true);
-                        mana.setVisible(true);
-                        attack.setVisible(true);
-                        race.setVisible(true);
-                        type.setVisible(true);
-                        behavior.setVisible(true);
-                        movement.setVisible(true);
-
-                        graphics.drawImage(new Image("heloroFace.png"), 740, 20);
-
-                        health.setFont(font);
-                        mana.setFont(font);
-                        attack.setFont(font);
-                        race.setFont(font);
-                        type.setFont(font);
-                        behavior.setFont(font);
-                        movement.setFont(font);
-
-                        health.setTextFill(Color.WHITE);
-                        mana.setTextFill(Color.WHITE);
-                        attack.setTextFill(Color.WHITE);
-                        race.setTextFill(Color.WHITE);
-                        type.setTextFill(Color.WHITE);
-                        behavior.setTextFill(Color.WHITE);
-                        movement.setTextFill(Color.WHITE);
-
-                        health.setText("HP: 7");
-                        mana.setText("MP: 10 ");
-                        attack.setText("Attack: 5");
-                        race.setText("Raza: Elfo");
-                        type.setText("Tipo: Mago");
-                        behavior.setText("Personalidad: Sabio,\npreocupado y justo.");
-                        movement.setText("Movimiento: 4");
-                    }
-                    if (x == 152 && y == 32){
-                        health.setVisible(true);
-                        attack.setVisible(true);
-                        race.setVisible(true);
-                        type.setVisible(true);
-                        behavior.setVisible(true);
-                        movement.setVisible(true);
-
-                        graphics.drawImage(new Image("lyrasaFace.png"), 740, 20);
-
-                        health.setFont(font);
-                        attack.setFont(font);
-                        race.setFont(font);
-                        type.setFont(font);
-                        behavior.setFont(font);
-                        movement.setFont(font);
-
-                        health.setTextFill(Color.WHITE);
-                        attack.setTextFill(Color.WHITE);
-                        race.setTextFill(Color.WHITE);
-                        type.setTextFill(Color.WHITE);
-                        behavior.setTextFill(Color.WHITE);
-                        movement.setTextFill(Color.WHITE);
-
-                        health.setText("HP: 6");
-                        attack.setText("Attack: 5");
-                        race.setText("Raza: Elfa");
-                        type.setText("Tipo: Arquera");
-                        behavior.setText("Personalidad: Silenciosa,\nprecisa y desconfiada.");
-                        movement.setText("Movimiento: 3");
-                    }
-
-                    if (selected[4].isCharacterActivated()) {
-                        graphics.drawImage(new Image(numberImages[selected[4].getNumberImage()]), selected[4].getX(), selected[4].getY());
-                    }
-                    if (selected[3].isCharacterActivated()) {
-                        graphics.drawImage(new Image(numberImages[selected[3].getNumberImage()]), selected[3].getX(), selected[3].getY());
-                    }
-                    if (selected[2].isCharacterActivated()) {
-                        graphics.drawImage(new Image(numberImages[selected[2].getNumberImage()]), selected[2].getX(), selected[2].getY());
-                    }
-                    if (selected[1].isCharacterActivated()) {
-                        graphics.drawImage(new Image(numberImages[selected[1].getNumberImage()]), selected[1].getX(), selected[1].getY());
-                    }
-                    if (selected[0].isCharacterActivated()) {
-                        graphics.drawImage(new Image(numberImages[selected[0].getNumberImage()]), selected[0].getX(), selected[0].getY());
-                    }
-                    if (selectedCharacters == 4){
-                        Font font = new Font(18);
-                        message = new Label("¿Esta seguro de haber elegido todos los personajes en el orden correcto?");
-                        message.setFont(font);
-                        message.setTranslateX(32);
-                        message.setTranslateY(670);
-                        message.setTextFill(Color.BLACK);
-
-
-                        yes = new Button ("Si.");
-                        no = new Button ("No.");
-                        yes.setFont(font);
-                        yes.setTranslateX(32);
-                        yes.setTranslateY(730);
-                        yes.setTextFill(Color.BLACK);
-                        yes.setFocusTraversable(false);
-                        no.setFont(font);
-                        no.setTranslateX(92);
-                        no.setTranslateY(730);
-                        no.setTextFill(Color.BLACK);
-                        no.setFocusTraversable(false);
-
-                        yes.setOnMouseClicked(e -> threeActions());
-                        no.setOnMouseClicked(e -> reset());
-
-                        message.setDisable(false);
-                        message.setVisible(true);
-                        yes.setDisable(false);
-                        yes.setVisible(true);
-                        no.setDisable(false);
-                        no.setVisible(true);
-                        root.getChildren().addAll(message, yes, no);
-                        animationTimer.stop();
-                        cantMove = true;
-                    }
 
                 }
-            };
-            animationTimer.start();
-        }
+                if (x == 32 && y ==152){
+                    health.setVisible(true);
+                    attack.setVisible(true);
+                    race.setVisible(true);
+                    type.setVisible(true);
+                    behavior.setVisible(true);
+                    movement.setVisible(true);
+
+                    graphics.drawImage(new Image("dravenFace.png"), 740, 20);
+
+                    health.setFont(font);
+                    attack.setFont(font);
+                    race.setFont(font);
+                    type.setFont(font);
+                    behavior.setFont(font);
+                    movement.setFont(font);
+
+                    health.setTextFill(Color.WHITE);
+                    attack.setTextFill(Color.WHITE);
+                    race.setTextFill(Color.WHITE);
+                    type.setTextFill(Color.WHITE);
+                    behavior.setTextFill(Color.WHITE);
+                    movement.setTextFill(Color.WHITE);
+
+                    health.setText("HP: 10");
+                    attack.setText("Attack: 3");
+                    race.setText("Raza: Humano");
+                    type.setText("Tipo: Guerrero");
+                    behavior.setText("Personalidad: Valiente,\nleal e impulsivo.");
+                    movement.setText("Movimiento: 2");
+                }
+                if (x == 32 && y == 272){
+                    health.setVisible(true);
+                    attack.setVisible(true);
+                    race.setVisible(true);
+                    type.setVisible(true);
+                    behavior.setVisible(true);
+                    movement.setVisible(true);
+
+                    graphics.drawImage(new Image("zorakFace.png"), 740, 20);
+
+                    health.setFont(font);
+                    attack.setFont(font);
+                    race.setFont(font);
+                    type.setFont(font);
+                    behavior.setFont(font);
+                    movement.setFont(font);
+
+                    health.setTextFill(Color.WHITE);
+                    attack.setTextFill(Color.WHITE);
+                    race.setTextFill(Color.WHITE);
+                    type.setTextFill(Color.WHITE);
+                    behavior.setTextFill(Color.WHITE);
+                    movement.setTextFill(Color.WHITE);
+
+                    health.setText("HP: 10");
+                    attack.setText("Attack: 5");
+                    race.setText("Raza: Orco");
+                    type.setText("Tipo: Berserker");
+                    behavior.setText("Personalidad: Experimen-\ntado, fuerte y sereno.");
+                    movement.setText("Movimiento: 3");
+                }
+                if (x == 32 && y == 392){
+                    health.setVisible(true);
+                    mana.setVisible(true);
+                    attack.setVisible(true);
+                    race.setVisible(true);
+                    type.setVisible(true);
+                    behavior.setVisible(true);
+                    movement.setVisible(true);
+
+                    graphics.drawImage(new Image("heloroFace.png"), 740, 20);
+
+                    health.setFont(font);
+                    mana.setFont(font);
+                    attack.setFont(font);
+                    race.setFont(font);
+                    type.setFont(font);
+                    behavior.setFont(font);
+                    movement.setFont(font);
+
+                    health.setTextFill(Color.WHITE);
+                    mana.setTextFill(Color.WHITE);
+                    attack.setTextFill(Color.WHITE);
+                    race.setTextFill(Color.WHITE);
+                    type.setTextFill(Color.WHITE);
+                    behavior.setTextFill(Color.WHITE);
+                    movement.setTextFill(Color.WHITE);
+
+                    health.setText("HP: 7");
+                    mana.setText("MP: 10 ");
+                    attack.setText("Attack: 5");
+                    race.setText("Raza: Elfo");
+                    type.setText("Tipo: Mago");
+                    behavior.setText("Personalidad: Sabio,\npreocupado y justo.");
+                    movement.setText("Movimiento: 4");
+                }
+                if (x == 152 && y == 32){
+                    health.setVisible(true);
+                    attack.setVisible(true);
+                    race.setVisible(true);
+                    type.setVisible(true);
+                    behavior.setVisible(true);
+                    movement.setVisible(true);
+
+                    graphics.drawImage(new Image("lyrasaFace.png"), 740, 20);
+
+                    health.setFont(font);
+                    attack.setFont(font);
+                    race.setFont(font);
+                    type.setFont(font);
+                    behavior.setFont(font);
+                    movement.setFont(font);
+
+                    health.setTextFill(Color.WHITE);
+                    attack.setTextFill(Color.WHITE);
+                    race.setTextFill(Color.WHITE);
+                    type.setTextFill(Color.WHITE);
+                    behavior.setTextFill(Color.WHITE);
+                    movement.setTextFill(Color.WHITE);
+
+                    health.setText("HP: 6");
+                    attack.setText("Attack: 5");
+                    race.setText("Raza: Elfa");
+                    type.setText("Tipo: Arquera");
+                    behavior.setText("Personalidad: Silenciosa,\nprecisa y desconfiada.");
+                    movement.setText("Movimiento: 3");
+                }
+
+                if (selected[4].isCharacterActivated()) {
+                    graphics.drawImage(new Image(numberImages[selected[4].getNumberImage()]), selected[4].getX(), selected[4].getY());
+                }
+                if (selected[3].isCharacterActivated()) {
+                    graphics.drawImage(new Image(numberImages[selected[3].getNumberImage()]), selected[3].getX(), selected[3].getY());
+                }
+                if (selected[2].isCharacterActivated()) {
+                    graphics.drawImage(new Image(numberImages[selected[2].getNumberImage()]), selected[2].getX(), selected[2].getY());
+                }
+                if (selected[1].isCharacterActivated()) {
+                    graphics.drawImage(new Image(numberImages[selected[1].getNumberImage()]), selected[1].getX(), selected[1].getY());
+                }
+                if (selected[0].isCharacterActivated()) {
+                    graphics.drawImage(new Image(numberImages[selected[0].getNumberImage()]), selected[0].getX(), selected[0].getY());
+                }
+                if (selectedCharacters == 4){
+                    Font font = new Font(18);
+                    message = new Label("¿Esta seguro de haber elegido todos los personajes en el orden correcto?");
+                    message.setFont(font);
+                    message.setTranslateX(32);
+                    message.setTranslateY(670);
+                    message.setTextFill(Color.BLACK);
 
 
-        private static void threeActions(){
+                    yes = new Button ("Si.");
+                    no = new Button ("No.");
+                    yes.setFont(font);
+                    yes.setTranslateX(32);
+                    yes.setTranslateY(730);
+                    yes.setTextFill(Color.BLACK);
+                    yes.setFocusTraversable(false);
+                    no.setFont(font);
+                    no.setTranslateX(92);
+                    no.setTranslateY(730);
+                    no.setTextFill(Color.BLACK);
+                    no.setFocusTraversable(false);
+
+                    yes.setOnMouseClicked(e -> threeActions());
+                    no.setOnMouseClicked(e -> reset());
+
+                    message.setDisable(false);
+                    message.setVisible(true);
+                    yes.setDisable(false);
+                    yes.setVisible(true);
+                    no.setDisable(false);
+                    no.setVisible(true);
+                    root.getChildren().addAll(message, yes, no);
+                    animationTimer.stop();
+                    cantMove = true;
+                }
+
+            }
+        };
+        animationTimer.start();
+    }
+
+
+    private static void threeActions(){
         animationTimer.stop();
         Campaign.initialize();
         AudioPlayer.playRoasterButtonSound();
+    }
+    private static void reset(){
+        selectedCharacters = -1;
+        cantMove = false;
+        player[0] = new PlayerCharacter();
+        player[1] = new PlayerCharacter();
+        player[2] = new PlayerCharacter();
+        player[3] = new PlayerCharacter();
+        player[4] = new PlayerCharacter();
+
+
+        selected[0] = new SelectedCharacters();
+        selected[1] = new SelectedCharacters();
+        selected[2] = new SelectedCharacters();
+        selected[3] = new SelectedCharacters();
+        selected[4] = new SelectedCharacters();
+
+        if(message != null && yes != null && no != null){
+
+            message.setDisable(true);
+            message.setVisible(false);
+            yes.setDisable(true);
+            yes.setVisible(false);
+            no.setDisable(true);
+            no.setVisible(false);
+            animationTimer.start();
         }
-        private static void reset(){
-            selectedCharacters = -1;
-            cantMove = false;
-            player[0] = new PlayerCharacter();
-            player[1] = new PlayerCharacter();
-            player[2] = new PlayerCharacter();
-            player[3] = new PlayerCharacter();
-            player[4] = new PlayerCharacter();
-
-
-            selected[0] = new SelectedCharacters();
-            selected[1] = new SelectedCharacters();
-            selected[2] = new SelectedCharacters();
-            selected[3] = new SelectedCharacters();
-            selected[4] = new SelectedCharacters();
-
-            if(message != null && yes != null && no != null){
-
-                message.setDisable(true);
-                message.setVisible(false);
-                yes.setDisable(true);
-                yes.setVisible(false);
-                no.setDisable(true);
-                no.setVisible(false);
-                animationTimer.start();
-            }
-        }
+    }
     public static PlayerCharacter[] getPlayer() {
         return player;
     }
@@ -824,7 +840,4 @@ public class Roaster {
     public static void setPlayer(PlayerCharacter[] player) {
         Roaster.player = player;
     }
-    }
-
-
-
+}

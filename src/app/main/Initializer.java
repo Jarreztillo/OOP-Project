@@ -1,10 +1,12 @@
 package app.main;
 
 import app.menus.*;
+import javafx.scene.layout.StackPane;
 
 public class Initializer {
 
     public static void InitAllMethods(){
+        PauseMenu.initPauseMenu();
         AudioPlayer.initMediaPlayer();
         AudioPlayer.initAudioClips();
         MainMenu.initMainMenu();
@@ -13,7 +15,6 @@ public class Initializer {
         SlidersSoundsMenu.initSlidersForVolumen();
         AudioPlayer.playMainMenu();
         SlidersBrightnessMenu.initBrightnessSlider();
-
 
     }
 }

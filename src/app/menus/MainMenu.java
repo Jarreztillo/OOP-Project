@@ -1,6 +1,7 @@
 package app.menus;
 
 import app.main.AudioPlayer;
+import app.main.Game;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -33,6 +34,9 @@ public class MainMenu {
        mainMenu.setPrefWidth(300);
        mainMenu.setAlignment(Pos.CENTER_RIGHT);
        mainMenu.setPadding(new Insets(0,40,0,0));
+
+     Game.isPausable=false;
+     PauseMenu.hide();
 
 
      play.setOnAction(_ -> {
