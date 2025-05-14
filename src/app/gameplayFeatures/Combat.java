@@ -81,7 +81,7 @@ public class Combat {
     private static void setupWindow() {
         root = new Group();
         combatScene = new Scene(root, 1000, 850);
-        //combatScene.getStylesheets().add(Combat.class.getResource("/buttons.css").toExternalForm());
+        combatScene.getStylesheets().add(Combat.class.getResource("/buttons.css").toExternalForm());
         Canvas canvas = new Canvas(1000, 850);
 
         setupLabels();
