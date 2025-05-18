@@ -89,7 +89,7 @@ public class PauseMenu {
         pauseMenu.setStyle("-fx-background-color: rgba(0, 0, 0, 0.8);");
         pauseMenu.setPrefSize(1000, 850);
         pauseMenu.setVisible(false);
-        pauseMenu.setMouseTransparent(true);
+        pauseMenu.setMouseTransparent(false);
         pauseMenu.getChildren().addAll(resume, options, exitGame,video,audio,back,MusicSound,MusicVolumen,
                 EffectSound,EffectVolumen,brightnessLabel,brightnessSlider);
 
@@ -171,6 +171,9 @@ public class PauseMenu {
     public static VBox getPauseMenu() {
         return pauseMenu;
     }
+    public static boolean pauseMenuIsVisible(){
+        return pauseMenu!=null&&pauseMenu.isVisible();
+    }
 
     public static void managePauseMenu() {
         boolean visible = pauseMenu.isVisible();
@@ -221,6 +224,9 @@ public class PauseMenu {
     public static void hideBrightnessSlider(){
         brightnessLabel.setVisible(false);
         brightnessSlider.setVisible(false);
+    }
+    public static ColorAdjust getBrightness(){
+        return brightness;
     }
 
 

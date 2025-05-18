@@ -67,10 +67,13 @@ public class Gameplay {
         player[0].setEnemy(enemy);
         root = new Group();
         gameplayScene = new Scene(root, 1000, 850);
+        gameplayScene.getStylesheets().add(Gameplay.class.getResource("/buttons.css").toExternalForm());
         canvas = new Canvas(1000, 850);
         root.getChildren().add(canvas);
         graphics = canvas.getGraphicsContext2D();
         window.setScene(gameplayScene);
+        root.getChildren().add(PauseMenu.getPauseMenu());
+        root.setEffect(PauseMenu.getBrightness());
     }
 
 
@@ -167,7 +170,7 @@ public class Gameplay {
         los puntos de accion y la posicion del jugador
         y determinara si se mueve o no se mueve.
         */
-
+        Game.isPausable=true;
         gameplayScene.setOnKeyPressed(event -> {
             switch (event.getCode().toString()) {
                 case "A":
@@ -315,6 +318,7 @@ public class Gameplay {
                     break;
                 case "P":
                         PauseMenu.managePauseMenu();
+                        gameplayTimer.stop();
                     break;
 
             }

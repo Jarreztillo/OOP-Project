@@ -5,22 +5,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbeda9a4-a7b2-4747-b40c-e0b3cefcaad9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/menus/ControlsInstructions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/javafx_swt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javafx_swt.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP-Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/OOP-Project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/css/buttons.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/css/buttons.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/gameplayFeatures/Combat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/gameplayFeatures/Combat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/gameplayFeatures/Gameplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/gameplayFeatures/Gameplay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/main/Initializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/Initializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/main/Roaster/Roaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/Roaster/Roaster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/menus/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/menus/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/menus/OptionsMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/menus/OptionsMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/menus/PauseMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/menus/PauseMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "AyalaLazaro05"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Jarreztillo/OOP-Project.git",
+    "accountId": "24c4a7f3-ba60-46b8-b9b1-b741ce81542f"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -29,21 +56,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Game.executor": "Run",
-    "Application.game.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/jarreztillo/Documentos/GitHub/OOP-Project",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Game.executor&quot;: &quot;Run&quot;,
+    &quot;Application.game.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/media/jarreztillo/Harry/Game&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.main.Game" />

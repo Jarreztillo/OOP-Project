@@ -58,7 +58,17 @@ public class Combat {
     public static void initializeCombat() {
         setupConfigurations();
         setupWindow();
-        }
+        Game.isPausable=true;
+        combatScene.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case P -> {
+                    if (Game.isPausable) {
+                        PauseMenu.managePauseMenu();
+                    }
+                }
+            }
+        });
+    }
 
     private static void setupConfigurations() {
         Gameplay.stopGameplayTimer();
@@ -74,11 +84,11 @@ public class Combat {
         combatScene.getStylesheets().add(Combat.class.getResource("/buttons.css").toExternalForm());
         Canvas canvas = new Canvas(1000, 850);
 
-
         setupLabels();
         setupButtons();
 
         root.getChildren().addAll(canvas, playerLife, playerAttack, enemyLife, enemyAttackL, attack, runAway, passTurn, useConsumable, message, playerTurnLabel,PauseMenu.getPauseMenu());
+        root.setEffect(PauseMenu.getBrightness());
         graphics = canvas.getGraphicsContext2D();
 
         setupKeyHandling();
@@ -172,9 +182,6 @@ public class Combat {
                         attackToSelectedEnemy = true;
                         keyPressed = "SPACE";
                     }
-                    break;
-                case "P":
-                        PauseMenu.managePauseMenu();
                     break;
             }
         });
