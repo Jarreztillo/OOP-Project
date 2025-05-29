@@ -112,48 +112,48 @@ public class ButtonManager {
     }
 
     public static void buttonVisibilizer(Button btn) {
-        btn.setDisable(true);
+        btn.setDisable(false);
         btn.setVisible(true);
 
     }
 
     public static void buttonVisibilizer(Button btn, Button btn1) {
-        btn.setDisable(true);
+        btn.setDisable(false);
         btn.setVisible(true);
-        btn1.setDisable(true);
+        btn1.setDisable(false);
         btn1.setVisible(true);
     }
 
     public static void buttonVisibilizer(Button btn, Button btn1, Button btn2) {
-        btn.setDisable(true);
+        btn.setDisable(false);
         btn.setVisible(true);
-        btn1.setDisable(true);
+        btn1.setDisable(false);
         btn1.setVisible(true);
-        btn2.setDisable(true);
+        btn2.setDisable(false);
         btn2.setVisible(true);
     }
 
     public static void buttonVisibilizer(Button btn, Button btn1, Button btn2, Button btn3) {
-        btn.setDisable(true);
+        btn.setDisable(false);
         btn.setVisible(true);
-        btn1.setDisable(true);
+        btn1.setDisable(false);
         btn1.setVisible(true);
-        btn2.setDisable(true);
+        btn2.setDisable(false);
         btn2.setVisible(true);
-        btn3.setDisable(true);
+        btn3.setDisable(false);
         btn3.setVisible(true);
     }
 
     public static void buttonVisibilizer(Button btn, Button btn1, Button btn2, Button btn3, Button btn4) {
-        btn.setDisable(true);
+        btn.setDisable(false);
         btn.setVisible(true);
-        btn1.setDisable(true);
+        btn1.setDisable(false);
         btn1.setVisible(true);
-        btn2.setDisable(true);
+        btn2.setDisable(false);
         btn2.setVisible(true);
-        btn3.setDisable(true);
+        btn3.setDisable(false);
         btn3.setVisible(true);
-        btn4.setDisable(true);
+        btn4.setDisable(false);
         btn4.setVisible(true);
     }
 

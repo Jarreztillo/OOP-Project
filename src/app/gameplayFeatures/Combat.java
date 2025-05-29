@@ -21,8 +21,7 @@ import javafx.scene.text.Font;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static app.fastFeatures.ButtonManager.buttonDisabler;
-import static app.fastFeatures.ButtonManager.createButton;
+import static app.fastFeatures.ButtonManager.*;
 import static app.gameplayFeatures.Gameplay.*;
 import static app.fastFeatures.LabelManager.createLabel;
 import static app.fastFeatures.PublicVariables.*;
@@ -225,7 +224,7 @@ public class Combat {
                     " ha atacado al lobo número " + selectedEnemy + "!");
             selectEnemyToAttack = false;
             attackToSelectedEnemy = false;
-            buttonDisabler(attack, runAway, useConsumable, passTurn);
+            buttonEnabler(attack, runAway, useConsumable, passTurn);
         }
     }
 

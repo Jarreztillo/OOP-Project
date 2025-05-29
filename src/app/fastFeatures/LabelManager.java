@@ -195,80 +195,80 @@ public class LabelManager {
     }
 
     public static void labelVisibilizer(Label lbl) {
-        lbl.setDisable(true);
+        lbl.setDisable(false);
         lbl.setVisible(true);
 
     }
 
     public static void labelVisibilizer(Label lbl, Label lbl1) {
-        lbl.setDisable(true);
+        lbl.setDisable(false);
         lbl.setVisible(true);
-        lbl1.setDisable(true);
+        lbl1.setDisable(false);
         lbl1.setVisible(true);
     }
 
     public static void labelVisibilizer(Label lbl, Label lbl1, Label lbl2) {
-        lbl.setDisable(true);
+        lbl.setDisable(false);
         lbl.setVisible(true);
-        lbl1.setDisable(true);
+        lbl1.setDisable(false);
         lbl1.setVisible(true);
-        lbl2.setDisable(true);
+        lbl2.setDisable(false);
         lbl2.setVisible(true);
     }
 
     public static void labelVisibilizer(Label lbl, Label lbl1, Label lbl2, Label lbl3) {
-        lbl.setDisable(true);
+        lbl.setDisable(false);
         lbl.setVisible(true);
-        lbl1.setDisable(true);
+        lbl1.setDisable(false);
         lbl1.setVisible(true);
-        lbl2.setDisable(true);
+        lbl2.setDisable(false);
         lbl2.setVisible(true);
-        lbl3.setDisable(true);
+        lbl3.setDisable(false);
         lbl3.setVisible(true);
     }
 
     public static void labelVisibilizer(Label lbl, Label lbl1, Label lbl2, Label lbl3, Label lbl4) {
-        lbl.setDisable(true);
+        lbl.setDisable(false);
         lbl.setVisible(true);
-        lbl1.setDisable(true);
+        lbl1.setDisable(false);
         lbl1.setVisible(true);
-        lbl2.setDisable(true);
+        lbl2.setDisable(false);
         lbl2.setVisible(true);
-        lbl3.setDisable(true);
+        lbl3.setDisable(false);
         lbl3.setVisible(true);
-        lbl4.setDisable(true);
+        lbl4.setDisable(false);
         lbl4.setVisible(true);
     }
 
     public static void labelVisibilizer(Label lbl, Label lbl1, Label lbl2, Label lbl3, Label lbl4, Label lbl5) {
-        lbl.setDisable(true);
+        lbl.setDisable(false);
         lbl.setVisible(true);
-        lbl1.setDisable(true);
+        lbl1.setDisable(false);
         lbl1.setVisible(true);
-        lbl2.setDisable(true);
+        lbl2.setDisable(false);
         lbl2.setVisible(true);
-        lbl3.setDisable(true);
+        lbl3.setDisable(false);
         lbl3.setVisible(true);
-        lbl4.setDisable(true);
+        lbl4.setDisable(false);
         lbl4.setVisible(true);
-        lbl5.setDisable(true);
+        lbl5.setDisable(false);
         lbl5.setVisible(true);
     }
 
     public static void labelVisibilizer(Label lbl, Label lbl1, Label lbl2, Label lbl3, Label lbl4, Label lbl5, Label lbl6) {
-        lbl.setDisable(true);
+        lbl.setDisable(false);
         lbl.setVisible(true);
-        lbl1.setDisable(true);
+        lbl1.setDisable(false);
         lbl1.setVisible(true);
-        lbl2.setDisable(true);
+        lbl2.setDisable(false);
         lbl2.setVisible(true);
-        lbl3.setDisable(true);
+        lbl3.setDisable(false);
         lbl3.setVisible(true);
-        lbl4.setDisable(true);
+        lbl4.setDisable(false);
         lbl4.setVisible(true);
-        lbl5.setDisable(true);
+        lbl5.setDisable(false);
         lbl5.setVisible(true);
-        lbl6.setDisable(true);
+        lbl6.setDisable(false);
         lbl6.setVisible(true);
     }
 

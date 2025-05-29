@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbeda9a4-a7b2-4747-b40c-e0b3cefcaad9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/images/backgrounds/fondo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/images/backgrounds/fondo1.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main/Roaster/Roaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main/Roaster/Roaster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/harry.castillo-Proyecto-DPOO-2025.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/fastFeatures/ButtonManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/fastFeatures/ButtonManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/fastFeatures/LabelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/fastFeatures/LabelManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/gameplayFeatures/Combat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/gameplayFeatures/Combat.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,12 +37,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Game.executor": "Run",
+    "Application.app.Game.executor": "Run",
     "Application.game.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/jarreztillo/Documentos/GitHub/harry.castillo-Proyecto-DPOO-2025",
+    "last_opened_file_path": "/home/jarreztillo/Documentos/GitHub/OOP-Project",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -50,8 +51,8 @@
   }
 }]]></component>
   <component name="RunManager">
-    <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="app.main.Game" />
+    <configuration name="app.Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="app.Game" />
       <module name="OOP-Project" />
       <extension name="coverage">
         <pattern>
@@ -74,7 +75,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Game" />
+        <item itemvalue="Application.app.Game" />
       </list>
     </recent_temporary>
   </component>
