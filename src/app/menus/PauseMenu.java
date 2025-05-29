@@ -1,14 +1,12 @@
 package app.menus;
 
-import app.main.AudioPlayer;
-import app.main.Game;
-import app.main.Roaster.Roaster;
+import app.fastFeatures.AudioPlayer;
+import app.fastFeatures.PublicVariables;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class PauseMenu {
@@ -89,7 +87,7 @@ public class PauseMenu {
         pauseMenu.setStyle("-fx-background-color: rgba(0, 0, 0, 0.8);");
         pauseMenu.setPrefSize(1000, 850);
         pauseMenu.setVisible(false);
-        pauseMenu.setMouseTransparent(true);
+        pauseMenu.setMouseTransparent(false);
         pauseMenu.getChildren().addAll(resume, options, exitGame,video,audio,back,MusicSound,MusicVolumen,
                 EffectSound,EffectVolumen,brightnessLabel,brightnessSlider);
 
@@ -127,7 +125,7 @@ public class PauseMenu {
 
         exitGame.setOnAction(_ ->{
             AudioPlayer.playButtonSound();
-            Game.window.close();
+            PublicVariables.window.close();
         });
 
         back.setOnAction(_ ->{
@@ -170,6 +168,10 @@ public class PauseMenu {
 
     public static VBox getPauseMenu() {
         return pauseMenu;
+    }
+
+    public static boolean pauseMenuIsVisible(){
+        return pauseMenu!=null&&pauseMenu.isVisible();
     }
 
     public static void managePauseMenu() {
@@ -221,6 +223,9 @@ public class PauseMenu {
     public static void hideBrightnessSlider(){
         brightnessLabel.setVisible(false);
         brightnessSlider.setVisible(false);
+    }
+    public static ColorAdjust getBrightness(){
+        return brightness;
     }
 
 

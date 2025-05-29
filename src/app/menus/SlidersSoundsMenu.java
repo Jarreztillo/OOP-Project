@@ -1,12 +1,11 @@
 package app.menus;
 
-import app.main.AudioPlayer;
+import app.fastFeatures.AudioPlayer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class SlidersSoundsMenu {
@@ -51,6 +50,9 @@ public class SlidersSoundsMenu {
         allSlider.getChildren().addAll(MasterSound,MasterVolumen,MusicSound,MusicVolumen,EffectSound,EffectVolumen,back);
         allSlider.setAlignment(Pos.CENTER);
         allSlider.setPadding(new Insets(0,0,30,100));
+        allSlider.setTranslateX(130);
+        allSlider.setTranslateY(-20);
+
 
         MasterVolumen.valueProperty().addListener((observable, oldValue, newValue) -> {
             double newVolumen= newValue.doubleValue();

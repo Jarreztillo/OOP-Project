@@ -1,18 +1,20 @@
 package domain.consumables;
 
-import app.gameplayFeatures.Consumables;
+import app.interfaces.Consumables;
 
-public class VitalityPotion extends Consumables {
+public class VitalityPotion extends app.gameplayFeatures.Consumables implements Consumables {
     private String id = "01";
     private int healthAdded = 3;
 
-    public int getHealthAdded() {
+    public VitalityPotion() {
+    }
+
+
+    public int getPointsAdded() {
         return healthAdded;
     }
 
-    public void setHealthAdded(int healthAdded) {
-        this.healthAdded = healthAdded;
-    }
-    public VitalityPotion() {
+    public void setPointsAdded(int healthAdded) {
+        this.healthAdded=healthAdded;
     }
 }

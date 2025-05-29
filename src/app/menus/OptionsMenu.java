@@ -1,12 +1,9 @@
 package app.menus;
 
-import app.main.AudioPlayer;
-import app.main.Game;
-import javafx.application.Platform;
+import app.fastFeatures.AudioPlayer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class OptionsMenu {
@@ -26,11 +23,18 @@ public class OptionsMenu {
         optionsMenu=new VBox(10);
         optionsMenu.getChildren().addAll(controls,video,audio,back);
         optionsMenu.setAlignment(Pos.CENTER_RIGHT);
-        optionsMenu.setPadding(new Insets(0,0,0,10));
+        optionsMenu.setPadding(new Insets(0,0,0,20));
+        optionsMenu.setTranslateX(60);
 
 
 
         hideMenu();
+
+        controls.setOnAction(_ -> {
+            AudioPlayer.playButtonSound();
+            hideMenu();
+            ControlsInstructions.showMenu();
+        });
 
         video.setOnAction(_ -> {
             AudioPlayer.playButtonSound();
