@@ -42,6 +42,7 @@ public class Gameplay {
     private static PlayerCharacter[] player;
     private static EnemyCharacter[] enemy;
     private static long time;
+    private static Font font;
 
 
     // Labels y botones.
@@ -49,10 +50,9 @@ public class Gameplay {
     private static Label actionPointLabel;
     private static Label inventoryLabel;
     private static Label emptyInventoryLabel;
-    private static Label itemNumber1;
-    private static Label itemNumber2;
-    private static Label itemNumber3;
-    private static Label itemNumber4;
+    private static Label potionQuantity;
+    private static Label manaQuantity;
+
 
     /*  Los itemNumber son para la cantidad de
         items en el Inventario. En el ItemNumber1
@@ -147,11 +147,15 @@ public class Gameplay {
     }
 
     private static void labelConfigurations() {
-        Font font = new Font("Arial", 20);
+        font = new Font("Arial", 20);
         actionPointLabel = LabelManager.createLabel(705, 48,"Action Points: " + actionPoints, Color.WHITE, font);
         inventoryLabel = LabelManager.createLabel(770, 550, "Inventario", Color.WHITE, font);
         emptyInventoryLabel = LabelManager.createLabel(720, 600, "El inventario esta vacio", Color.WHITE, font);
-        root.getChildren().addAll(actionPointLabel, inventoryLabel, emptyInventoryLabel);
+        potionQuantity= LabelManager.createLabel(725,660,"x"+inventory.getFirst().getQuantity(),Color.WHITE,font);
+        potionQuantity.setVisible(false);
+        manaQuantity= LabelManager.createLabel(785,660,"x"+inventory.get(1).getQuantity(),Color.WHITE,font);
+        manaQuantity.setVisible(false);
+        root.getChildren().addAll(actionPointLabel, inventoryLabel, emptyInventoryLabel,potionQuantity,manaQuantity);
     }
 
     private static void gameLoop() {
@@ -227,10 +231,10 @@ public class Gameplay {
     private static void drawConsumableAtMap() {
         if (Combat.isDropConsumable()) {
             for (int i = 0; i < inventory.size(); i++){
-                if (!(inventory.get(i).getImage() == null)){
-                    if (drawConsumable) {
-                        graphics.drawImage(new Image(inventory.get(i).getImage()), inventory.get(i).getX(), inventory.get(i).getY());
-                    }
+                System.out.println("Inventario: "+i);
+                System.out.println("DrawMap: "+inventory.get(i).isDrawAtMap());
+                if ((inventory.get(i).isDrawAtMap())){
+                    graphics.drawImage(new Image(inventory.get(i).getImage()), inventory.get(i).getX(), inventory.get(i).getY());
                 }}
 
         }
@@ -238,8 +242,16 @@ public class Gameplay {
 
     private static void drawConsumableAtInventory() {
         if(inventory.getFirst().getQuantity() > 0) {
+            potionQuantity.setText("x"+inventory.getFirst().getQuantity());
             graphics.drawImage(new Image(inventory.getFirst().getImage()), 705, 602);
+            potionQuantity.setVisible(true);
         }
+        if (inventory.get(1).getQuantity()>0){
+            manaQuantity.setText("x"+inventory.get(1).getQuantity());
+            graphics.drawImage(new Image(inventory.get(1).getImage()), 765, 602);
+            manaQuantity.setVisible(true);
+        }
+
     }
 
 
@@ -287,6 +299,28 @@ public class Gameplay {
             PlayerCharacter.setCollideEnemy(false);
         }
 
+    }
+
+    public static void actualizeConsumablesAtInventary(){
+       actualizePotionAtInventary();
+       actualizeManaAtInventary();
+
+    }
+    public static void actualizePotionAtInventary(){
+        if (inventory.get(0).getQuantity()==0){
+            potionQuantity.setVisible(false);
+        }
+        else {
+            potionQuantity.setText("X"+inventory.get(0).getQuantity());
+        }
+    }
+    public static void actualizeManaAtInventary(){
+        if (inventory.get(1).getQuantity()==0){
+            manaQuantity.setVisible(false);
+        }
+        else {
+            manaQuantity.setText("X"+inventory.get(1).getQuantity());
+        }
     }
 
 

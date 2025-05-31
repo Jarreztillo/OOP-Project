@@ -5,11 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbeda9a4-a7b2-4747-b40c-e0b3cefcaad9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DAO/images/consumables/shard_aether.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/consumables/ShardOfAether.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/javafx_swt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javafx_swt.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/harry.castillo-Proyecto-DPOO-2025.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/fastFeatures/ButtonManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/fastFeatures/ButtonManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/fastFeatures/LabelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/fastFeatures/LabelManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/gameplayFeatures/Combat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/gameplayFeatures/Combat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/gameplayFeatures/Consumables.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/gameplayFeatures/Consumables.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/gameplayFeatures/Gameplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/gameplayFeatures/Gameplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/interfaces/Consumables.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/interfaces/consumables.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/consumables/ManaPotion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/consumables/ManaPotion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/consumables/VitalityPotion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/consumables/VitalityPotion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/generalClasses/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/generalClasses/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/generalClasses/PlayerCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/generalClasses/PlayerCharacter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +36,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;AyalaLazaro05&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Jarreztillo/OOP-Project.git&quot;,
+    &quot;accountId&quot;: &quot;24c4a7f3-ba60-46b8-b9b1-b741ce81542f&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -37,21 +59,27 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Game.executor": "Run",
-    "Application.app.Game.executor": "Run",
+    "Application.app.Game.executor": "Debug",
     "Application.game.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/jarreztillo/Documentos/GitHub/OOP-Project",
+    "last_opened_file_path": "D:/Proyectos de Programacion/OOP-Project",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Proyectos de Programacion\OOP-Project\src\DAO\images\consumables" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration name="app.Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Game" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.Game" />
       <module name="OOP-Project" />
       <extension name="coverage">
@@ -73,11 +101,6 @@
       <option name="filePath" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.app.Game" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
