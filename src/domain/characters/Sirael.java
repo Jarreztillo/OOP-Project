@@ -3,8 +3,8 @@ package domain.characters;
 import domain.generalClasses.PlayerCharacter;
 
 public class Sirael extends PlayerCharacter {
-    private int health = 10;
-    private int attack = 5;
+    private int health = 20;
+    private int attack = 7;
     private boolean havesMana = false;
     private String characterName = "Sirael";
     private String imageName = "Sirael.png";
