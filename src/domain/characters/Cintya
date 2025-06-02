@@ -3,8 +3,8 @@ package domain.characters;
 import domain.generalClasses.PlayerCharacter;
 
 public class Draven extends PlayerCharacter {
-    private int health = 10;
-    private int attack = 3;
+    private int health = 8;
+    private int attack = 5;
     private boolean havesMana = false;
     private String characterName = "Cintya";
     private String imageName = "Cintya.png";
