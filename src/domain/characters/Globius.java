@@ -3,8 +3,8 @@ package domain.characters;
 import domain.generalClasses.PlayerCharacter;
 
 public class Globius extends PlayerCharacter {
-    private int health = 12;
-    private int attack = 7;
+    private int health = 7;
+    private int attack = 5;
     private boolean havesMana = false;
     private String characterName = "Globius";
     private String imageName = "Globiud.png";
