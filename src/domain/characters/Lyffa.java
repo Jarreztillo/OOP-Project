@@ -2,7 +2,7 @@ package domain.characters;
 
 import domain.generalClasses.PlayerCharacter;
 
-public class Lina extends PlayerCharacter {
+public class Lyffa extends PlayerCharacter {
     private int health = 6;
     private int attack = 5;
     private boolean havesMana = True;
