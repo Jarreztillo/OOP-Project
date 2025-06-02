@@ -4,7 +4,7 @@ import domain.generalClasses.PlayerCharacter;
 
 public class Sirael extends PlayerCharacter {
     private int health = 10;
-    private int attack = 3;
+    private int attack = 5;
     private boolean havesMana = false;
     private String characterName = "Sirael";
     private String imageName = "Sirael.png";
