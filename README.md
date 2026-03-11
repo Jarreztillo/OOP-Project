@@ -4,7 +4,7 @@
 
 # Instalación
 
-Recomendamos simplemente descargar el .jar en Lanzamientos, pero si quiere compilarlo desde su computadora, primero descárguese el SDK de JavaFX 21, descomprímalo y luego:
+Recomendamos simplemente descargar el .jar en Lanzamientos y tener Java instalado, pero si quiere compilarlo desde su computadora, primero descárguese el SDK de JavaFX 21 (https://gluonhq.com/products/javafx/), descomprímalo y luego:
 
  - git clone https://github.com/Jarreztillo/OOP-Project
  - cp /ruta/del/directorio/de/JavaFX ./OOP-Project
