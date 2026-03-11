@@ -6,9 +6,10 @@
 
 Recomendamos simplemente descargar el .jar en Lanzamientos, pero si quiere compilarlo desde su computadora, primero descárguese el SDK de JavaFX 21, luego:
 
- git clone https://github.com/Jarreztillo/OOP-Project
- cp /ruta/del/directorio/de/JavaFX ./OOP-Project
- cd ./OOP-Project
- ./gradlew run
+ - git clone https://github.com/Jarreztillo/OOP-Project
+ - cp /ruta/del/directorio/de/JavaFX ./OOP-Project
+ - cd ./OOP-Project
+ - ./gradlew run 
+
 
 
